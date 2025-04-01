@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-
-import '../widgets/appButton.dart';
-import '../widgets/appText.dart';
-import 'logInPage.dart';
+import '../widgets/app_button.dart';
+import '../widgets/app_text.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

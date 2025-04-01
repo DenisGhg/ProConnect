@@ -9,7 +9,7 @@ class LandingPage extends StatefulWidget {
 
 class _LandingPageState extends State<LandingPage> {
   void lancement(){
-    Future.delayed(const Duration(seconds: 3), (){
+    Future.delayed(const Duration(seconds: 5), (){
       Navigator.pushReplacementNamed(context, '/homePage');
     });
   }

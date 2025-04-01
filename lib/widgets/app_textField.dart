@@ -7,6 +7,7 @@ class AppTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final bool? obscureText;
+  final Widget? suffix;
   final Color? enableBorderColor;
   final Color? focusedBorderColor;
   final TextInputType keyboardType;
@@ -22,6 +23,7 @@ class AppTextField extends StatelessWidget {
     this.onChanged,
     this.enableBorderColor,
     this.focusedBorderColor,
+    this.suffix,
     required this.keyboardType,
   });
 
@@ -38,6 +40,7 @@ class AppTextField extends StatelessWidget {
         labelText: labelText,
         suffixIcon: suffixIcon,
         prefixIcon: prefixIcon,
+        suffix: suffix,
         labelStyle: TextStyle(
           color: Colors.grey,
         ),
