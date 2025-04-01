@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import '../widgets/appButton.dart';
-import '../widgets/appText.dart';
-import '../widgets/appTextField.dart';
+
+import '../../widgets/app_button.dart';
+import '../../widgets/app_text.dart';
+import '../../widgets/app_textField.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -17,12 +18,12 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _rePasswordController = TextEditingController();
 
-  String messageLastName = "";
-  String messageFirstName = "";
-  String messageMail = "";
-  String messagePassword = "";
-  String messageRePassword = "";
-  String messageTerms = "";
+  String _messageLastName = "";
+  String _messageFirstName = "";
+  String _messageMail = "";
+  String _messagePassword = "";
+  String _messageRePassword = "";
+  String _messageTerms = "";
 
   bool _isObscuredFirst = true;
   bool _isObscuredSecond = true;
@@ -31,44 +32,44 @@ class _SignUpPageState extends State<SignUpPage> {
   void verifierInfo(){
     if(_lastNameController.text.isEmpty) {
       setState(() {
-        messageLastName = "Veuillez entrer votre Nom";
+        _messageLastName = "Veuillez entrer votre Nom";
       });
     }
     if(_firstNameController.text.isEmpty){
       setState(() {
-        messageFirstName = "Veuillez entrer votre Prénom(s)";
+        _messageFirstName = "Veuillez entrer votre Prénom(s)";
       });
     }
     if(_mailController.text.isEmpty){
       setState(() {
-        messageMail = "Veuillez entrer votre E-mail";
+        _messageMail = "Veuillez entrer votre E-mail";
       });
     }else if(!_mailController.text.endsWith("@gmail.com")){
       setState(() {
-        messageMail = "Veuillez entrer un E-mail valide";
+        _messageMail = "Veuillez entrer un E-mail valide";
       });
     }
     if(_passwordController.text.isEmpty){
       setState(() {
-        messagePassword = "Veuillez entrer un mot de passe";
+        _messagePassword = "Veuillez entrer un mot de passe";
       });
     }
     if(_rePasswordController.text.isEmpty){
       setState(() {
-        messageRePassword = "Veuillez confirmer votre mot de passe";
+        _messageRePassword = "Veuillez confirmer votre mot de passe";
       });
     }else if(_passwordController.text != _rePasswordController.text){
       setState(() {
-        messagePassword = "Les mots de passe ne correspondent pas";
-        messageRePassword = "Les mots de passe ne correspondent pas";
+        _messagePassword = "Les mots de passe ne correspondent pas";
+        _messageRePassword = "Les mots de passe ne correspondent pas";
       });
     }
     if(_isChecked == false){
       setState(() {
-        messageTerms = "Veuillez accepter les conditions d'utilisation";
+        _messageTerms = "Veuillez accepter les conditions d'utilisation";
       });
     }
-    if(messageLastName.isEmpty && messageFirstName.isEmpty && messageMail.isEmpty && messagePassword.isEmpty && messageRePassword.isEmpty && messageTerms.isEmpty){
+    if(_messageLastName.isEmpty && _messageFirstName.isEmpty && _messageMail.isEmpty && _messagePassword.isEmpty && _messageRePassword.isEmpty && _messageTerms.isEmpty){
       Navigator.pushNamedAndRemoveUntil(context, '/succesSignUp', (route) => false);
     }
   }
@@ -129,18 +130,18 @@ class _SignUpPageState extends State<SignUpPage> {
                   hinText: "Entrez votre Nom",
                   labelText: "Nom *",
                   // En rouge au cas où il y a d'erreur
-                  enableBorderColor: messageLastName.isNotEmpty ? Colors.red : Colors.grey,
-                  focusedBorderColor: messageLastName.isNotEmpty ? Colors.red : Colors.grey,
+                  enableBorderColor: _messageLastName.isNotEmpty ? Colors.red : Colors.grey,
+                  focusedBorderColor: _messageLastName.isNotEmpty ? Colors.red : Colors.grey,
                   onChanged: (value){
                     setState(() {
-                      messageLastName = "";
+                      _messageLastName = "";
                     });
                   },
                 ),
         
-                // Erreur message
+                // Erreur _message
                 AppText(
-                  text: "$messageLastName",
+                  text: "$_messageLastName",
                   color: Colors.red,
                   fontSize: 10,
                 ),
@@ -157,17 +158,17 @@ class _SignUpPageState extends State<SignUpPage> {
                   hinText: "Entrez votre Prénom(s)",
                   labelText: "Prénom(s) *",
                   // En rouge au cas où il y a d'erreur
-                  enableBorderColor: messageFirstName.isNotEmpty ? Colors.red : Colors.grey,
-                  focusedBorderColor: messageFirstName.isNotEmpty ? Colors.red : Colors.grey,
+                  enableBorderColor: _messageFirstName.isNotEmpty ? Colors.red : Colors.grey,
+                  focusedBorderColor: _messageFirstName.isNotEmpty ? Colors.red : Colors.grey,
                   onChanged: (value){
                     setState(() {
-                      messageFirstName = "";
+                      _messageFirstName = "";
                     });
                   },
                 ),
-                // Erreur message
+                // Erreur _message
                 AppText(
-                  text: "$messageFirstName",
+                  text: "$_messageFirstName",
                   color: Colors.red,
                   fontSize: 10,
                 ),
@@ -184,18 +185,18 @@ class _SignUpPageState extends State<SignUpPage> {
                   hinText: "Entrez votre E-mail",
                   labelText: "E-mail *",
                   // En rouge au cas où il y a d'erreur
-                  enableBorderColor: messageMail.isNotEmpty ? Colors.red : Colors.grey,
-                  focusedBorderColor: messageMail.isNotEmpty ? Colors.red : Colors.grey,
+                  enableBorderColor: _messageMail.isNotEmpty ? Colors.red : Colors.grey,
+                  focusedBorderColor: _messageMail.isNotEmpty ? Colors.red : Colors.grey,
                   onChanged: (value){
                     setState(() {
-                      messageMail = "";
+                      _messageMail = "";
                     });
                   },
                 ),
         
-                // Erreur message
+                // Erreur _message
                 AppText(
-                  text: "$messageMail",
+                  text: "$_messageMail",
                   color: Colors.red,
                   fontSize: 10,
                 ),
@@ -213,8 +214,8 @@ class _SignUpPageState extends State<SignUpPage> {
                   labelText: "Mot de passe *",
                   obscureText: _isObscuredFirst,
                   // En rouge au cas où il y a d'erreur
-                  enableBorderColor: messagePassword.isNotEmpty ? Colors.red : Colors.grey,
-                  focusedBorderColor: messagePassword.isNotEmpty ? Colors.red : Colors.grey,
+                  enableBorderColor: _messagePassword.isNotEmpty ? Colors.red : Colors.grey,
+                  focusedBorderColor: _messagePassword.isNotEmpty ? Colors.red : Colors.grey,
                   suffixIcon: IconButton(
                     onPressed: (){
                       setState(() {
@@ -225,15 +226,15 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   onChanged: (value){
                     setState(() {
-                      messagePassword = "";
-                      messageRePassword ="";
+                      _messagePassword = "";
+                      _messageRePassword ="";
                     });
                   },
                 ),
         
-                // Erreur message
+                // Erreur _message
                 AppText(
-                  text: "$messagePassword",
+                  text: "$_messagePassword",
                   color: Colors.red,
                   fontSize: 10,
                 ),
@@ -251,8 +252,8 @@ class _SignUpPageState extends State<SignUpPage> {
                   labelText: "Confirmer ot de passe *",
                   obscureText: _isObscuredSecond,
                   // En rouge au cas où il y a d'erreur
-                  enableBorderColor: messageRePassword.isNotEmpty ? Colors.red : Colors.grey,
-                  focusedBorderColor: messageRePassword.isNotEmpty ? Colors.red : Colors.grey,
+                  enableBorderColor: _messageRePassword.isNotEmpty ? Colors.red : Colors.grey,
+                  focusedBorderColor: _messageRePassword.isNotEmpty ? Colors.red : Colors.grey,
                   suffixIcon: IconButton(
                     onPressed: (){
                       setState(() {
@@ -263,15 +264,15 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   onChanged: (value){
                     setState(() {
-                      messageRePassword = "";
-                      messagePassword = "";
+                      _messageRePassword = "";
+                      _messagePassword = "";
                     });
                   },
                 ),
         
-                // Erreur message
+                // Erreur _message
                  AppText(
-                  text: "$messageRePassword",
+                  text: "$_messageRePassword",
                   color: Colors.red,
                   fontSize: 10,
                 ),
@@ -290,7 +291,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       onChanged: (value){
                         setState(() {
                           _isChecked = value!;
-                          messageTerms = "";
+                          _messageTerms = "";
                         });
                       },
                     ),
@@ -308,9 +309,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   ],
                 ),
 
-                // Erreur message
+                // Erreur _message
                 AppText(
-                  text: "$messageTerms",
+                  text: "$_messageTerms",
                   color: Colors.red,
                   fontSize: 10,
                 ),

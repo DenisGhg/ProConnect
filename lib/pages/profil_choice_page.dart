@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/appButton.dart';
-import '../widgets/appText.dart';
+import '../widgets/app_button.dart';
+import '../widgets/app_text.dart';
 
 class ProfilChoicePage extends StatefulWidget {
   const ProfilChoicePage({super.key});

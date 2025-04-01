@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import '../widgets/appButton.dart';
-import '../widgets/appText.dart';
-import '../widgets/appTextField.dart';
+
+import '../../widgets/app_button.dart';
+import '../../widgets/app_text.dart';
+import '../../widgets/app_textField.dart';
 
 class LogInPage extends StatefulWidget {
   const LogInPage({super.key});
@@ -163,7 +164,9 @@ class _SignUpPageState extends State<LogInPage> {
         
                 // Mot de passe oublié
                 GestureDetector(
-                  onTap: null,
+                  onTap: (){
+                    Navigator.pushNamed(context, '/verifMail');
+                  },
                   child: AppText(
                     text: "Mot de passe oublié?",
                     color: Colors.green,

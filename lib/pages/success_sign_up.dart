@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/appButton.dart';
-import '../widgets/appText.dart';
+import '../widgets/app_button.dart';
+import '../widgets/app_text.dart';
 
-class SuccesSignUp extends StatelessWidget {
-  const SuccesSignUp({super.key});
+class SuccessSignUp extends StatelessWidget {
+  const SuccessSignUp({super.key});
 
   @override
   Widget build(BuildContext context) {

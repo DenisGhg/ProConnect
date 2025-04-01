@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'appText.dart';
+import 'app_text.dart';
 
 class AppButton extends StatelessWidget {
   final Function()? onTap;
