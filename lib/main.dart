@@ -1,16 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:pro_connect_projet/pages/homePage.dart';
-import 'package:pro_connect_projet/pages/landingPage.dart';
-import 'package:pro_connect_projet/pages/profilChoicePage.dart';
-import 'package:pro_connect_projet/pages/signUpPage.dart';
-import 'package:pro_connect_projet/pages/succesLogIn.dart';
-import 'package:pro_connect_projet/pages/succesSignUp.dart';
+import 'package:pro_connect_projet/pages/auth_pages/log_in_page.dart';
+import 'package:pro_connect_projet/pages/auth_pages/sign_up_page.dart';
+import 'package:pro_connect_projet/pages/home_page.dart';
+import 'package:pro_connect_projet/pages/landing_page.dart';
+import 'package:pro_connect_projet/pages/profil_choice_page.dart';
+import 'package:pro_connect_projet/pages/reset_password_pages/email_verification.dart';
+import 'package:pro_connect_projet/pages/reset_password_pages/new_password.dart';
+import 'package:pro_connect_projet/pages/reset_password_pages/verify_code.dart';
+import 'package:pro_connect_projet/pages/success_log_in.dart';
+import 'package:pro_connect_projet/pages/success_sign_up.dart';
+import 'package:provider/provider.dart';
 
-
-import 'pages/logInPage.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => RecupMailProvider()),
+      ],
+
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -26,14 +37,17 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       //initialRoute: '/',
-      routes: {
+      routes: <String, WidgetBuilder>{
         '/': (context) => LandingPage(),
         '/signUp': (context) => SignUpPage(),
         '/logIn': (context) => LogInPage(),
         '/profilChoice': (context) => ProfilChoicePage(),
         '/homePage': (context) => HomePage(),
-        '/succesLogIn':(context) => SuccesLogIn(),
-        '/succesSignUp':(context) => SuccesSignUp(),
+        '/succesLogIn': (context) => SuccessLogIn(),
+        '/succesSignUp': (context) => SuccessSignUp(),
+        '/verifMail': (context) => EmailVerification(),
+        '/verifCode': (context) => VerifyCode(),
+        '/newPassword': (context) => NewPassword(),
       },
     );
   }
