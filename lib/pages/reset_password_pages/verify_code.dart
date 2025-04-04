@@ -53,26 +53,12 @@ class _VerifyCodeState extends State<VerifyCode> {
 
               Center(
                 child: AppText(
-                  text: "Un code a été envoyé de 6 chiffres a été envoyé",
+                  text: "Un code a été envoyé de 6 chiffres a été envoyé à ${context.watch<RecupMailProvider>().mailController.text}",
                   fontSize: 15,
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              
-              Consumer<RecupMailProvider>(
-                  builder: (context, recupMailProvider, child){
-                    return Center(
-                      child: AppText(
-                        text: recupMailProvider.recupMail,
-                        fontSize: 15,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    );
-                  }
-              ),
-              
 
               SizedBox(height: screeHeight * 0.02), // Espacement
               // Field

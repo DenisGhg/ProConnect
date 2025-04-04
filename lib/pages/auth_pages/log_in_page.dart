@@ -173,6 +173,7 @@ class _SignUpPageState extends State<LogInPage> {
                     fontSize: screeWidth * 0.04,
                     fontWeight: FontWeight.bold,
                   ),
+
                 ),
                 //Espacement
                 SizedBox(
