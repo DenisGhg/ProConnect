@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import '../../providers/reset_password_providers/mail_provider.dart';
 import '../../widgets/app_button.dart';
 import '../../widgets/app_text.dart';
 import '../../widgets/app_textField.dart';
@@ -21,7 +21,7 @@ class _EmailVerificationState extends State<EmailVerification> {
   // verfication de la validité du mail
 
   void verifMail() {
-    String mail = context.read<RecupMailProvider>().mailController.text;
+    String mail = context.read<MailProvider>().mailController.text;
     if (!mail.endsWith("@gmail.com") || mail.isEmpty) {
       setState(() {
         _messageMail = "*Veuillez entrer un e-mail valide";
@@ -33,7 +33,6 @@ class _EmailVerificationState extends State<EmailVerification> {
 
   @override
   Widget build(BuildContext context) {
-    print("---------------${context.watch<RecupMailProvider>().mailController.text}");
     double screeWidth = MediaQuery.of(context).size.width;
     double screeHeight = MediaQuery.of(context).size.height;
 
@@ -78,7 +77,7 @@ class _EmailVerificationState extends State<EmailVerification> {
               // Field
               AppTextField(
                 keyboardType: TextInputType.emailAddress,
-                controller: context.watch<RecupMailProvider>().mailController,
+                controller: context.watch<MailProvider>().mailController,
                 hinText: "Entrez votre e-mail",
                 labelText: "E-mail *",
                 // En rouge au cas où il y a d'erreur
@@ -87,7 +86,7 @@ class _EmailVerificationState extends State<EmailVerification> {
                 focusedBorderColor:
                     _messageMail.isNotEmpty ? Colors.red : Colors.grey,
                 onChanged: (value) {
-                  Provider.of<RecupMailProvider>(context, listen: false).updateMail(value);
+                  Provider.of<MailProvider>(context, listen: false).updateMail(value);
                   setState(() {
                     _messageMail = "";
                   });
@@ -120,13 +119,4 @@ class _EmailVerificationState extends State<EmailVerification> {
   }
 }
 
-class RecupMailProvider with ChangeNotifier {
-  TextEditingController _mailController = TextEditingController();
 
-  TextEditingController get mailController => _mailController;
-
-  void updateMail(String value){
-    _mailController.text = value;
-    notifyListeners();
-  }
-}

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pro_connect_projet/pages/reset_password_pages/email_verification.dart';
 import 'package:provider/provider.dart';
-
+import '../../providers/reset_password_providers/mail_provider.dart';
 import '../../widgets/app_button.dart';
 import '../../widgets/app_text.dart';
 import '../../widgets/app_textField.dart';
@@ -53,7 +52,7 @@ class _VerifyCodeState extends State<VerifyCode> {
 
               Center(
                 child: AppText(
-                  text: "Un code a été envoyé de 6 chiffres a été envoyé à ${context.watch<RecupMailProvider>().mailController.text}",
+                  text: "Un code a été envoyé de 6 chiffres a été envoyé à & ${context.watch<MailProvider>().mailController.text}",
                   fontSize: 15,
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
