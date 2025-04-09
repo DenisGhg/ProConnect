@@ -4,11 +4,12 @@ import 'package:pro_connect_projet/pages/auth_pages/sign_up_page.dart';
 import 'package:pro_connect_projet/pages/home_page.dart';
 import 'package:pro_connect_projet/pages/landing_page.dart';
 import 'package:pro_connect_projet/pages/profil_choice_page.dart';
-import 'package:pro_connect_projet/pages/reset_password_pages/email_verification.dart';
-import 'package:pro_connect_projet/pages/reset_password_pages/new_password.dart';
-import 'package:pro_connect_projet/pages/reset_password_pages/verify_code.dart';
+import 'package:pro_connect_projet/pages/reset_password_pages/reset_password_page.dart';
+import 'package:pro_connect_projet/pages/reset_password_pages/verify_code_page.dart';
+import 'package:pro_connect_projet/pages/reset_password_pages/verify_mail_page.dart';
 import 'package:pro_connect_projet/pages/success_log_in.dart';
 import 'package:pro_connect_projet/pages/success_sign_up.dart';
+import 'package:pro_connect_projet/providers/reset_password_providers/mail_provider.dart';
 import 'package:provider/provider.dart';
 
 
@@ -16,7 +17,7 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => RecupMailProvider()),
+        ChangeNotifierProvider(create: (context) => MailProvider()),
       ],
 
       child: const MyApp(),
@@ -36,7 +37,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      //initialRoute: '/',
+      initialRoute: '/',
       routes: <String, WidgetBuilder>{
         '/': (context) => LandingPage(),
         '/signUp': (context) => SignUpPage(),

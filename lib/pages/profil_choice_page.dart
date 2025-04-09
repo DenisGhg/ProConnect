@@ -149,6 +149,7 @@ class _ProfilChoicePageState extends State<ProfilChoicePage> {
                         selectedR = !selectedR;
                         selectedT = false;
                         selectedRecruteur = !selectedRecruteur;
+
                       });
                     },
                     height: screeHeight * 0.26,
@@ -245,5 +246,14 @@ class _ProfilChoicePageState extends State<ProfilChoicePage> {
         ),
       ),
     );
+  }
+}
+
+class AccountTypeProvider with ChangeNotifier{
+  String type = "talent";
+
+  void changeType(){
+    type = (type == "talent") ? type = "recrutor" : "talent";
+    notifyListeners();
   }
 }
