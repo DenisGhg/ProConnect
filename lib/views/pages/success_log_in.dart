@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pro_connect_projet/constants/routes.dart';
 
-import '../widgets/app_button.dart';
-import '../widgets/app_text.dart';
+import '../../widgets/app_button.dart';
+import '../../widgets/app_text.dart';
+
 
 class SuccessLogIn extends StatelessWidget {
   const SuccessLogIn({super.key});
@@ -29,7 +31,7 @@ class SuccessLogIn extends StatelessWidget {
             
             AppButton(
               onTap: (){
-                Navigator.pushReplacementNamed(context, '/homePage');
+                Navigator.pushReplacementNamed(context, AppRoutes.PRESENTATIONPAGE);
               },
               height: 50,
               width: 200,

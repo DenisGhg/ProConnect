@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:pro_connect_projet/constants/routes.dart';
 import 'package:provider/provider.dart';
-import '../../providers/reset_password_providers/mail_provider.dart';
-import '../../widgets/app_button.dart';
-import '../../widgets/app_text.dart';
-import '../../widgets/app_textField.dart';
 
-class EmailVerification extends StatefulWidget {
-  const EmailVerification({super.key});
+import '../../../providers/reset_password_providers/mail_provider.dart';
+import '../../../widgets/app_button.dart';
+import '../../../widgets/app_text.dart';
+import '../../../widgets/app_textField.dart';
+
+
+class VerifyMailPage extends StatefulWidget {
+  const VerifyMailPage({super.key});
 
   @override
-  State<EmailVerification> createState() => _EmailVerificationState();
+  State<VerifyMailPage> createState() => _VerifyMailPageState();
 }
 
-class _EmailVerificationState extends State<EmailVerification> {
+class _VerifyMailPageState extends State<VerifyMailPage> {
   //TextEditingController _mailController = TextEditingController();
 
   String _messageMail = "";
@@ -27,7 +30,7 @@ class _EmailVerificationState extends State<EmailVerification> {
         _messageMail = "*Veuillez entrer un e-mail valide";
       });
     } else {
-      Navigator.pushNamed(context, '/verifCode');
+      Navigator.pushNamed(context, AppRoutes.VERIFYCODEPAGE);
     }
   }
 

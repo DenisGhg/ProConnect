@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:pro_connect_projet/constants/routes.dart';
 import 'package:provider/provider.dart';
-import '../../providers/reset_password_providers/mail_provider.dart';
-import '../../widgets/app_button.dart';
-import '../../widgets/app_text.dart';
-import '../../widgets/app_textField.dart';
+
+import '../../../providers/reset_password_providers/mail_provider.dart';
+import '../../../widgets/app_button.dart';
+import '../../../widgets/app_text.dart';
+import '../../../widgets/app_textField.dart';
 
 
-class VerifyCode extends StatefulWidget {
-  const VerifyCode({super.key});
+class VerifyCodePage extends StatefulWidget {
+  const VerifyCodePage({super.key});
 
   @override
-  State<VerifyCode> createState() => _VerifyCodeState();
+  State<VerifyCodePage> createState() => _VerifyCodePageState();
 }
 
-class _VerifyCodeState extends State<VerifyCode> {
+class _VerifyCodePageState extends State<VerifyCodePage> {
 
   TextEditingController _codeController = TextEditingController();
   String _messageCode = "";
@@ -24,7 +26,7 @@ class _VerifyCodeState extends State<VerifyCode> {
     if(_codeController.text.isEmpty || _codeController.text != '123456'){
       _messageCode == "*Entrez incorrect";
     }else{
-      Navigator.pushNamedAndRemoveUntil(context, '/newPassword', (route) => false);
+      Navigator.pushNamedAndRemoveUntil(context, AppRoutes.RESETPASSWORDPAGE, (route) => false);
     }
   }
   @override

@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:pro_connect_projet/constants/routes.dart';
 
-import '../widgets/app_button.dart';
-import '../widgets/app_text.dart';
+import '../../widgets/app_button.dart';
+import '../../widgets/app_text.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class PresentationPage extends StatefulWidget {
+  const PresentationPage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<PresentationPage> createState() => _PresentationPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _PresentationPageState extends State<PresentationPage> {
   @override
   Widget build(BuildContext context) {
     double screeWidth = MediaQuery.of(context).size.width;
@@ -86,7 +87,7 @@ class _HomePageState extends State<HomePage> {
               // Se Connecter
               AppButton(
                 onTap: (){
-                  Navigator.pushNamed(context, '/logIn');
+                  Navigator.pushNamed(context, AppRoutes.LOGINPAGE);
                 },
                 height: screeHeight * 0.07,
                 width: screeWidth * 0.4,
@@ -107,7 +108,7 @@ class _HomePageState extends State<HomePage> {
               // Bouton s'inscrire
               AppButton(
                 onTap: (){
-                  Navigator.pushNamed(context, '/profilChoice');
+                  Navigator.pushNamed(context, AppRoutes.PROFILCHOICEPAGE);
                 },
                 height: screeHeight * 0.07,
                 width: screeWidth * 0.4,

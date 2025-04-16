@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:pro_connect_projet/constants/images_paths.dart';
+import 'package:pro_connect_projet/constants/routes.dart';
+import 'package:pro_connect_projet/providers/profil_type_provider.dart';
+import 'package:provider/provider.dart';
 
-import '../widgets/app_button.dart';
-import '../widgets/app_text.dart';
+import '../../../widgets/app_button.dart';
+import '../../../widgets/app_text.dart';
 
 class ProfilChoicePage extends StatefulWidget {
   const ProfilChoicePage({super.key});
@@ -76,6 +80,7 @@ class _ProfilChoicePageState extends State<ProfilChoicePage> {
                         selectedT = !selectedT;
                         selectedR = false;
                         selectedTalent = !selectedTalent;
+                        //context.read<ProfilTypeProvider>().setProfilType("talent");
                       });
                     },
                     height: screeHeight * 0.26,
@@ -90,7 +95,7 @@ class _ProfilChoicePageState extends State<ProfilChoicePage> {
                           height: screeHeight * 0.22,
                           width: screeWidth * 0.22,
                           child: Image.asset(
-                            "images/talentbgless.png",
+                            ImagesPaths.FINDJOB,
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -149,6 +154,7 @@ class _ProfilChoicePageState extends State<ProfilChoicePage> {
                         selectedR = !selectedR;
                         selectedT = false;
                         selectedRecruteur = !selectedRecruteur;
+                        //context.read<ProfilTypeProvider>().setProfilType("recruteur");
 
                       });
                     },
@@ -164,7 +170,7 @@ class _ProfilChoicePageState extends State<ProfilChoicePage> {
                           height: screeHeight * 0.22,
                           width: screeWidth * 0.22,
                           child: Image.asset(
-                            "images/recruteurbgless.png",
+                            ImagesPaths.FINDTALENT,
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -220,9 +226,9 @@ class _ProfilChoicePageState extends State<ProfilChoicePage> {
               AppButton(
                 onTap: (){
                   if(selectedTalent){
-                    Navigator.pushNamed(context, '/signUp');
+                    Navigator.pushNamed(context, AppRoutes.SIGNUPPAGE);
                   }else if(selectedRecruteur){
-                    Navigator.pushNamed(context, '/signUp');
+                    Navigator.pushNamed(context, AppRoutes.SIGNUPPAGE);
                   }else{
                     setState(() {
                       errorMessage = "Veuillez selectionner un type de profil";
@@ -249,11 +255,3 @@ class _ProfilChoicePageState extends State<ProfilChoicePage> {
   }
 }
 
-class AccountTypeProvider with ChangeNotifier{
-  String type = "talent";
-
-  void changeType(){
-    type = (type == "talent") ? type = "recrutor" : "talent";
-    notifyListeners();
-  }
-}

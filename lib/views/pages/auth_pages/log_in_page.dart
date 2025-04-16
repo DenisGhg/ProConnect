@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:pro_connect_projet/constants/routes.dart';
 
-import '../../widgets/app_button.dart';
-import '../../widgets/app_text.dart';
-import '../../widgets/app_textField.dart';
+import '../../../widgets/app_button.dart';
+import '../../../widgets/app_text.dart';
+import '../../../widgets/app_textField.dart';
+
+
 
 class LogInPage extends StatefulWidget {
   const LogInPage({super.key});
@@ -42,7 +45,7 @@ class _SignUpPageState extends State<LogInPage> {
         messagePassword = "E-mail ou mot de passe incorrect";
       });
     }else{
-      Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+      Navigator.pushNamedAndRemoveUntil(context, AppRoutes.PRESENTATIONPAGE, (route) => false);
     }
 
   }
@@ -165,7 +168,7 @@ class _SignUpPageState extends State<LogInPage> {
                 // Mot de passe oublié
                 GestureDetector(
                   onTap: (){
-                    Navigator.pushNamed(context, '/verifMail');
+                    Navigator.pushNamed(context, AppRoutes.VERIFYMAILPAGE);
                   },
                   child: AppText(
                     text: "Mot de passe oublié?",
@@ -219,7 +222,7 @@ class _SignUpPageState extends State<LogInPage> {
                     // Connect
                     GestureDetector(
                       onTap: (){
-                        Navigator.pushReplacementNamed(context, '/profilChoice');
+                        Navigator.pushReplacementNamed(context, AppRoutes.PROFILCHOICEPAGE);
                       },
                       child: AppText(
                         text: "Inscrivez-vous !",

@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:pro_connect_projet/constants/routes.dart';
 
-import '../../widgets/app_button.dart';
-import '../../widgets/app_text.dart';
-import '../../widgets/app_textField.dart';
+import '../../../widgets/app_button.dart';
+import '../../../widgets/app_text.dart';
+import '../../../widgets/app_textField.dart';
 
-class NewPassword extends StatefulWidget {
-  const NewPassword({super.key});
+
+
+class ResetPasswordPage extends StatefulWidget {
+  const ResetPasswordPage({super.key});
 
   @override
-  State<NewPassword> createState() => _NewPasswordState();
+  State<ResetPasswordPage> createState() => _ResetPasswordPageState();
 }
 
-class _NewPasswordState extends State<NewPassword> {
+class _ResetPasswordPageState extends State<ResetPasswordPage> {
 
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _rePasswordController = TextEditingController();
@@ -39,7 +42,7 @@ class _NewPasswordState extends State<NewPassword> {
       });
     }
     if(_messagePassword.isEmpty && _messageRePassword.isEmpty){
-      Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+      Navigator.pushNamedAndRemoveUntil(context, AppRoutes.PRESENTATIONPAGE, (route) => false);
     }
   }
   @override

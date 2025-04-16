@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pro_connect_projet/constants/routes.dart';
 
-import '../../widgets/app_button.dart';
-import '../../widgets/app_text.dart';
-import '../../widgets/app_textField.dart';
+import '../../../widgets/app_button.dart';
+import '../../../widgets/app_text.dart';
+import '../../../widgets/app_textField.dart';
+
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -70,7 +72,7 @@ class _SignUpPageState extends State<SignUpPage> {
       });
     }
     if(_messageLastName.isEmpty && _messageFirstName.isEmpty && _messageMail.isEmpty && _messagePassword.isEmpty && _messageRePassword.isEmpty && _messageTerms.isEmpty){
-      Navigator.pushNamedAndRemoveUntil(context, '/succesSignUp', (route) => false);
+      Navigator.pushNamedAndRemoveUntil(context, AppRoutes.SUCESSSIGNUPPAGE, (route) => false);
     }
   }
   @override
@@ -354,7 +356,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     // Connect
                     GestureDetector(
                       onTap: (){
-                        Navigator.pushReplacementNamed(context, '/logIn');
+                        Navigator.pushReplacementNamed(context, AppRoutes.LOGINPAGE);
                       },
                       child: AppText(
                         text: "Connectez-vous !",
