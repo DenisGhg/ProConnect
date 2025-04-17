@@ -4,6 +4,9 @@ import 'package:pro_connect_projet/views/pages/auth_pages/sign_up_page.dart';
 import 'package:pro_connect_projet/views/pages/logo_page.dart';
 import 'package:pro_connect_projet/views/pages/presentation_page.dart';
 import 'package:pro_connect_projet/views/pages/auth_pages/profil_choice_page.dart';
+import 'package:pro_connect_projet/views/pages/register_pages/talent_pages/talent_profile_presentation.dart';
+import 'package:pro_connect_projet/views/pages/register_pages/talent_pages/talent_profile_step2.dart';
+import 'package:pro_connect_projet/views/pages/register_pages/talent_pages/talent_profile_step1.dart';
 import 'package:pro_connect_projet/views/pages/reset_password_pages/reset_password_page.dart';
 import 'package:pro_connect_projet/views/pages/reset_password_pages/verify_code_page.dart';
 import 'package:pro_connect_projet/views/pages/reset_password_pages/verify_mail_page.dart';
@@ -21,6 +24,9 @@ Map<String, Widget Function(BuildContext)> routes = {
   '/verifyMailPage': (context) => const VerifyMailPage(),
   '/verifyCodePage': (context) => const VerifyCodePage(),
   '/resetPasswordPage': (context) => const ResetPasswordPage(),
+  '/talentProfilPresentation': (context) => const TalentProfilPresentation(),
+  '/talentProfileStep1' :(context) => const TalentProfileStep1(),
+  '/talentProfileStep2' :(context) => const TalentProfileStep2(),
 };
 
 class AppRoutes{
@@ -34,4 +40,7 @@ class AppRoutes{
   static const String VERIFYMAILPAGE = '/verifyMailPage';
   static const String VERIFYCODEPAGE = '/verifyCodePage';
   static const String RESETPASSWORDPAGE = '/resetPasswordPage';
+  static const String TALENTPROFILPRESENTATION = '/talentProfilPresentation';
+  static const String TALENTPROFILESTEP1 = '/talentProfileStep1';
+  static const String TALENTPROFILESTEP2 = '/talentProfileStep2';
 }

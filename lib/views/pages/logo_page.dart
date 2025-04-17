@@ -32,7 +32,7 @@ class _LogoPageState extends State<LogoPage> {
           color: Colors.black,
         ),
         child : Center(
-          child: Image.asset(ImagesPaths.LOGOWHITE, width: 300, height: 300,),
+          child: Image.asset(ImagesPaths.LOGOBLUE, width: 300, height: 300,),
         ),
       ),
     );

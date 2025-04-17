@@ -4,6 +4,7 @@ import 'package:pro_connect_projet/constants/routes.dart';
 import 'package:pro_connect_projet/providers/profil_type_provider.dart';
 import 'package:provider/provider.dart';
 
+
 import '../../../widgets/app_button.dart';
 import '../../../widgets/app_text.dart';
 
@@ -18,8 +19,6 @@ class _ProfilChoicePageState extends State<ProfilChoicePage> {
 
   bool selectedT = false;
   bool selectedR = false;
-  bool selectedTalent = false;
-  bool selectedRecruteur = false;
   String errorMessage = "";
 
   @override
@@ -79,8 +78,6 @@ class _ProfilChoicePageState extends State<ProfilChoicePage> {
                       setState(() {
                         selectedT = !selectedT;
                         selectedR = false;
-                        selectedTalent = !selectedTalent;
-                        //context.read<ProfilTypeProvider>().setProfilType("talent");
                       });
                     },
                     height: screeHeight * 0.26,
@@ -153,9 +150,6 @@ class _ProfilChoicePageState extends State<ProfilChoicePage> {
                       setState(() {
                         selectedR = !selectedR;
                         selectedT = false;
-                        selectedRecruteur = !selectedRecruteur;
-                        //context.read<ProfilTypeProvider>().setProfilType("recruteur");
-
                       });
                     },
                     height: screeHeight * 0.26,
@@ -225,10 +219,14 @@ class _ProfilChoicePageState extends State<ProfilChoicePage> {
               // Bouton Continuer
               AppButton(
                 onTap: (){
-                  if(selectedTalent){
+                  if(selectedT){
+                    context.read<ProfilTypeProvider>().setProfilType("talent");
+                    print("${Provider.of<ProfilTypeProvider>(context, listen: false).profilType}");
                     Navigator.pushNamed(context, AppRoutes.SIGNUPPAGE);
-                  }else if(selectedRecruteur){
+                  }else if(selectedR){
                     Navigator.pushNamed(context, AppRoutes.SIGNUPPAGE);
+                    context.read<ProfilTypeProvider>().setProfilType("recruteur");
+                    print("${Provider.of<ProfilTypeProvider>(context, listen: false).profilType}");
                   }else{
                     setState(() {
                       errorMessage = "Veuillez selectionner un type de profil";

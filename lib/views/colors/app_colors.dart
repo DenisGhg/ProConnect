@@ -4,11 +4,12 @@ class AppColors {
   static Color primaryColor = const Color(0xFF03A63D);
   static Color secondaryColor = const Color.fromARGB(255, 50, 131, 13);
   static Color tertiaryColor = const Color.fromARGB(255, 49, 63, 58);
-  static Color blueColor = Colors.blue;
+  static Color blueColor = const Color(0xFF2196F3);
   static Color redColor = const Color.fromARGB(179, 255, 0, 0);
   static Color yellowColor = const Color.fromARGB(179, 255, 255, 0);
   static Color orangeColor = const Color.fromARGB(179, 255, 165, 0);
   static Color purpleColor = const Color.fromARGB(179, 128, 0, 128);
+  static Color whiteColor = const Color.fromARGB(255, 255, 255, 255);
 }
 
 // TODO : A supprimer

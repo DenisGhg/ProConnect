@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pro_connect_projet/constants/routes.dart';
+import 'package:pro_connect_projet/providers/profil_type_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../../widgets/app_button.dart';
 import '../../../widgets/app_text.dart';
@@ -72,7 +74,11 @@ class _SignUpPageState extends State<SignUpPage> {
       });
     }
     if(_messageLastName.isEmpty && _messageFirstName.isEmpty && _messageMail.isEmpty && _messagePassword.isEmpty && _messageRePassword.isEmpty && _messageTerms.isEmpty){
-      Navigator.pushNamedAndRemoveUntil(context, AppRoutes.SUCESSSIGNUPPAGE, (route) => false);
+      //Navigator.pushNamedAndRemoveUntil(context, AppRoutes.SUCESSSIGNUPPAGE, (route) => false);
+      String profilType = Provider.of<ProfilTypeProvider>(context, listen: false).profilType;
+      if(profilType == "talent"){
+        Navigator.pushNamedAndRemoveUntil(context, AppRoutes.TALENTPROFILPRESENTATION, (route) => false);
+      }
     }
   }
   @override
@@ -170,7 +176,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 // Erreur _message
                 AppText(
-                  text: "$_messageFirstName",
+                  text: _messageFirstName,
                   color: Colors.red,
                   fontSize: 10,
                 ),
@@ -198,7 +204,7 @@ class _SignUpPageState extends State<SignUpPage> {
         
                 // Erreur _message
                 AppText(
-                  text: "$_messageMail",
+                  text: _messageMail,
                   color: Colors.red,
                   fontSize: 10,
                 ),
@@ -236,7 +242,7 @@ class _SignUpPageState extends State<SignUpPage> {
         
                 // Erreur _message
                 AppText(
-                  text: "$_messagePassword",
+                  text: _messagePassword,
                   color: Colors.red,
                   fontSize: 10,
                 ),
@@ -274,7 +280,7 @@ class _SignUpPageState extends State<SignUpPage> {
         
                 // Erreur _message
                  AppText(
-                  text: "$_messageRePassword",
+                  text: _messageRePassword,
                   color: Colors.red,
                   fontSize: 10,
                 ),
@@ -313,23 +319,26 @@ class _SignUpPageState extends State<SignUpPage> {
 
                 // Erreur _message
                 AppText(
-                  text: "$_messageTerms",
+                  text: _messageTerms,
                   color: Colors.red,
                   fontSize: 10,
                 ),
 
                 // Bouton création
-                AppButton(
-                  onTap: verifierInfo,
-                  height: screeHeight * 0.07,
-                  width: double.infinity,
-                  backgroundColor: Colors.green,
-                  alignment: Alignment.center,
-                  radius: 20,
-                  child: AppText(
-                    text: "Créer un compte",
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
+                Hero(
+                  tag: "sign",
+                  child: AppButton(
+                    onTap: verifierInfo,
+                    height: screeHeight * 0.07,
+                    width: double.infinity,
+                    backgroundColor: Colors.green,
+                    alignment: Alignment.center,
+                    radius: 20,
+                    child: AppText(
+                      text: "Créer un compte",
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
 
