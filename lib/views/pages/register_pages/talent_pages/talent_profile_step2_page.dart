@@ -8,7 +8,6 @@ import 'package:pro_connect_projet/widgets/app_text.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../providers/register_providers/talent_providers/subdomain_selection_provider.dart';
-import '../../../../providers/themes/theme_provider.dart';
 
 class TalentProfileStep2Page extends StatefulWidget {
   const TalentProfileStep2Page({super.key});
@@ -96,13 +95,13 @@ class _TalentProfileStep2PageState extends State<TalentProfileStep2Page> {
       } else {
         // Vérifie si on tente d'ajouter un 3e domaine
         if (!selectedSubDomains.containsKey(domain) && selectedSubDomains.length >= 2) {
-          _showSnackBar('Tu ne peux sélectionner des sous-domaines que dans 2 domaines maximum.');
+          _showSnackBar('Vous ne pouvez sélectionner des sous-domaines que dans 2 domaines au maximum.');
           return;
         }
 
         // Vérifie la limite de 3 sous-domaines par domaine
         if ((selectedSubDomains[domain]?.length ?? 0) >= 3) {
-          _showSnackBar('Tu ne peux sélectionner que 3 sous-domaines dans "$domain".');
+          _showSnackBar('Vous ne pouvez sélectionner que 3 sous-domaines dans "$domain".');
           return;
         }
 
@@ -130,8 +129,9 @@ class _TalentProfileStep2PageState extends State<TalentProfileStep2Page> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: context.screenHeight * 0.05,
-        leadingWidth: context.screenHeight * 0.075 ,
-        title: AppText(text: "Créez votre Profil", fontWeight: FontWeight.bold, fontSize: context.largeText * 0.8,),
+        leadingWidth: context.screenHeight * 0.075,
+        centerTitle: true,
+        title: AppText(text: "Créez votre Profil", fontWeight: FontWeight.bold, fontSize: context.largeText * 0.9,),
         leading: Padding(
           padding: EdgeInsets.only(left: context.defaultPagePadding),
           child: Container(
@@ -142,12 +142,6 @@ class _TalentProfileStep2PageState extends State<TalentProfileStep2Page> {
             child: Icon(Icons.person, size: context.screenHeight * 0.038, color: AppColors.blackColor,),
           ),
         ),
-        actions: [
-          IconButton(
-              onPressed: context.read<ThemeProvider>().toggleTheme,
-              icon: Icon(context.read<ThemeProvider>().isDarkMode == true ? Icons.light_mode : Icons.dark_mode)
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -155,16 +149,55 @@ class _TalentProfileStep2PageState extends State<TalentProfileStep2Page> {
           child: Column(
             children: [
               //Intro
-              AppText(text: "Choisissez les domaines qui représentent le mieux votre profil professionnel", fontWeight: FontWeight.bold, fontSize: context.largeText * 0.9, textAlign: TextAlign.center,),
+              AppText(
+                text: "Choisissez les domaines qui représentent le mieux votre profil professionnel",
+                fontWeight: FontWeight.bold,
+                fontSize: context.largeText * 0.9,
+                textAlign: TextAlign.center,
+                color: AppColors.blueColor,
+              ),
         
               // Message d’instructions
+              SizedBox(height: context.defaultSpacing * 2),
+              Row(
+                children: [
+                  Icon(Icons.info_outline, color: AppColors.blueColor,),
+                  Expanded(
+                    child: RichText(
+                      text: TextSpan(
+                        style: TextStyle(
+                          color: Theme.of(context).brightness == Brightness.dark ? AppColors.whiteColor : AppColors.blackColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: context.smallText * 1.2,
+                        ),
+                        children: [
+                          TextSpan(text: "Vous pouvez choisir jusqu’à "),
+                          TextSpan(text: "2 domaines", style: TextStyle(color: AppColors.blueColor)),
+                          TextSpan(text: " avec "),
+                          TextSpan(text: "3 sous-domaines", style: TextStyle(color: AppColors.blueColor)),
+                          TextSpan(text: " chacun.")
+                        ]
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
               SizedBox(height: context.defaultSpacing),
-              AppText(text: "Vous pouvez choisir jusqu’à 2 domaines, avec 3 sous-domaines chacun."),
-        
-              SizedBox(height: context.defaultSpacing),
-              AppText(text: "Ne vous inquiètez pas, vous pouvez modifier vos choix plus tard"),
-        
-              SizedBox(height: context.defaultSpacing),
+              Row(
+                children: [
+                  Icon(Icons.info_outline, color: AppColors.blueColor,),
+                  Expanded(
+                    child: AppText(
+                      text: "Ne vous inquiètez pas, vous pouvez modifier vos choix plus tard",
+                      fontWeight: FontWeight.bold,
+                      fontSize: context.smallText * 1.3,
+                    ),
+                  ),
+                ],
+              ),
+
+              SizedBox(height: context.defaultSpacing * 2),
         
               ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
@@ -207,7 +240,8 @@ class _TalentProfileStep2PageState extends State<TalentProfileStep2Page> {
       ),
 
       //Boutons Confirmer et Retour
-      bottomNavigationBar:  Padding(
+      bottomNavigationBar:  Container(
+        color: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
         padding: EdgeInsets.all(context.defaultPagePadding),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
