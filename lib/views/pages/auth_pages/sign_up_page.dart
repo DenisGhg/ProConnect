@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:pro_connect_projet/constants/routes.dart';
 import 'package:pro_connect_projet/providers/profil_type_provider.dart';
+import 'package:pro_connect_projet/views/sizes/app_sizes.dart';
+import 'package:pro_connect_projet/views/sizes/text_sizes.dart';
 import 'package:provider/provider.dart';
 
 import '../../../widgets/app_button.dart';
 import '../../../widgets/app_text.dart';
 import '../../../widgets/app_textField.dart';
+import '../../colors/app_colors.dart';
+import '../../modelsUI/field_filling_error.dart';
 
 
 class SignUpPage extends StatefulWidget {
@@ -16,11 +20,17 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  TextEditingController _firstNameController = TextEditingController();
-  TextEditingController _lastNameController = TextEditingController();
-  TextEditingController _mailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _rePasswordController = TextEditingController();
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _mailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _rePasswordController = TextEditingController();
+
+  final _lastNameFocusNode = FocusNode();
+  final _firstNameFocusNode = FocusNode();
+  final _mailFocusNode = FocusNode();
+  final _passwordFocusNode = FocusNode();
+  final _rePasswordFocusNode = FocusNode();
 
   String _messageLastName = "";
   String _messageFirstName = "";
@@ -81,306 +91,304 @@ class _SignUpPageState extends State<SignUpPage> {
       }
     }
   }
+
+  @override
+  void dispose() {
+    _lastNameFocusNode.dispose();
+    _firstNameFocusNode.dispose();
+    _mailFocusNode.dispose();
+    _passwordFocusNode.dispose();
+    _rePasswordFocusNode.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    double screeWidth = MediaQuery.of(context).size.width;
-    double screeHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      body: SafeArea(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: (){
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back_sharp),
+        ),
+      ),
+      body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                IconButton(
+          padding: EdgeInsets.all(context.defaultPagePadding),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: AppText(
+                  text: "Créer un compte",
+                  fontWeight: FontWeight.bold,
+                  fontSize: context.mediumText * 1.2,
+                  color: AppColors.blueColor,
+                ),
+              ),
+          
+              // Espacement
+              SizedBox(
+                height: context.defaultSpacing,
+              ),
+          
+              // Label de la page
+              AppText(
+                text: "Créez un compte pour pouvoir profiter des fonctionnalités de ProConnect",
+                color: AppColors.whiteColor,
+                textAlign: TextAlign.center,
+              ),
+          
+              // Espacement
+              SizedBox(
+                height: context.screenHeight * 0.03,
+              ),
+          
+              //Formulaire SignUP
+              //Nom
+              AppTextField(
+                keyboardType: TextInputType.text,
+                controller: _lastNameController,
+                focusNode: _lastNameFocusNode,
+                hinText: "Entrez votre Nom",
+                labelText: "Nom *",
+                // En rouge au cas où il y a d'erreur
+                enableBorderColor: _messageLastName.isNotEmpty ? AppColors.redColor : AppColors.greyColor,
+                focusedBorderColor: _messageLastName.isNotEmpty ? AppColors.redColor : AppColors.blueColorSecond,
+                onChanged: (value){
+                  setState(() {
+                    _messageLastName = "";
+                  });
+                },
+                onSubmitted: (_){
+                  FocusScope.of(context).requestFocus(_firstNameFocusNode);
+                },
+              ),
+          
+              // Erreur _message
+              ErrorMessage(message: _messageLastName),
+          
+              //Espacement
+              SizedBox(
+                height: context.screenHeight * 0.02,
+              ),
+          
+              //Prénom(s)
+              AppTextField(
+                keyboardType: TextInputType.text,
+                controller: _firstNameController,
+                focusNode: _firstNameFocusNode,
+                hinText: "Entrez votre Prénom(s)",
+                labelText: "Prénom(s) *",
+                // En rouge au cas où il y a d'erreur
+                enableBorderColor: _messageFirstName.isNotEmpty ? AppColors.redColor : AppColors.greyColor,
+                focusedBorderColor: _messageFirstName.isNotEmpty ? AppColors.redColor : AppColors.blueColorSecond,
+                onChanged: (value){
+                  setState(() {
+                    _messageFirstName = "";
+                  });
+                },
+                onSubmitted: (_){
+                  FocusScope.of(context).requestFocus(_mailFocusNode);
+                },
+              ),
+              // Erreur _message
+              ErrorMessage(message: _messageFirstName),
+          
+              //Espacement
+              SizedBox(
+                height: context.screenHeight * 0.02,
+              ),
+          
+              //E-mail
+              AppTextField(
+                keyboardType: TextInputType.emailAddress,
+                controller: _mailController,
+                focusNode: _mailFocusNode,
+                hinText: "Entrez votre E-mail",
+                labelText: "E-mail *",
+                // En rouge au cas où il y a d'erreur
+                enableBorderColor: _messageMail.isNotEmpty ? AppColors.redColor : AppColors.greyColor,
+                focusedBorderColor: _messageMail.isNotEmpty ? AppColors.redColor : AppColors.blueColorSecond,
+                onChanged: (value){
+                  setState(() {
+                    _messageMail = "";
+                  });
+                },
+                onSubmitted: (_){
+                  FocusScope.of(context).requestFocus(_passwordFocusNode);
+                },
+              ),
+          
+              // Erreur _message
+              ErrorMessage(message: _messageMail),
+          
+              //Espacement
+              SizedBox(
+                height: context.screenHeight * 0.02,
+              ),
+          
+              //Mot de passe
+              AppTextField(
+                keyboardType: TextInputType.visiblePassword,
+                controller: _passwordController,
+                focusNode: _passwordFocusNode,
+                hinText: "Entrez votre Mot de passe",
+                labelText: "Mot de passe *",
+                obscureText: _isObscuredFirst,
+                // En rouge au cas où il y a d'erreur
+                enableBorderColor: _messagePassword.isNotEmpty ? AppColors.redColor : AppColors.greyColor,
+                focusedBorderColor: _messagePassword.isNotEmpty ? AppColors.redColor : AppColors.blueColorSecond,
+                suffixIcon: IconButton(
                   onPressed: (){
-                    Navigator.pop(context);
-                  },
-                  icon: Icon(Icons.arrow_back_sharp, color: Colors.red,),
-                ),
-        
-                // Titre
-                Center(
-                  child: AppText(
-                    text: "Créer un compte",
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    color: Colors.blue.shade900,
-                  ),
-                ),
-        
-                // Espacement
-                SizedBox(
-                  height: screeHeight * 0.01,
-                ),
-        
-                // Label de la page
-                Center(
-                  child: AppText(
-                    text: "Créez un compte pour pouvoir profiter des fonctionnalités de ProConnect",
-                    color: Colors.grey.shade900,
-                    fontSize: 16,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-        
-                // Espacement
-                SizedBox(
-                  height: screeHeight * 0.03,
-                ),
-        
-                //Formulaire SignUP
-                //Nom
-                AppTextField(
-                  keyboardType: TextInputType.text,
-                  controller: _lastNameController,
-                  hinText: "Entrez votre Nom",
-                  labelText: "Nom *",
-                  // En rouge au cas où il y a d'erreur
-                  enableBorderColor: _messageLastName.isNotEmpty ? Colors.red : Colors.grey,
-                  focusedBorderColor: _messageLastName.isNotEmpty ? Colors.red : Colors.grey,
-                  onChanged: (value){
                     setState(() {
-                      _messageLastName = "";
+                      _isObscuredFirst = !_isObscuredFirst;
                     });
                   },
+                  icon: Icon(_isObscuredFirst ? Icons.visibility : Icons.visibility_off),
                 ),
-        
-                // Erreur _message
-                AppText(
-                  text: "$_messageLastName",
-                  color: Colors.red,
-                  fontSize: 10,
-                ),
-        
-                //Espacement
-                SizedBox(
-                  height: screeHeight * 0.02,
-                ),
-        
-                //Prénom(s)
-                AppTextField(
-                  keyboardType: TextInputType.text,
-                  controller: _firstNameController,
-                  hinText: "Entrez votre Prénom(s)",
-                  labelText: "Prénom(s) *",
-                  // En rouge au cas où il y a d'erreur
-                  enableBorderColor: _messageFirstName.isNotEmpty ? Colors.red : Colors.grey,
-                  focusedBorderColor: _messageFirstName.isNotEmpty ? Colors.red : Colors.grey,
-                  onChanged: (value){
+                onChanged: (value){
+                  setState(() {
+                    _messagePassword = "";
+                    _messageRePassword ="";
+                  });
+                },
+                onSubmitted: (_){
+                  FocusScope.of(context).requestFocus(_rePasswordFocusNode);
+                },
+              ),
+          
+              // Erreur _message
+              ErrorMessage(message: _messagePassword),
+          
+              //Espacement
+              SizedBox(
+                height: context.screenHeight * 0.02,
+              ),
+          
+              //Confirmation Mot de passe
+              AppTextField(
+                keyboardType: TextInputType.visiblePassword,
+                controller: _rePasswordController,
+                focusNode: _rePasswordFocusNode,
+                hinText: "Confirmez votre Mot de passe",
+                labelText: "Confirmer ot de passe *",
+                obscureText: _isObscuredSecond,
+                // En rouge au cas où il y a d'erreur
+                enableBorderColor: _messageRePassword.isNotEmpty ? AppColors.redColor : AppColors.greyColor,
+                focusedBorderColor: _messageRePassword.isNotEmpty ? AppColors.redColor : AppColors.blueColorSecond,
+                suffixIcon: IconButton(
+                  onPressed: (){
                     setState(() {
-                      _messageFirstName = "";
+                      _isObscuredSecond = !_isObscuredSecond;
                     });
                   },
+                  icon: Icon(_isObscuredSecond ? Icons.visibility : Icons.visibility_off),
                 ),
-                // Erreur _message
-                AppText(
-                  text: _messageFirstName,
-                  color: Colors.red,
-                  fontSize: 10,
-                ),
-        
-                //Espacement
-                SizedBox(
-                  height: screeHeight * 0.02,
-                ),
-        
-                //E-mail
-                AppTextField(
-                  keyboardType: TextInputType.emailAddress,
-                  controller: _mailController,
-                  hinText: "Entrez votre E-mail",
-                  labelText: "E-mail *",
-                  // En rouge au cas où il y a d'erreur
-                  enableBorderColor: _messageMail.isNotEmpty ? Colors.red : Colors.grey,
-                  focusedBorderColor: _messageMail.isNotEmpty ? Colors.red : Colors.grey,
-                  onChanged: (value){
-                    setState(() {
-                      _messageMail = "";
-                    });
-                  },
-                ),
-        
-                // Erreur _message
-                AppText(
-                  text: _messageMail,
-                  color: Colors.red,
-                  fontSize: 10,
-                ),
-        
-                //Espacement
-                SizedBox(
-                  height: screeHeight * 0.02,
-                ),
-        
-                //Mot de passe
-                AppTextField(
-                  keyboardType: TextInputType.visiblePassword,
-                  controller: _passwordController,
-                  hinText: "Entrez votre Mot de passe",
-                  labelText: "Mot de passe *",
-                  obscureText: _isObscuredFirst,
-                  // En rouge au cas où il y a d'erreur
-                  enableBorderColor: _messagePassword.isNotEmpty ? Colors.red : Colors.grey,
-                  focusedBorderColor: _messagePassword.isNotEmpty ? Colors.red : Colors.grey,
-                  suffixIcon: IconButton(
-                    onPressed: (){
+                onChanged: (value){
+                  setState(() {
+                    _messageRePassword = "";
+                    _messagePassword = "";
+                  });
+                },
+              ),
+          
+              // Erreur _message
+              ErrorMessage(message: _messageRePassword),
+          
+          
+              //Espacement
+              SizedBox(
+                height: context.screenHeight * 0.001,
+              ),
+          
+              //Accepter les conditions
+              Row(
+                children: [
+                  Checkbox(
+                    value: _isChecked,
+                    onChanged: (value){
                       setState(() {
-                        _isObscuredFirst = !_isObscuredFirst;
+                        _isChecked = value!;
+                        _messageTerms = "";
                       });
                     },
-                    icon: Icon(_isObscuredFirst ? Icons.visibility : Icons.visibility_off),
                   ),
-                  onChanged: (value){
-                    setState(() {
-                      _messagePassword = "";
-                      _messageRePassword ="";
-                    });
-                  },
+          
+                  // J'accepte les conditions
+                  RichText(
+                    text: TextSpan(
+                      children: <TextSpan>[
+                        TextSpan(text: "J'accepte les", style: TextStyle(color: AppColors.whiteColor, fontSize: 15)),
+                        TextSpan(text: " conditions d'utilisation", style: TextStyle(color: AppColors.blueColor, fontSize: 15, fontWeight: FontWeight.bold)),
+                      ],
+                    ),
+                  ),
+          
+                ],
+              ),
+          
+              // Erreur _message
+              ErrorMessage(message: _messageTerms),
+
+              SizedBox(height: context.defaultSpacing * 10),
+          
+              // Bouton création
+              AppButton(
+                onTap: verifierInfo,
+                width: double.infinity,
+                backgroundColor: AppColors.blueColor,
+                alignment: Alignment.center,
+                child: AppText(
+                  text: "Créer un compte",
+                  color: AppColors.whiteColor,
+                  fontWeight: FontWeight.bold,
                 ),
-        
-                // Erreur _message
-                AppText(
-                  text: _messagePassword,
-                  color: Colors.red,
-                  fontSize: 10,
-                ),
-        
-                //Espacement
-                SizedBox(
-                  height: screeHeight * 0.02,
-                ),
-        
-                //Confirmation Mot de passe
-                AppTextField(
-                  keyboardType: TextInputType.visiblePassword,
-                  controller: _rePasswordController,
-                  hinText: "Confirmez votre Mot de passe",
-                  labelText: "Confirmer ot de passe *",
-                  obscureText: _isObscuredSecond,
-                  // En rouge au cas où il y a d'erreur
-                  enableBorderColor: _messageRePassword.isNotEmpty ? Colors.red : Colors.grey,
-                  focusedBorderColor: _messageRePassword.isNotEmpty ? Colors.red : Colors.grey,
-                  suffixIcon: IconButton(
-                    onPressed: (){
-                      setState(() {
-                        _isObscuredSecond = !_isObscuredSecond;
-                      });
+              ),
+          
+              SizedBox(
+                height: context.defaultSpacing,
+              ),
+          
+              // connectez-vous au cas où
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  //...
+                  AppText(
+                    text: "Vous avez déjà un compte?",
+                    color: AppColors.whiteColor,
+                    fontSize: context.mediumText * 0.9,
+                  ),
+          
+                  //Espacement
+                  SizedBox(
+                    width: context.screenWidth * 0.01,
+                  ),
+          
+                  // Connect
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.pushReplacementNamed(context, AppRoutes.LOGINPAGE);
                     },
-                    icon: Icon(_isObscuredSecond ? Icons.visibility : Icons.visibility_off),
-                  ),
-                  onChanged: (value){
-                    setState(() {
-                      _messageRePassword = "";
-                      _messagePassword = "";
-                    });
-                  },
-                ),
-        
-                // Erreur _message
-                 AppText(
-                  text: _messageRePassword,
-                  color: Colors.red,
-                  fontSize: 10,
-                ),
-        
-        
-                //Espacement
-                SizedBox(
-                  height: screeHeight * 0.001,
-                ),
-        
-                //Accepter les conditions
-                Row(
-                  children: [
-                    Checkbox(
-                      value: _isChecked,
-                      onChanged: (value){
-                        setState(() {
-                          _isChecked = value!;
-                          _messageTerms = "";
-                        });
-                      },
-                    ),
-
-                    // J'accepte les conditions
-                    RichText(
-                      text: TextSpan(
-                        children: const<TextSpan>[
-                          TextSpan(text: "J'accepte les", style: TextStyle(color: Colors.black, fontSize: 15)),
-                          TextSpan(text: " conditions d'utilisation", style: TextStyle(color: Colors.green, fontSize: 15, fontWeight: FontWeight.bold)),
-                        ],
-                      ),
-                    ),
-
-                  ],
-                ),
-
-                // Erreur _message
-                AppText(
-                  text: _messageTerms,
-                  color: Colors.red,
-                  fontSize: 10,
-                ),
-
-                // Bouton création
-                Hero(
-                  tag: "sign",
-                  child: AppButton(
-                    onTap: verifierInfo,
-                    height: screeHeight * 0.07,
-                    width: double.infinity,
-                    backgroundColor: Colors.green,
-                    alignment: Alignment.center,
-                    radius: 20,
                     child: AppText(
-                      text: "Créer un compte",
-                      color: Colors.black,
+                      text: "Connectez-vous !",
+                      color: AppColors.blueColor,
+                      fontSize: context.mediumText * 0.9,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                ),
-
-                SizedBox(
-                  height: screeHeight * 0.01,
-                ),
-
-                // connectez-vous au cas où
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    //...
-                    AppText(
-                      text: "Vous avez déjà un compte?",
-                      color: Colors.blue.shade900,
-                      fontSize: screeWidth * 0.04,
-                    ),
-        
-                    //Espacement
-                    SizedBox(
-                      width: screeWidth * 0.01,
-                    ),
-        
-                    // Connect
-                    GestureDetector(
-                      onTap: (){
-                        Navigator.pushReplacementNamed(context, AppRoutes.LOGINPAGE);
-                      },
-                      child: AppText(
-                        text: "Connectez-vous !",
-                        color: Colors.green,
-                        fontSize: screeWidth * 0.04,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                ],
+              ),
+            ],
           ),
         ),
       ),
     );
   }
 }
+
+
+

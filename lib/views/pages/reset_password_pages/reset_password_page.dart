@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pro_connect_projet/constants/routes.dart';
+import 'package:pro_connect_projet/views/colors/app_colors.dart';
+import 'package:pro_connect_projet/views/sizes/app_sizes.dart';
+import 'package:pro_connect_projet/views/sizes/text_sizes.dart';
 
 import '../../../widgets/app_button.dart';
 import '../../../widgets/app_text.dart';
@@ -16,8 +19,8 @@ class ResetPasswordPage extends StatefulWidget {
 
 class _ResetPasswordPageState extends State<ResetPasswordPage> {
 
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _rePasswordController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _rePasswordController = TextEditingController();
   String _messagePassword = "";
   String _messageRePassword = "";
   bool _isObscuredFirst = true;
@@ -47,66 +50,64 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   }
   @override
   Widget build(BuildContext context) {
-    double screeWidth = MediaQuery.of(context).size.width;
-    double screeHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: SafeArea(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back_sharp),
+        ),
+      ),
+      body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: EdgeInsets.all(context.defaultPagePadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              IconButton(
-                onPressed: (){
-                  Navigator.pop(context);
-                },
-                icon: Icon(Icons.arrow_back_ios, color: Colors.red,),
-              ),
-
               // Titre
               Center(
                 child: AppText(
                   text: "Nouveau mot de passe",
                   fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: Colors.blue.shade900,
+                  fontSize: context.largeText * 0.9,
+                  color: AppColors.blueColor,
                 ),
               ),
-
+        
               // Espacement
               SizedBox(
-                height: screeHeight * 0.01,
+                height: context.defaultSpacing,
               ),
-
+        
               // Label de la page
               Center(
                 child: AppText(
                   text: "Créez un nouveau mot de passe",
-                  color: Colors.grey.shade900,
-                  fontSize: 16,
                   textAlign: TextAlign.center,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-
+        
               // Espacement
               SizedBox(
-                height: screeHeight * 0.03,
+                height: context.defaultSpacing * 3,
               ),
-
+        
               //Formulaire Nouveau password
-
+        
               // Erreur message
               AppText(
-                text: "$_messagePassword",
+                text: _messagePassword,
                 color: Colors.red,
-                fontSize: 10,
+                fontSize: context.smallText,
               ),
-
+        
               //Espacement
               SizedBox(
-                height: screeHeight * 0.02,
+                height: context.screenHeight * 0.02,
               ),
-
+        
               //Mot de passe
               AppTextField(
                 keyboardType: TextInputType.visiblePassword,
@@ -132,14 +133,14 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   });
                 },
               ),
-
+        
               // Erreur message
               AppText(
-                text: "$_messagePassword",
+                text: _messagePassword,
                 color: Colors.red,
                 fontSize: 10,
               ),
-
+        
               //Mot de passe
               AppTextField(
                 keyboardType: TextInputType.visiblePassword,
@@ -148,8 +149,8 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                 labelText: "Confirmez mot de passe*",
                 obscureText: _isObscuredSecond,
                 // En rouge au cas où il y a d'erreur
-                enableBorderColor: _messageRePassword.isNotEmpty ? Colors.red : Colors.grey,
-                focusedBorderColor: _messageRePassword.isNotEmpty ? Colors.red : Colors.grey,
+                enableBorderColor: _messageRePassword.isNotEmpty ? AppColors.redColor : AppColors.greyColor,
+                focusedBorderColor: _messageRePassword.isNotEmpty ? AppColors.redColor : AppColors.blueColor,
                 suffixIcon: IconButton(
                   onPressed: (){
                     setState(() {
@@ -165,29 +166,26 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   });
                 },
               ),
-
+        
               // Erreur message
               AppText(
-                text: "$_messageRePassword",
-                color: Colors.red,
-                fontSize: 10,
+                text: _messageRePassword,
+                color: AppColors.redColor,
+                fontSize: context.smallText,
               ),
-
+        
               //Espacement
               SizedBox(
-                height: screeHeight * 0.04 ,
+                height: context.defaultSpacing * 4,
               ),
               // Bouton Login
               AppButton(
                 onTap: verifierInfo,
-                height: screeHeight * 0.07,
-                width: double.infinity,
-                backgroundColor: Colors.green,
+                backgroundColor: AppColors.blueColor,
                 alignment: Alignment.center,
                 radius: 20,
                 child: AppText(
                   text: "Créez un nouveau mot de passe",
-                  color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
               ),

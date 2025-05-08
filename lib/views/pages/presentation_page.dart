@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pro_connect_projet/constants/routes.dart';
-
+import 'package:pro_connect_projet/views/sizes/app_sizes.dart';
+import 'package:pro_connect_projet/views/sizes/text_sizes.dart';
 import '../../widgets/app_button.dart';
 import '../../widgets/app_text.dart';
+import '../colors/app_colors.dart';
 
 class PresentationPage extends StatefulWidget {
   const PresentationPage({super.key});
@@ -12,118 +14,92 @@ class PresentationPage extends StatefulWidget {
 }
 
 class _PresentationPageState extends State<PresentationPage> {
+
+
+
   @override
   Widget build(BuildContext context) {
-    double screeWidth = MediaQuery.of(context).size.width;
-    double screeHeight = MediaQuery.of(context).size.height;
-    print("width ---${MediaQuery.of(context).size.width}, height---${MediaQuery.of(context).size.height}");
+
     return Scaffold(
       // Page d'accueil
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: screeHeight * 0.15,
-          ),
-
-          // Welcome
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0),
-            child: AppText(
+      body: Padding(
+        padding: EdgeInsets.all(context.defaultPagePadding),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // Welcome
+            AppText(
               text: "Bienvenue sur ProConnect !",
               textAlign: TextAlign.center,
-              fontSize: 24,
+              fontSize: context.largeText * 1.1,
               fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 7, 54, 92),
+              color: AppColors.blueColor,
             ),
-          ),
 
-          // Espacement
-          SizedBox(
-            height: screeHeight * 0.05,
-          ),
+            // Espacement
+            SizedBox(
+              height: context.defaultSpacing * 5,
+            ),
 
-          //Bref description
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: AppText(
+            //Bref description
+            AppText(
               text: "Créez facilement votre portfolio professionnel et mettez en avant vos compétences et projets en tant qu'informaticien. Que vous soyez recruteur ou talent, ProConnect vous aide à trouver les bonnes connexions dans le monde du numérique.",
               textAlign: TextAlign.center,
-              fontSize: 16,
               fontWeight: FontWeight.bold,
-              color: Colors.black,
             ),
-          ),
 
-          // Espacement
-          SizedBox(
-            height: screeHeight * 0.03,
-          ),
+            // Espacement
+            SizedBox(
+              height: context.defaultSpacing * 3,
+            ),
 
-          // Suite Description
-          RichText(
-            textAlign: TextAlign.center,
-            text: TextSpan(
-              children: const<TextSpan>[
-                TextSpan(text: "Connectez-vous", style: TextStyle(color: Colors.blue, fontSize: 18, fontWeight: FontWeight.bold),),
-                TextSpan(text: " ou ", style: TextStyle(color: Colors.black, fontSize: 18)),
-                TextSpan(text: "Inscrivez-vous", style: TextStyle(color: Colors.orange, fontSize: 18, fontWeight: FontWeight.bold),),
-                TextSpan(text: " pour commencer", style: TextStyle(color: Colors.black, fontSize: 18)),
+            // Espacement
+            SizedBox(
+              height: context.defaultSpacing * 3,
+            ),
 
+            // Boutons Se connecter et S'inscrire
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+
+                // Bouton s'inscrire
+                AppButton(
+                  onTap: (){
+                    Navigator.pushNamed(context, AppRoutes.PROFILCHOICEPAGE);
+                  },
+                  width: context.screenWidth * 0.4,
+                  alignment: Alignment.center,
+                  child: AppText(
+                    text: "S'incrire",
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+
+                //Espacement
+                SizedBox(
+                  width: context.screenWidth * 0.02,
+                ),
+
+                // Se Connecter
+                AppButton(
+                  onTap: (){
+                    Navigator.pushNamed(context, AppRoutes.LOGINPAGE);
+                  },
+                  width: context.screenWidth * 0.4,
+                  backgroundColor: AppColors.blueColorSecond,
+                  alignment: Alignment.center,
+                  child: AppText(
+                    text: "Se connecter",
+                    color: AppColors.whiteColor,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ],
             ),
-          ),
-
-          // Espacement
-          SizedBox(
-            height: screeHeight * 0.1,
-          ),
-
-          // Boutons Se connecter et S'inscrire
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Se Connecter
-              AppButton(
-                onTap: (){
-                  Navigator.pushNamed(context, AppRoutes.LOGINPAGE);
-                },
-                height: screeHeight * 0.07,
-                width: screeWidth * 0.4,
-                backgroundColor: Colors.blue,
-                alignment: Alignment.center,
-                child: AppText(
-                  text: "Se connecter",
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-
-              //Espacement
-              SizedBox(
-                width: screeWidth * 0.02,
-              ),
-
-              // Bouton s'inscrire
-              AppButton(
-                onTap: (){
-                  Navigator.pushNamed(context, AppRoutes.PROFILCHOICEPAGE);
-                },
-                height: screeHeight * 0.07,
-                width: screeWidth * 0.4,
-                backgroundColor: Colors.orange,
-                alignment: Alignment.center,
-                child: AppText(
-                  text: "S'incrire",
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

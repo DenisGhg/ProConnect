@@ -12,9 +12,12 @@ class AppTheme {
       bodyMedium: TextStyle(color: Colors.black),
     ),
     appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.white,
+      backgroundColor:  Color.fromARGB(255, 214, 210, 210),
       foregroundColor: Colors.black,
     ),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor:  Color.fromARGB(255, 214, 210, 210),
+    )
   );
 
   static final ThemeData darkTheme = ThemeData(
@@ -28,8 +31,11 @@ class AppTheme {
       bodyMedium: TextStyle(color: Colors.white),
     ),
     appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.black,
+      backgroundColor:  Color.fromARGB(255, 32, 28, 28),
       foregroundColor: Colors.white,
     ),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor:  Color.fromARGB(255, 32, 28, 28),
+    )
   );
 }

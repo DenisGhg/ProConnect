@@ -4,14 +4,16 @@ import 'package:pro_connect_projet/views/pages/auth_pages/sign_up_page.dart';
 import 'package:pro_connect_projet/views/pages/logo_page.dart';
 import 'package:pro_connect_projet/views/pages/presentation_page.dart';
 import 'package:pro_connect_projet/views/pages/auth_pages/profil_choice_page.dart';
-import 'package:pro_connect_projet/views/pages/register_pages/talent_pages/talent_profile_presentation.dart';
-import 'package:pro_connect_projet/views/pages/register_pages/talent_pages/talent_profile_step2.dart';
-import 'package:pro_connect_projet/views/pages/register_pages/talent_pages/talent_profile_step1.dart';
+import 'package:pro_connect_projet/views/pages/register_pages/talent_pages/talent_profile_step2_page.dart';
+import 'package:pro_connect_projet/views/pages/register_pages/talent_pages/talent_profile_step3_page.dart';
 import 'package:pro_connect_projet/views/pages/reset_password_pages/reset_password_page.dart';
 import 'package:pro_connect_projet/views/pages/reset_password_pages/verify_code_page.dart';
 import 'package:pro_connect_projet/views/pages/reset_password_pages/verify_mail_page.dart';
 import 'package:pro_connect_projet/views/pages/success_log_in.dart';
-import 'package:pro_connect_projet/views/pages/success_sign_up.dart';
+
+import '../views/pages/register_pages/talent_pages/talent_profile_presentation_page.dart';
+import '../views/pages/register_pages/talent_pages/talent_profile_step1_page.dart';
+import '../views/pages/register_pages/talent_pages/talent_profile_step4_page.dart';
 
 Map<String, Widget Function(BuildContext)> routes = {
   '/logoPage': (context) => const LogoPage(),
@@ -20,13 +22,14 @@ Map<String, Widget Function(BuildContext)> routes = {
   '/profilChoicePage': (context) => const ProfilChoicePage(),
   '/presentationPage': (context) => const PresentationPage(),
   '/succesLogIn': (context) => const SuccessLogIn(),
-  '/succesSignUp': (context) => const SuccessSignUp(),
   '/verifyMailPage': (context) => const VerifyMailPage(),
   '/verifyCodePage': (context) => const VerifyCodePage(),
   '/resetPasswordPage': (context) => const ResetPasswordPage(),
   '/talentProfilPresentation': (context) => const TalentProfilPresentation(),
   '/talentProfileStep1' :(context) => const TalentProfileStep1(),
-  '/talentProfileStep2' :(context) => const TalentProfileStep2(),
+  '/talentProfileStep2' :(context) => TalentProfileStep2Page(),
+  '/talentProfileStep3' :(context) => TalentProfileStep3Page(),
+  '/talentProfileStep4' :(context) => TalentProfileStep4Page(),
 };
 
 class AppRoutes{
@@ -36,11 +39,12 @@ class AppRoutes{
   static const String PROFILCHOICEPAGE = '/profilChoicePage';
   static const String PRESENTATIONPAGE = '/presentationPage';
   static const String SUCCESSLOGINPAGE = '/successLoginPage';
-  static const String SUCESSSIGNUPPAGE = '/successSignUpPage';
   static const String VERIFYMAILPAGE = '/verifyMailPage';
   static const String VERIFYCODEPAGE = '/verifyCodePage';
   static const String RESETPASSWORDPAGE = '/resetPasswordPage';
   static const String TALENTPROFILPRESENTATION = '/talentProfilPresentation';
   static const String TALENTPROFILESTEP1 = '/talentProfileStep1';
   static const String TALENTPROFILESTEP2 = '/talentProfileStep2';
+  static const String TALENTPROFILESTEP3 = '/talentProfileStep3';
+  static const String TALENTPROFILESTEP4 = '/talentProfileStep4';
 }

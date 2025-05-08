@@ -4,6 +4,7 @@ import 'package:pro_connect_projet/views/colors/app_colors.dart';
 import 'package:pro_connect_projet/views/sizes/app_sizes.dart';
 import 'package:pro_connect_projet/views/sizes/text_sizes.dart';
 import 'package:pro_connect_projet/widgets/app_button.dart';
+import 'package:pro_connect_projet/widgets/app_snackbar.dart';
 import 'package:pro_connect_projet/widgets/app_text.dart';
 import 'package:provider/provider.dart';
 
@@ -95,13 +96,15 @@ class _TalentProfileStep2PageState extends State<TalentProfileStep2Page> {
       } else {
         // Vérifie si on tente d'ajouter un 3e domaine
         if (!selectedSubDomains.containsKey(domain) && selectedSubDomains.length >= 2) {
-          _showSnackBar('Vous ne pouvez sélectionner des sous-domaines que dans 2 domaines au maximum.');
+          String alert = "Vous ne pouvez sélectionner des sous-domaines que dans 2 domaines au maximum.";
+          AppSnackBar.show(context, alert);
           return;
         }
 
         // Vérifie la limite de 3 sous-domaines par domaine
         if ((selectedSubDomains[domain]?.length ?? 0) >= 3) {
-          _showSnackBar('Vous ne pouvez sélectionner que 3 sous-domaines dans "$domain".');
+          String alert = 'Vous ne pouvez sélectionner que 3 sous-domaines dans "$domain".';
+          AppSnackBar.show(context, alert);
           return;
         }
 
@@ -112,12 +115,7 @@ class _TalentProfileStep2PageState extends State<TalentProfileStep2Page> {
     });
   }
 
-  // Affiche un snack bar pour alerter l’utilisateur
-  void _showSnackBar(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message), duration: Duration(seconds: 2)),
-    );
-  }
+
 
   // Vérifie si un sous-domaine est sélectionné
   bool _isSelected(String domain, String subDomain) {

@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:pro_connect_projet/constants/routes.dart';
+import 'package:pro_connect_projet/views/modelsUI/field_filling_error.dart';
+import 'package:pro_connect_projet/views/sizes/app_sizes.dart';
+import 'package:pro_connect_projet/views/sizes/text_sizes.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/reset_password_providers/mail_provider.dart';
 import '../../../widgets/app_button.dart';
 import '../../../widgets/app_text.dart';
 import '../../../widgets/app_textField.dart';
+import '../../colors/app_colors.dart';
 
 
 class VerifyCodePage extends StatefulWidget {
@@ -17,7 +21,7 @@ class VerifyCodePage extends StatefulWidget {
 
 class _VerifyCodePageState extends State<VerifyCodePage> {
 
-  TextEditingController _codeController = TextEditingController();
+  final TextEditingController _codeController = TextEditingController();
   String _messageCode = "";
 
   // Verication du code
@@ -32,77 +36,69 @@ class _VerifyCodePageState extends State<VerifyCodePage> {
   @override
   Widget build(BuildContext context) {
 
-    double screeWidth = MediaQuery.of(context).size.width;
-    double screeHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              //Bouton retour
-              IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: Icon(Icons.arrow_back_sharp, color: Colors.red),
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back_sharp,),
+        ),
+      ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: context.defaultPagePadding),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: context.defaultSpacing * 9,),
+            RichText(
+              text: TextSpan(
+                style: TextStyle(color: AppColors.whiteColor, fontSize: context.mediumText, fontWeight: FontWeight.bold),
+                children: <TextSpan>[
+                  TextSpan(text: "Un code a été envoyé de 6 chiffres a été envoyé à : "),
+                  TextSpan(text: context.watch<MailProvider>().mailController.text, style: TextStyle(color: AppColors.blueColorSecond))
+                ]
               ),
+            ),
 
-              SizedBox(height: screeHeight * 0.04), // Espacement
+            SizedBox(height: context.defaultSpacing * 2), // Espacement
+            // Field
+            AppTextField(
+              keyboardType: TextInputType.emailAddress,
+              controller: _codeController,
+              hinText: "Entrez le code de 6 chiffres",
+              labelText: "Code de 6 chiffres*",
+              //suffix: AppText(text: "Renvoyez le code", fontSize: 15,),
+              // En rouge au cas où il y a d'erreur
+              enableBorderColor:
+              _messageCode.isNotEmpty ? AppColors.redColor : AppColors.greyColor,
+              focusedBorderColor:
+              _messageCode.isNotEmpty ? AppColors.redColor : AppColors.blueColor,
+              onChanged: (value) {
+                setState(() {
+                  _messageCode = "";
+                });
+              },
+            ),
 
-              Center(
-                child: AppText(
-                  text: "Un code a été envoyé de 6 chiffres a été envoyé à & ${context.watch<MailProvider>().mailController.text}",
-                  fontSize: 15,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
+            //Message d'erreur en cas de non validité du mail
+            ErrorMessage(message: _messageCode),
+
+            SizedBox(height: context.defaultSpacing * 2), // Espacement
+
+            // Bouton continuer
+            AppButton(
+              onTap: verifCode,
+              width: double.infinity,
+              backgroundColor: AppColors.blueColor,
+              alignment: Alignment.center,
+              radius: 20,
+              child: AppText(
+                text: "Suivant",
+                fontWeight: FontWeight.bold,
               ),
-
-              SizedBox(height: screeHeight * 0.02), // Espacement
-              // Field
-              AppTextField(
-                keyboardType: TextInputType.emailAddress,
-                controller: _codeController,
-                hinText: "Entrez le code de 6 chiffres",
-                labelText: "Code de 6 chiffres*",
-                //suffix: AppText(text: "Renvoyez le code", fontSize: 15,),
-                // En rouge au cas où il y a d'erreur
-                enableBorderColor:
-                _messageCode.isNotEmpty ? Colors.red : Colors.grey,
-                focusedBorderColor:
-                _messageCode.isNotEmpty ? Colors.red : Colors.grey,
-                onChanged: (value) {
-                  setState(() {
-                    _messageCode = "";
-                  });
-                },
-              ),
-
-              //Message d'erreur en cas de non validité du mail
-              AppText(text: _messageCode, color: Colors.red, fontSize: 10),
-
-              SizedBox(height: screeHeight * 0.02), // Espacement
-
-
-              // Bouton continuer
-              AppButton(
-                onTap: verifCode,
-                height: screeHeight * 0.07,
-                width: double.infinity,
-                backgroundColor: Colors.blue,
-                alignment: Alignment.center,
-                radius: 20,
-                child: AppText(
-                  text: "Suivant",
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pro_connect_projet/views/sizes/app_sizes.dart';
 
 import 'app_text.dart';
 
@@ -12,6 +13,7 @@ class AppButton extends StatelessWidget {
   final Widget? child;
   final Color? borderColor;
   final double? borderWidth;
+  final EdgeInsetsGeometry? padding;
 
   const AppButton({
     super.key,
@@ -23,7 +25,8 @@ class AppButton extends StatelessWidget {
     this.radius,
     this.child,
     this.borderColor,
-    this.borderWidth
+    this.borderWidth,
+    this.padding,
   });
 
   @override
@@ -31,13 +34,13 @@ class AppButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: height ?? 10,
-        width: width ?? 10,
-        alignment: alignment,
-        padding: EdgeInsets.all(10),
+        height: height ?? context.adjustAppSize(context.screenHeight, 0.06),
+        width: width ?? context.adjustAppSize(context.screenWidth, 0.943),
+        alignment: alignment ?? Alignment.center,
+        padding: padding ?? EdgeInsets.all(context.screenWidth * 0.027),
         decoration: BoxDecoration(
           color: backgroundColor ?? Colors.blue,
-          borderRadius: BorderRadius.circular(radius ?? 10),
+          borderRadius: BorderRadius.circular(radius ?? context.screenHeight * 0.027),
           border: Border.all(
             color: borderColor ?? Colors.transparent,
             width: borderWidth ?? 0,

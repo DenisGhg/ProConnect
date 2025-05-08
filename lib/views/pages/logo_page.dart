@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pro_connect_projet/constants/images_paths.dart';
 import 'package:pro_connect_projet/constants/routes.dart';
+import 'package:pro_connect_projet/views/colors/app_colors.dart';
+import 'package:pro_connect_projet/views/sizes/app_sizes.dart';
 
 class LogoPage extends StatefulWidget {
   const LogoPage({super.key});
@@ -10,8 +12,8 @@ class LogoPage extends StatefulWidget {
 }
 
 class _LogoPageState extends State<LogoPage> {
-  void lancement(){
-    Future.delayed(const Duration(seconds: 5), (){
+  void lauch(){
+    Future.delayed(const Duration(seconds: 2), (){
       Navigator.pushReplacementNamed(context, AppRoutes.PRESENTATIONPAGE);
     });
   }
@@ -19,21 +21,14 @@ class _LogoPageState extends State<LogoPage> {
   @override
   initState(){
     super.initState();
-    lancement();
+    lauch();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-          color: Colors.black,
-        ),
-        child : Center(
-          child: Image.asset(ImagesPaths.LOGOBLUE, width: 300, height: 300,),
-        ),
+      body: Center(
+        child: Image.asset(ImagesPaths.LOGOBLUE, width: context.screenHeight * 0.37, height: context.screenHeight * 0.37,),
       ),
     );
   }

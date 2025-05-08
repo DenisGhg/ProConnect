@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:pro_connect_projet/views/colors/app_colors.dart';
+import 'package:pro_connect_projet/views/sizes/text_sizes.dart';
 
 class AppText extends StatelessWidget {
   final String text;
-  final TextAlign textAlign;
-  final Color color;
-  final FontWeight fontWeight;
-  final double fontSize;
+  final TextAlign? textAlign;
+  final Color? color;
+  final FontWeight? fontWeight;
+  final double? fontSize;
 
   const AppText({
     super.key,
     required this.text,
-    this.textAlign = TextAlign.left,
-    this.color = Colors.black,
-    this.fontWeight = FontWeight.normal,
-    this.fontSize = 16.0,
+    this.textAlign,
+    this.color,
+    this.fontWeight,
+    this.fontSize,
   });
 
   @override
@@ -24,7 +26,7 @@ class AppText extends StatelessWidget {
       style: TextStyle(
         color: color,
         fontWeight: fontWeight,
-        fontSize: fontSize,
+        fontSize: fontSize ?? context.mediumText,
       ),
     );
   }

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../providers/themes/theme_provider.dart';
 
 class AppColors {
   static Color blueColor = const Color.fromARGB(255, 33, 150, 243);
@@ -9,5 +12,12 @@ class AppColors {
   static Color orangeColor = const Color.fromARGB(255, 255, 152, 0);
   static Color blueColorSecond = const Color.fromARGB(255, 13, 71, 161);
   static Color blackColor = const Color.fromARGB(255, 0, 0, 0);
+
+  // La couleur primaire basée sur le mode sombre/claire
+  static Color primaryColor(BuildContext context) {
+    bool isDarkMode = context.read<ThemeProvider>().isDarkMode;
+    return isDarkMode ? whiteColor : blackColor;
+  }
+
 }
 

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pro_connect_projet/views/colors/app_colors.dart';
+import 'package:pro_connect_projet/views/sizes/app_sizes.dart';
 
 class AppTextField extends StatelessWidget {
   final TextEditingController? controller;
@@ -10,8 +12,10 @@ class AppTextField extends StatelessWidget {
   final Widget? suffix;
   final Color? enableBorderColor;
   final Color? focusedBorderColor;
+  final FocusNode? focusNode;
   final TextInputType keyboardType;
   final Function(String)? onChanged;
+  final Function(String)? onSubmitted;
   const AppTextField({
     super.key,
     this.controller,
@@ -24,6 +28,8 @@ class AppTextField extends StatelessWidget {
     this.enableBorderColor,
     this.focusedBorderColor,
     this.suffix,
+    this.focusNode,
+    this.onSubmitted,
     required this.keyboardType,
   });
 
@@ -32,9 +38,11 @@ class AppTextField extends StatelessWidget {
     return TextField(
       textAlign: TextAlign.start,
       controller: controller,
-      keyboardType: keyboardType ?? TextInputType.text,
+      focusNode: focusNode,
+      keyboardType: keyboardType,
       obscureText: obscureText ?? false,
       onChanged: onChanged,
+      onSubmitted: onSubmitted,
       decoration: InputDecoration(
         hintText: hinText,
         labelText: labelText,
@@ -42,20 +50,20 @@ class AppTextField extends StatelessWidget {
         prefixIcon: prefixIcon,
         suffix: suffix,
         labelStyle: TextStyle(
-          color: Colors.grey,
+          color: AppColors.greyColor,
         ),
         hintStyle: TextStyle(
 
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: enableBorderColor ?? Colors.grey, width: 1.5),
-          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: enableBorderColor ?? AppColors.greyColor, width: context.screenWidth *0.0042),
+          borderRadius: BorderRadius.circular(context.screenWidth * 0.027),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: focusedBorderColor ?? Colors.blue.shade900, width: 1.5),
-          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: focusedBorderColor ?? AppColors.blueColorSecond, width: context.screenWidth *0.0042),
+          borderRadius: BorderRadius.circular(context.screenWidth * 0.027),
         ),
-      ),
+      )
     );
   }
 }
