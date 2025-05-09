@@ -1,52 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:pro_connect_projet/constants/routes.dart';
 import 'package:pro_connect_projet/views/colors/app_colors.dart';
 import 'package:pro_connect_projet/views/sizes/app_sizes.dart';
 import 'package:pro_connect_projet/views/sizes/text_sizes.dart';
 import 'package:pro_connect_projet/widgets/app_button.dart';
 
-import '../../../../models/register/talent/experience.dart';
+import '../../../../models/register/talent/education.dart';
 import '../../../../widgets/app_text.dart';
 
-// Page principale pour ajouter et afficher les expériences
-class TalentProfileStep4Page extends StatefulWidget {
-  const TalentProfileStep4Page({super.key});
+
+// Page pour ajouter ou modifier les formations
+class TalentProfileStep5Page extends StatefulWidget {
+  const TalentProfileStep5Page({super.key});
 
   @override
-  State<TalentProfileStep4Page> createState() => _TalentProfileStep4PageState();
+  State<TalentProfileStep5Page> createState() => _TalentProfileStep5PageState();
 }
 
-class _TalentProfileStep4PageState extends State<TalentProfileStep4Page> {
-  List<Experience> experiences = []; // Liste des expériences ajoutées
-  int? editingIndex; // Index utilisé lorsqu'on modifie une expérience
+class _TalentProfileStep5PageState extends State<TalentProfileStep5Page> {
+  List<Education> educations = [];
+  int? editingIndex;
 
-  // Clé du formulaire et controllers pour les champs
   final _formKey = GlobalKey<FormState>();
-  final _titleController = TextEditingController();
-  final _companyController = TextEditingController();
+  final _diplomaController = TextEditingController();
+  final _schoolController = TextEditingController();
   final _descriptionController = TextEditingController();
 
-  // Variables pour les dates
   DateTime? _startDate;
   DateTime? _endDate;
-  bool _isCurrent = false; // True si le poste est actuel
+  bool _isCurrent = false;
 
-  // Ouvre le bottom sheet pour ajouter ou modifier une expérience
   void _showExperienceForm([int? indexToEdit]) {
     if (indexToEdit != null) {
-      // Pré-remplir les champs si on modifie
-      final exp = experiences[indexToEdit];
-      _titleController.text = exp.title;
-      _companyController.text = exp.company;
-      _descriptionController.text = exp.description;
-      _startDate = exp.startDate;
-      _endDate = exp.endDate;
-      _isCurrent = exp.isCurrent;
+      final edu = educations[indexToEdit];
+      _diplomaController.text = edu.diploma;
+      _schoolController.text = edu.school;
+      _descriptionController.text = edu.description;
+      _startDate = edu.startDate;
+      _endDate = edu.endDate;
+      _isCurrent = edu.isCurrent;
       editingIndex = indexToEdit;
     } else {
-      // Nettoyer les champs si on ajoute une nouvelle expérience
-      _titleController.clear();
-      _companyController.clear();
+      _diplomaController.clear();
+      _schoolController.clear();
       _descriptionController.clear();
       _startDate = null;
       _endDate = null;
@@ -68,91 +63,99 @@ class _TalentProfileStep4PageState extends State<TalentProfileStep4Page> {
                 child: Wrap(
                   children: [
                     AppText(
-                      text : editingIndex != null ? 'Modifier une expérience' : 'Ajouter une expérience',
+                      text: editingIndex != null
+                          ? 'Modifier une formation'
+                          : 'Ajouter une formation',
                       fontWeight: FontWeight.bold,
                     ),
-                    SizedBox(height: context.defaultSpacing,),
+                    SizedBox(height: context.defaultSpacing),
 
-                    // Champ : Titre du poste
+                    // Champ : Intitulé du diplôme
                     TextFormField(
-                      controller: _titleController,
-                      decoration: InputDecoration(labelText: 'Titre du poste'),
+                      controller: _diplomaController,
+                      decoration: InputDecoration(labelText: 'Diplôme ou formation'),
                       validator: (value) => value!.isEmpty ? 'Champ requis' : null,
                     ),
 
-                    // Champ : Entreprise
+                    // Champ : École
                     TextFormField(
-                      controller: _companyController,
-                      decoration: InputDecoration(labelText: 'Entreprise'),
+                      controller: _schoolController,
+                      decoration: InputDecoration(labelText: 'Établissement'),
                       validator: (value) => value!.isEmpty ? 'Champ requis' : null,
                     ),
 
-                    // Champ : Description
+                    // Champ : Description / Spécialité
                     TextFormField(
                       controller: _descriptionController,
-                      decoration: InputDecoration(labelText: 'Description'),
+                      decoration: InputDecoration(labelText: 'Spécialité / Détails'),
                       maxLines: 3,
                     ),
 
                     SizedBox(height: context.defaultSpacing * 2),
 
-                    // Sélection de la date de début
+                    // Date de début
                     Row(
                       children: [
                         Expanded(
                           child: AppText(
-                            text : _startDate == null
-                              ? 'Date de début'
-                              : 'Début : ${_startDate!.toLocal().toString().split(' ')[0]}'),
+                            text: _startDate == null
+                                ? 'Date de début'
+                                : 'Début : ${_startDate!.toLocal().toString().split(' ')[0]}',
+                          ),
                         ),
                         ElevatedButton(
                           onPressed: () => _pickDate(isStartDate: true),
-                          child: AppText(text :'Choisir'),
+                          child: AppText(text: 'Choisir'),
                         ),
                       ],
                     ),
 
-                    // Sélection de la date de fin (si ce n’est pas un poste actuel)
+                    // Date de fin (si non en cours)
                     Row(
                       children: [
                         Expanded(
                           child: _isCurrent
-                              ? AppText(text : 'Poste actuel')
-                              : AppText(text : _endDate == null
-                              ? 'Date de fin'
-                              : 'Fin : ${_endDate!.toLocal().toString().split(' ')[0]}'),
+                              ? AppText(text: 'Formation en cours')
+                              : AppText(
+                            text: _endDate == null
+                                ? 'Date de fin'
+                                : 'Fin : ${_endDate!.toLocal().toString().split(' ')[0]}',
+                          ),
                         ),
                         if (!_isCurrent)
                           ElevatedButton(
                             onPressed: () => _pickDate(isStartDate: false),
-                            child: AppText(text :'Choisir'),
+                            child: AppText(text: 'Choisir'),
                           ),
                       ],
                     ),
 
-                    // Case à cocher : Poste actuel
+                    // Case à cocher : Formation en cours
                     CheckboxListTile(
                       value: _isCurrent,
                       onChanged: (val) {
                         setModalState(() => _isCurrent = val!);
                       },
-                      title: AppText(text: "C'est mon poste actuel"),
+                      title: AppText(text: "Formation en cours"),
                     ),
 
-                    // Boutons d'action : Annuler et Ajouter/Modifier
+                    // Boutons
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         AppButton(
                           width: context.screenWidth * 0.25,
                           backgroundColor: Colors.transparent,
-                          onTap: ()=> Navigator.pop(context),
-                          child: AppText(text: "Annuler", fontWeight: FontWeight.bold, color: AppColors.greyColor,),
+                          onTap: () => Navigator.pop(context),
+                          child: AppText(
+                            text: "Annuler",
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.greyColor,
+                          ),
                         ),
                         SizedBox(width: 8),
-
                         ElevatedButton(
-                          onPressed: _submitExperience,
+                          onPressed: _submitEducation,
                           child: AppText(text: editingIndex != null ? 'Modifier' : 'Ajouter'),
                         ),
                       ],
@@ -167,7 +170,6 @@ class _TalentProfileStep4PageState extends State<TalentProfileStep4Page> {
     );
   }
 
-  // Fonction pour choisir une date (début ou fin)
   void _pickDate({required bool isStartDate}) async {
     final now = DateTime.now();
     final initialDate = isStartDate ? (_startDate ?? now) : (_endDate ?? now);
@@ -190,12 +192,11 @@ class _TalentProfileStep4PageState extends State<TalentProfileStep4Page> {
     }
   }
 
-  // Ajoute ou modifie une expérience après validation
-  void _submitExperience() {
+  void _submitEducation() {
     if (_formKey.currentState!.validate() && _startDate != null) {
-      final newExp = Experience(
-        title: _titleController.text,
-        company: _companyController.text,
+      final newEdu = Education(
+        diploma: _diplomaController.text,
+        school: _schoolController.text,
         description: _descriptionController.text,
         startDate: _startDate!,
         endDate: _isCurrent ? null : _endDate,
@@ -204,22 +205,20 @@ class _TalentProfileStep4PageState extends State<TalentProfileStep4Page> {
 
       setState(() {
         if (editingIndex != null) {
-          experiences[editingIndex!] = newExp; // Modification
+          educations[editingIndex!] = newEdu;
         } else {
-          experiences.add(newExp); // Ajout
+          educations.add(newEdu);
         }
       });
 
-      Navigator.pop(context); // Ferme le bottom sheet
+      Navigator.pop(context);
     }
   }
 
-  // Supprime une expérience
-  void _deleteExperience(int index) {
-    setState(() => experiences.removeAt(index));
+  void _deleteEducation(int index) {
+    setState(() => educations.removeAt(index));
   }
 
-  // Affichage principal
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -227,7 +226,11 @@ class _TalentProfileStep4PageState extends State<TalentProfileStep4Page> {
         toolbarHeight: context.screenHeight * 0.05,
         leadingWidth: context.screenHeight * 0.075,
         centerTitle: true,
-        title: AppText(text: "Créez votre Profil", fontWeight: FontWeight.bold, fontSize: context.largeText * 0.9,),
+        title: AppText(
+          text: "Créez votre Profil",
+          fontWeight: FontWeight.bold,
+          fontSize: context.largeText * 0.9,
+        ),
         leading: Padding(
           padding: EdgeInsets.only(left: context.defaultPagePadding),
           child: Container(
@@ -235,11 +238,14 @@ class _TalentProfileStep4PageState extends State<TalentProfileStep4Page> {
               color: AppColors.greyColor,
               borderRadius: BorderRadius.circular(context.screenHeight * 0.03),
             ),
-            child: Icon(Icons.person, size: context.screenHeight * 0.038, color: AppColors.blackColor,),
+            child: Icon(
+              Icons.school,
+              size: context.screenHeight * 0.038,
+              color: AppColors.blackColor,
+            ),
           ),
         ),
       ),
-
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(context.defaultPagePadding),
@@ -247,7 +253,7 @@ class _TalentProfileStep4PageState extends State<TalentProfileStep4Page> {
             children: [
               SizedBox(height: context.defaultSpacing * 4,),
               AppText(
-                text: "Ajoutez vos expériences professionnelles",
+                text: "Ajoutez vos formations académiques",
                 fontWeight: FontWeight.bold,
                 fontSize: context.largeText * 0.9,
                 textAlign: TextAlign.center,
@@ -256,48 +262,47 @@ class _TalentProfileStep4PageState extends State<TalentProfileStep4Page> {
 
               SizedBox(height: context.defaultSpacing * 2,),
               AppText(
-                text: "Renseignez vos postes que vous aviez occupés, les entreprises, les périodes et les missions réalisées. Ces informations permettent aux recruteurs de mieux comprendre votre parcours et voss compétences.",
+                text: "Renseignez les diplômes ou formations que vous avez suivis, les établissements, les périodes et les spécialités. Ces informations permettent aux recruteurs de mieux comprendre votre parcours académique.",
                 textAlign: TextAlign.justify,
                 fontWeight: FontWeight.bold,
               ),
 
               SizedBox(height: context.defaultSpacing * 4,),
-              // Bouton pour ouvrir le formulaire
+              // Bouton pour ouvrir le formulaire d'ajout de formation
               AppButton(
-                onTap: () => _showExperienceForm(),
+                onTap: () => _showExperienceForm(), // Utilise la méthode d'affichage de formulaire existante
                 width: context.screenWidth * 0.6,
                 padding: EdgeInsets.zero,
                 height: context.screenHeight * 0.05,
-                //backgroundColor: AppColors.greyColor,
                 radius: context.screenWidth * 0.1,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.add),
-                    AppText(text: "Ajouter une expérience")
+                    AppText(text: "Ajouter une formation")
                   ],
                 ),
               ),
               SizedBox(height: context.defaultSpacing * 4),
 
-              // Liste des expériences ajoutées
-              experiences.isEmpty
-                  ? Center(child: AppText(text: "Aucune expérience ajoutée."))
+              // Liste des formations ajoutées
+              educations.isEmpty
+                  ? Center(child: AppText(text: "Aucune formation ajoutée."))
                   : ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: experiences.length,
+                itemCount: educations.length,
                 itemBuilder: (_, index) {
-                  final exp = experiences[index];
+                  final edu = educations[index];
                   return Card(
                     margin: EdgeInsets.only(bottom: context.defaultPagePadding * 0.9),
                     child: ListTile(
-                      title: AppText(text: exp.title),
+                      title: AppText(text: edu.diploma),
                       subtitle: AppText(
-                        text: "${exp.company}\n"
-                            "${exp.description}\n"
-                            "${exp.startDate.toLocal().toString().split(' ')[0]}"
-                            "${exp.isCurrent ? ' - Présent' : ' - ${exp.endDate?.toLocal().toString().split(' ')[0] ?? ''}'}",
+                        text: "${edu.school}\n"
+                            "${edu.description}\n"
+                            "${edu.startDate.toLocal().toString().split(' ')[0]}"
+                            "${edu.isCurrent ? ' - Présent' : ' - ${edu.endDate?.toLocal().toString().split(' ')[0] ?? ''}'}",
                       ),
                       isThreeLine: true,
                       trailing: Row(
@@ -306,12 +311,12 @@ class _TalentProfileStep4PageState extends State<TalentProfileStep4Page> {
                           // Bouton modifier
                           IconButton(
                             icon: Icon(Icons.edit, color: AppColors.orangeColor),
-                            onPressed: () => _showExperienceForm(index),
+                            onPressed: () => _showExperienceForm(index), // Reutilise la même fonction pour modifier
                           ),
                           // Bouton supprimer
                           IconButton(
                             icon: Icon(Icons.delete, color: AppColors.redColor),
-                            onPressed: () => _deleteExperience(index),
+                            onPressed: () => _deleteEducation(index),
                           ),
                         ],
                       ),
@@ -323,7 +328,7 @@ class _TalentProfileStep4PageState extends State<TalentProfileStep4Page> {
           ),
         ),
       ),
-      bottomNavigationBar:  Container(
+      bottomNavigationBar: Container(
         color: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
         padding: EdgeInsets.all(context.defaultPagePadding),
         child: Row(
@@ -331,27 +336,30 @@ class _TalentProfileStep4PageState extends State<TalentProfileStep4Page> {
           children: [
             Container(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(context.screenHeight * 0.038),
-                  border: Border.all(
-                    color: AppColors.greyColor,
-                    width: 2,
-                  )
+                borderRadius: BorderRadius.circular(context.screenHeight * 0.038),
+                border: Border.all(
+                  color: AppColors.greyColor,
+                  width: 2,
+                ),
               ),
               child: IconButton(
                 onPressed: () => Navigator.pop(context),
-                icon: Icon(Icons.arrow_back_ios_new, size: context.screenHeight * 0.03, color: AppColors.blueColor,),
+                icon: Icon(
+                  Icons.arrow_back_ios_new,
+                  size: context.screenHeight * 0.03,
+                  color: AppColors.blueColor,
+                ),
               ),
             ),
-
-            //Suivant
+            // Suivant
             AppButton(
-              onTap: ()=>Navigator.pushNamed(context, AppRoutes.TALENTPROFILESTEP5),
               width: context.screenWidth * 0.4,
               child: AppText(text: "Suivant"),
-            )
+            ),
           ],
         ),
       ),
     );
   }
+
 }
