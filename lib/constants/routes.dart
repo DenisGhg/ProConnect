@@ -7,6 +7,7 @@ import 'package:pro_connect_projet/views/pages/auth_pages/profil_choice_page.dar
 import 'package:pro_connect_projet/views/pages/register_pages/talent_pages/talent_profile_step2_page.dart';
 import 'package:pro_connect_projet/views/pages/register_pages/talent_pages/talent_profile_step3_page.dart';
 import 'package:pro_connect_projet/views/pages/register_pages/talent_pages/talent_profile_step5_page.dart';
+import 'package:pro_connect_projet/views/pages/register_pages/talent_pages/talent_profile_step6_page.dart';
 import 'package:pro_connect_projet/views/pages/reset_password_pages/reset_password_page.dart';
 import 'package:pro_connect_projet/views/pages/reset_password_pages/verify_code_page.dart';
 import 'package:pro_connect_projet/views/pages/reset_password_pages/verify_mail_page.dart';
@@ -32,6 +33,7 @@ Map<String, Widget Function(BuildContext)> routes = {
   '/talentProfileStep3' :(context) => TalentProfileStep3Page(),
   '/talentProfileStep4' :(context) => TalentProfileStep4Page(),
   '/talentProfileStep5' :(context) => TalentProfileStep5Page(),
+  '/talentProfileStep6' :(context) => TalentProfileStep6Page(),
 };
 
 class AppRoutes{
@@ -50,4 +52,5 @@ class AppRoutes{
   static const String TALENTPROFILESTEP3 = '/talentProfileStep3';
   static const String TALENTPROFILESTEP4 = '/talentProfileStep4';
   static const String TALENTPROFILESTEP5 = '/talentProfileStep5';
+  static const String TALENTPROFILESTEP6 = '/talentProfileStep6';
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pro_connect_projet/constants/routes.dart';
 import 'package:pro_connect_projet/views/colors/app_colors.dart';
 import 'package:pro_connect_projet/views/sizes/app_sizes.dart';
 import 'package:pro_connect_projet/views/sizes/text_sizes.dart';
@@ -353,6 +354,7 @@ class _TalentProfileStep5PageState extends State<TalentProfileStep5Page> {
             ),
             // Suivant
             AppButton(
+              onTap: ()=> Navigator.pushNamed(context, AppRoutes.TALENTPROFILESTEP6),
               width: context.screenWidth * 0.4,
               child: AppText(text: "Suivant"),
             ),
