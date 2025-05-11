@@ -13,6 +13,7 @@ class AppTextField extends StatelessWidget {
   final Color? enableBorderColor;
   final Color? focusedBorderColor;
   final FocusNode? focusNode;
+  final int? maxLines;
   final TextInputType keyboardType;
   final Function(String)? onChanged;
   final Function(String)? onSubmitted;
@@ -30,6 +31,7 @@ class AppTextField extends StatelessWidget {
     this.suffix,
     this.focusNode,
     this.onSubmitted,
+    this.maxLines,
     required this.keyboardType,
   });
 
@@ -43,6 +45,7 @@ class AppTextField extends StatelessWidget {
       obscureText: obscureText ?? false,
       onChanged: onChanged,
       onSubmitted: onSubmitted,
+      maxLines: maxLines,
       decoration: InputDecoration(
         hintText: hinText,
         labelText: labelText,

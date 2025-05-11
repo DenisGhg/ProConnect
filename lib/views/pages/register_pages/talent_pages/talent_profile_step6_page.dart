@@ -3,6 +3,7 @@ import 'package:pro_connect_projet/views/sizes/app_sizes.dart';
 import 'package:pro_connect_projet/views/sizes/text_sizes.dart';
 import 'package:pro_connect_projet/widgets/app_snackbar.dart';
 
+import '../../../../constants/routes.dart';
 import '../../../../widgets/app_button.dart';
 import '../../../../widgets/app_text.dart';
 import '../../../colors/app_colors.dart';
@@ -203,7 +204,7 @@ class _TalentProfileStep6PageState extends State<TalentProfileStep6Page> {
 
             //Suivant
             AppButton(
-              //onTap: ()=>Navigator.pushNamed(context, AppRoutes.TALENTPROFILESTEP5),
+              onTap: ()=>Navigator.pushNamed(context, AppRoutes.TALENTPROFILESTEP7),
               width: context.screenWidth * 0.4,
               child: AppText(text: "Suivant"),
             )
