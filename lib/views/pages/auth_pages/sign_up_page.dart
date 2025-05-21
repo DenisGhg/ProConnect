@@ -87,6 +87,7 @@ class _SignUpPageState extends State<SignUpPage> {
       //Navigator.pushNamedAndRemoveUntil(context, AppRoutes.SUCESSSIGNUPPAGE, (route) => false);
       String profilType = Provider.of<ProfilTypeProvider>(context, listen: false).profilType;
       if(profilType == "talent"){
+        print(profilType);
         Navigator.pushNamedAndRemoveUntil(context, AppRoutes.TALENTPROFILPRESENTATION, (route) => false);
       }
     }

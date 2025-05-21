@@ -62,7 +62,7 @@ class _TalentProfileStep5PageState extends State<TalentProfileStep5Page> {
               child: Form(
                 key: _formKey,
                 child: Wrap(
-                  children: [
+                  children : [
                     AppText(
                       text: editingIndex != null
                           ? 'Modifier une formation'

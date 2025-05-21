@@ -10,10 +10,13 @@ class AppTextField extends StatelessWidget {
   final Widget? prefixIcon;
   final bool? obscureText;
   final Widget? suffix;
+  final Widget? prefix;
   final Color? enableBorderColor;
   final Color? focusedBorderColor;
   final FocusNode? focusNode;
   final int? maxLines;
+  final bool readOnly;
+  final Function()? onTap;
   final TextInputType keyboardType;
   final Function(String)? onChanged;
   final Function(String)? onSubmitted;
@@ -29,9 +32,12 @@ class AppTextField extends StatelessWidget {
     this.enableBorderColor,
     this.focusedBorderColor,
     this.suffix,
+    this.prefix,
     this.focusNode,
     this.onSubmitted,
     this.maxLines,
+    this.readOnly = false,
+    this.onTap,
     required this.keyboardType,
   });
 
@@ -45,13 +51,16 @@ class AppTextField extends StatelessWidget {
       obscureText: obscureText ?? false,
       onChanged: onChanged,
       onSubmitted: onSubmitted,
-      maxLines: maxLines,
+      maxLines: maxLines ?? 1,
+      readOnly: readOnly,
+      onTap: onTap,
       decoration: InputDecoration(
         hintText: hinText,
         labelText: labelText,
         suffixIcon: suffixIcon,
         prefixIcon: prefixIcon,
         suffix: suffix,
+        prefix: prefix,
         labelStyle: TextStyle(
           color: AppColors.greyColor,
         ),
