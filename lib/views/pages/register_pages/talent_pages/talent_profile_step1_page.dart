@@ -48,7 +48,7 @@ class _TalentProfileStep1State extends State<TalentProfileStep1> {
   void _selectDate() async {
     DateTime? pickedDate = await showDatePicker(
       context: context,
-      initialDate: DateTime(1930, 1, 1),
+      initialDate: DateTime(2000, 1, 1),
       firstDate: DateTime(1900),
       lastDate: DateTime.now(),
       helpText: "Sélectionnez votre date de naissance",

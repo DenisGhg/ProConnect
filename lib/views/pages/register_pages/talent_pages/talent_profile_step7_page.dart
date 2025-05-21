@@ -24,7 +24,7 @@ class _TalentProfileStep7PageState extends State<TalentProfileStep7Page> {
   //Fonction de contrôle
   void _onSubmitted(){
     print(_bioController.text.length);
-    if(_bioController.text.length < 100){
+    if(_bioController.text.length > 100){
       AppSnackBar.show(context, "La bio doit contenir au moins 100 caractères");
     }else{
       Navigator.pushNamed(context, AppRoutes.TALENTPROFILESTEP6);
@@ -75,6 +75,7 @@ class _TalentProfileStep7PageState extends State<TalentProfileStep7Page> {
 
               //Champ de la bio
               AppTextField(
+                controller: _bioController,
                 keyboardType: TextInputType.text,
                 maxLines: 5,
                 hinText: "Entrez votre bio",

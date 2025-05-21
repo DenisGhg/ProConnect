@@ -102,45 +102,54 @@ class _TalentProfileStep6PageState extends State<TalentProfileStep6Page> {
         
               // Si le booléen showFields est vrai, on affiche les champs
               if (showFields)
-                Row(
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Menu déroulant pour choisir la langue
-                    Expanded(
-                      child: DropdownButtonFormField<String>(
-                        value: tempLanguage,
-                        hint: AppText(text: "Langue"),
-                        items: languages.map((lang) {
-                          return DropdownMenuItem(value: lang, child: AppText(text: lang));
-                        }).toList(),
-                        onChanged: (value) {
-                          setState(() {
-                            tempLanguage = value;
-                          });
-                        },
-                      ),
+                    Row(
+                      children: [
+                        // Menu déroulant pour choisir la langue
+                        SizedBox(
+                          width: context.screenWidth * 0.4,
+                          child: DropdownButtonFormField<String>(
+                            value: tempLanguage,
+                            hint: AppText(text: "Langue"),
+                            items: languages.map((lang) {
+                              return DropdownMenuItem(value: lang, child: AppText(text: lang));
+                            }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                tempLanguage = value;
+                              });
+                            },
+                          ),
+                        ),
+                        SizedBox(width: context.screenWidth * 0.02), // Espace entre les deux champs
+
+                        // Menu déroulant pour choisir le niveau
+                        SizedBox(
+                          width: context.screenWidth * 0.4,
+                          child: DropdownButtonFormField<String>(
+                            value: tempLevel,
+                            hint: AppText(text: "Niveau",),
+                            items: levels.map((level) {
+                              return DropdownMenuItem(value: level, child: AppText(text: level));
+                            }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                tempLevel = value;
+                              });
+                            },
+                          ),
+                        ),
+                      ],
                     ),
-                    SizedBox(width: context.screenWidth * 0.02), // Espace entre les deux champs
-        
-                    // Menu déroulant pour choisir le niveau
-                    Expanded(
-                      child: DropdownButtonFormField<String>(
-                        value: tempLevel,
-                        hint: AppText(text: "Niveau",),
-                        items: levels.map((level) {
-                          return DropdownMenuItem(value: level, child: AppText(text: level));
-                        }).toList(),
-                        onChanged: (value) {
-                          setState(() {
-                            tempLevel = value;
-                          });
-                        },
-                      ),
-                    ),
-        
+
+                    SizedBox(height: context.defaultSpacing,),
+
                     // Bouton de validation (icône check)
-                    IconButton(
-                      icon: Icon(Icons.check),
-                      onPressed: () {
+                    AppButton(
+                      width: context.screenWidth * 0.3,
+                      onTap: () {
                         if (tempLanguage != null && tempLevel != null) {
                           // Si les deux champs sont remplis, on ajoute la langue à la Map
                           setState(() {
@@ -152,6 +161,7 @@ class _TalentProfileStep6PageState extends State<TalentProfileStep6Page> {
                           AppSnackBar.show(context, "Veuillez choisir une langue et un niveau.");
                         }
                       },
+                      child: AppText(text: "Ajouter"),
                     ),
                   ],
                 ),
