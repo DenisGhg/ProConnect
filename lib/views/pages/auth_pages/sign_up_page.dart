@@ -5,6 +5,7 @@ import 'package:pro_connect_projet/views/sizes/app_sizes.dart';
 import 'package:pro_connect_projet/views/sizes/text_sizes.dart';
 import 'package:provider/provider.dart';
 
+import '../../../providers/auth_providers/sign_up_provider.dart';
 import '../../../widgets/app_button.dart';
 import '../../../widgets/app_text.dart';
 import '../../../widgets/app_textField.dart';
@@ -43,7 +44,7 @@ class _SignUpPageState extends State<SignUpPage> {
   bool _isObscuredSecond = true;
   bool _isChecked = false;
 
-  void verifierInfo(){
+  void onSubmitted(){
     if(_lastNameController.text.isEmpty) {
       setState(() {
         _messageLastName = "Veuillez entrer votre Nom";
@@ -83,14 +84,28 @@ class _SignUpPageState extends State<SignUpPage> {
         _messageTerms = "Veuillez accepter les conditions d'utilisation";
       });
     }
-    if(_messageLastName.isEmpty && _messageFirstName.isEmpty && _messageMail.isEmpty && _messagePassword.isEmpty && _messageRePassword.isEmpty && _messageTerms.isEmpty){
-      //Navigator.pushNamedAndRemoveUntil(context, AppRoutes.SUCESSSIGNUPPAGE, (route) => false);
+    if (_messageLastName.isEmpty &&
+        _messageFirstName.isEmpty &&
+        _messageMail.isEmpty &&
+        _messagePassword.isEmpty &&
+        _messageRePassword.isEmpty &&
+        _messageTerms.isEmpty) {
+
+      // Enregistrer dans le Provider
+      final signUpProvider = Provider.of<SignUpProvider>(context, listen: false);
+      signUpProvider.setFirstName(_firstNameController.text.trim());
+      signUpProvider.setLastName(_lastNameController.text.trim());
+      signUpProvider.setEmail(_mailController.text.trim());
+      signUpProvider.setPassword(_passwordController.text.trim());
+      signUpProvider.setTermsAccepted(_isChecked);
+
+      // Redirection
       String profilType = Provider.of<ProfilTypeProvider>(context, listen: false).profilType;
-      if(profilType == "talent"){
-        print(profilType);
+      if (profilType == "talent") {
         Navigator.pushNamedAndRemoveUntil(context, AppRoutes.TALENTPROFILPRESENTATION, (route) => false);
       }
     }
+
   }
 
   @override
@@ -338,7 +353,7 @@ class _SignUpPageState extends State<SignUpPage> {
           
               // Bouton création
               AppButton(
-                onTap: verifierInfo,
+                onTap: onSubmitted,
                 width: double.infinity,
                 backgroundColor: AppColors.blueColor,
                 alignment: Alignment.center,

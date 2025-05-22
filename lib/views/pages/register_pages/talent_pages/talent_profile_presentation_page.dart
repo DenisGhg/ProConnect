@@ -31,7 +31,7 @@ class TalentProfilPresentation extends StatelessWidget {
               SizedBox(height: context.defaultSpacing * 2,),
               AppButton(
                 onTap: (){
-                  Navigator.pushNamed(context, AppRoutes.TALENTPROFILESTEP1);
+                  Navigator.pushNamed(context, AppRoutes.TALENTPERSONALINFOPAGE);
                 },
                 alignment: Alignment.center,
                 child: AppText(

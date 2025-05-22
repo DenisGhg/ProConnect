@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:pro_connect_projet/constants/routes.dart';
+import 'package:pro_connect_projet/providers/register_providers/talent_providers/talent_experience_provider.dart';
 import 'package:pro_connect_projet/views/colors/app_colors.dart';
 import 'package:pro_connect_projet/views/sizes/app_sizes.dart';
 import 'package:pro_connect_projet/views/sizes/text_sizes.dart';
 import 'package:pro_connect_projet/widgets/app_button.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../models/register/talent/experience.dart';
 import '../../../../widgets/app_text.dart';
 
 // Page principale pour ajouter et afficher les expériences
-class TalentProfileStep4Page extends StatefulWidget {
-  const TalentProfileStep4Page({super.key});
+class ExperiencesSelectionPage extends StatefulWidget {
+  const ExperiencesSelectionPage({super.key});
 
   @override
-  State<TalentProfileStep4Page> createState() => _TalentProfileStep4PageState();
+  State<ExperiencesSelectionPage> createState() => _ExperiencesSelectionPageState();
 }
 
-class _TalentProfileStep4PageState extends State<TalentProfileStep4Page> {
+class _ExperiencesSelectionPageState extends State<ExperiencesSelectionPage> {
   List<Experience> experiences = []; // Liste des expériences ajoutées
   int? editingIndex; // Index utilisé lorsqu'on modifie une expérience
 
@@ -219,6 +221,13 @@ class _TalentProfileStep4PageState extends State<TalentProfileStep4Page> {
     setState(() => experiences.removeAt(index));
   }
 
+  //Enregistrement et routage
+  void _onSubmitted(){
+    final provider = Provider.of<TalentExperienceProvider>(context, listen: false);
+    provider.setExperiences(experiences);
+    Navigator.pushNamed(context, AppRoutes.EDUCATIONSSELECTIONPAGE);
+  }
+
   // Affichage principal
   @override
   Widget build(BuildContext context) {
@@ -345,7 +354,7 @@ class _TalentProfileStep4PageState extends State<TalentProfileStep4Page> {
 
             //Suivant
             AppButton(
-              onTap: ()=>Navigator.pushNamed(context, AppRoutes.TALENTPROFILESTEP5),
+              onTap: _onSubmitted,
               width: context.screenWidth * 0.4,
               child: AppText(text: "Suivant"),
             )

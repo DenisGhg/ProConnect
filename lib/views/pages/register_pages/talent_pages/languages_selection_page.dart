@@ -2,22 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:pro_connect_projet/views/sizes/app_sizes.dart';
 import 'package:pro_connect_projet/views/sizes/text_sizes.dart';
 import 'package:pro_connect_projet/widgets/app_snackbar.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../constants/routes.dart';
+import '../../../../providers/register_providers/talent_providers/talent_language_provider.dart';
 import '../../../../widgets/app_button.dart';
 import '../../../../widgets/app_text.dart';
 import '../../../colors/app_colors.dart';
 
-class TalentProfileStep6Page extends StatefulWidget {
-  const TalentProfileStep6Page({super.key});
+class LanguagesSelectionPage extends StatefulWidget {
+  const LanguagesSelectionPage({super.key});
 
   @override
-  State<TalentProfileStep6Page> createState() => _TalentProfileStep6PageState();
+  State<LanguagesSelectionPage> createState() => _LanguagesSelectionPageState();
 }
 
-class _TalentProfileStep6PageState extends State<TalentProfileStep6Page> {
+class _LanguagesSelectionPageState extends State<LanguagesSelectionPage> {
   // Map pour enregistrer les langues sélectionnées : clé = langue, valeur = niveau
-  final Map<String, String> selectedLanguages = {};
+  final Map<String, String> _selectedLanguages = {};
 
   // Listes de langues et de niveaux disponibles dans les menus déroulants
   final List<String> languages = ['Français', 'Anglais', 'Espagnol', 'Allemand'];
@@ -35,6 +37,17 @@ class _TalentProfileStep6PageState extends State<TalentProfileStep6Page> {
 
   // Booléen pour afficher ou non les champs de sélection
   bool showFields = false;
+  
+  //Enregistrement et routage
+  void _onSubmitted(){
+    if(_selectedLanguages.isEmpty){
+      AppSnackBar.show(context, "Aucune langue selectionnée");
+    }else{
+      final provider = Provider.of<TalentLanguageProvider>(context, listen: false);
+      provider.setSelectedLanguages(_selectedLanguages);
+      Navigator.pushNamed(context, AppRoutes.TALENTBIOPAGE);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -153,7 +166,7 @@ class _TalentProfileStep6PageState extends State<TalentProfileStep6Page> {
                         if (tempLanguage != null && tempLevel != null) {
                           // Si les deux champs sont remplis, on ajoute la langue à la Map
                           setState(() {
-                            selectedLanguages[tempLanguage!] = tempLevel!;
+                            _selectedLanguages[tempLanguage!] = tempLevel!;
                             showFields = false; // On cache à nouveau les champs
                           });
                         } else {
@@ -169,10 +182,10 @@ class _TalentProfileStep6PageState extends State<TalentProfileStep6Page> {
               SizedBox(height: context.defaultSpacing), // Espace
         
               // Affiche les langues sélectionnées si la Map n'est pas vide
-              if (selectedLanguages.isNotEmpty)
+              if (_selectedLanguages.isNotEmpty)
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: selectedLanguages.entries.map((entry) {
+                  children: _selectedLanguages.entries.map((entry) {
                     return ListTile(
                       title: AppText(text: entry.key), // Langue
                       subtitle: AppText(text: "Niveau : ${entry.value}"), // Niveau
@@ -180,7 +193,7 @@ class _TalentProfileStep6PageState extends State<TalentProfileStep6Page> {
                         icon: Icon(Icons.delete, color: Colors.red), // Bouton de suppression
                         onPressed: () {
                           setState(() {
-                            selectedLanguages.remove(entry.key); // Supprime l’entrée de la Map
+                            _selectedLanguages.remove(entry.key); // Supprime l’entrée de la Map
                           });
                         },
                       ),
@@ -214,7 +227,7 @@ class _TalentProfileStep6PageState extends State<TalentProfileStep6Page> {
 
             //Suivant
             AppButton(
-              onTap: ()=>Navigator.pushNamed(context, AppRoutes.TALENTPROFILESTEP7),
+              onTap: _onSubmitted,
               width: context.screenWidth * 0.4,
               child: AppText(text: "Suivant"),
             )

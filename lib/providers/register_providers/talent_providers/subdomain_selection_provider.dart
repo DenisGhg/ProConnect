@@ -5,7 +5,8 @@ class SubDomainSelectionProvider with ChangeNotifier {
   final Map<String, List<String>> _selectedSubDomains = {};
 
   // Getter pour récupérer la Map complète des choix
-  Map<String, List<String>> get selectedSubDomains => _selectedSubDomains;
+  Map<String, List<String>> get selectedSubDomains => Map.unmodifiable(_selectedSubDomains);
+
 
   // Méthode pour enregistrer une nouvelle Map de choix
   void saveSelections(Map<String, List<String>> newSelections) {

@@ -1,36 +1,52 @@
 import 'package:flutter/material.dart';
+import 'package:pro_connect_projet/providers/register_providers/talent_providers/talent_title_pro_provider.dart';
 import 'package:pro_connect_projet/views/sizes/app_sizes.dart';
 import 'package:pro_connect_projet/views/sizes/text_sizes.dart';
 import 'package:pro_connect_projet/widgets/app_snackbar.dart';
 import 'package:pro_connect_projet/widgets/app_textField.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../constants/routes.dart';
 import '../../../../widgets/app_button.dart';
 import '../../../../widgets/app_text.dart';
 import '../../../colors/app_colors.dart';
 
-class TalentProfileStep7Page extends StatefulWidget {
-  const TalentProfileStep7Page({super.key});
+class TalentTitleProPage extends StatefulWidget {
+  const TalentTitleProPage({super.key});
 
   @override
-  State<TalentProfileStep7Page> createState() => _TalentProfileStep7PageState();
+  State<TalentTitleProPage> createState() => _TalentTitleProPageState();
 }
 
-class _TalentProfileStep7PageState extends State<TalentProfileStep7Page> {
+class _TalentTitleProPageState extends State<TalentTitleProPage> {
+  
+  final TextEditingController _titleProController = TextEditingController();
 
-  //Controller de la bio
-  final TextEditingController _bioController = TextEditingController();
+  final FocusNode _titleProFocusNode = FocusNode();
 
-  //Fonction de contrôle
-  void _onSubmitted(){
-    print(_bioController.text.length);
-    if(_bioController.text.length > 100){
-      AppSnackBar.show(context, "La bio doit contenir au moins 100 caractères");
-    }else{
-      Navigator.pushNamed(context, AppRoutes.TALENTPROFILESTEP6);
-    }
+
+  void _focusNodeLaunch(){
+    Future.delayed(const Duration(seconds: 2), (){
+      FocusScope.of(context).requestFocus(_titleProFocusNode);
+    });
   }
 
+  @override
+  void initState() {
+    _focusNodeLaunch();
+    super.initState();
+  }
+
+  void _onSubmitted(){
+    if(_titleProController.text.isEmpty){
+      AppSnackBar.show(context, "Veuillez entrer un titre Pro");
+    }else{
+      final provider = Provider.of<TalentTitleProProvider>(context, listen: false);
+      provider.setProTitle(_titleProController.text);
+      Navigator.pushNamed(context, AppRoutes.EXPERIENCESSELECTIONPAGE);
+    }
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,14 +66,15 @@ class _TalentProfileStep7PageState extends State<TalentProfileStep7Page> {
           ),
         ),
       ),
-
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(context.defaultPagePadding),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: context.defaultSpacing * 4,),
               AppText(
-                text: "Présentez-vous en quelques lignes",
+                text: "Exprimez en une phrase qui vous êtes en tant que professionnel",
                 fontWeight: FontWeight.bold,
                 fontSize: context.largeText * 0.9,
                 textAlign: TextAlign.center,
@@ -66,33 +83,31 @@ class _TalentProfileStep7PageState extends State<TalentProfileStep7Page> {
 
               SizedBox(height: context.defaultSpacing * 2,),
               AppText(
-                text: "Mettez en avant votre parcours, vos compétences clés et ce que vous recherchez. Cette biographie aide les récruteurs à mieux cerner votre profil professionnel.",
+                text: "C’est la première chose que les recruteurs verront, alors assurez-vous qu’il reflète clairement votre expertise. Montrez en quelques mots ce que vous faites de mieux.",
                 textAlign: TextAlign.justify,
                 fontWeight: FontWeight.bold,
               ),
 
-              SizedBox(height: context.defaultSpacing * 4,),
+              SizedBox(height: context.defaultSpacing * 2,),
+              AppText(
+                text: "Titre professionnel",
+                fontWeight: FontWeight.bold,
+                textAlign: TextAlign.start,
+                ),
 
-              //Champ de la bio
+              SizedBox(height: context.defaultSpacing,),
               AppTextField(
-                controller: _bioController,
+                controller: _titleProController,
+                //focusNode: _titleProFocusNode,
                 keyboardType: TextInputType.text,
-                maxLines: 5,
-                hinText: "Entrez votre bio",
+                hinText: "Ex : Développeur web et mobile",
               ),
 
-              //Instruction
-              Align(
-                alignment: Alignment.centerRight,
-                child: AppText(text: "Au moins 100 lettres", color: AppColors.greyColor,),
-              )
-
-        ],
+            ],
           ),
         ),
       ),
 
-      //Bottom Nav Bar
       bottomNavigationBar:  Container(
         color: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
         padding: EdgeInsets.all(context.defaultPagePadding),
@@ -122,6 +137,7 @@ class _TalentProfileStep7PageState extends State<TalentProfileStep7Page> {
           ],
         ),
       ),
+
     );
   }
 }

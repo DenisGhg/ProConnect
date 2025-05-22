@@ -4,20 +4,22 @@ import 'package:pro_connect_projet/views/colors/app_colors.dart';
 import 'package:pro_connect_projet/views/sizes/app_sizes.dart';
 import 'package:pro_connect_projet/views/sizes/text_sizes.dart';
 import 'package:pro_connect_projet/widgets/app_button.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../models/register/talent/education.dart';
+import '../../../../providers/register_providers/talent_providers/talent_education_provider.dart';
 import '../../../../widgets/app_text.dart';
 
 
 // Page pour ajouter ou modifier les formations
-class TalentProfileStep5Page extends StatefulWidget {
-  const TalentProfileStep5Page({super.key});
+class EducationsSelectionPage extends StatefulWidget {
+  const EducationsSelectionPage({super.key});
 
   @override
-  State<TalentProfileStep5Page> createState() => _TalentProfileStep5PageState();
+  State<EducationsSelectionPage> createState() => _EducationsSelectionPageState();
 }
 
-class _TalentProfileStep5PageState extends State<TalentProfileStep5Page> {
+class _EducationsSelectionPageState extends State<EducationsSelectionPage> {
   List<Education> educations = [];
   int? editingIndex;
 
@@ -220,6 +222,13 @@ class _TalentProfileStep5PageState extends State<TalentProfileStep5Page> {
     setState(() => educations.removeAt(index));
   }
 
+  //Enregistrement et routage
+  void _onSubmitted(){
+    final provider = Provider.of<TalentEducationProvider>(context, listen: false);
+    provider.setEducations(educations);
+    Navigator.pushNamed(context, AppRoutes.LANGUAGESSELECTIONPAGE);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -354,7 +363,7 @@ class _TalentProfileStep5PageState extends State<TalentProfileStep5Page> {
             ),
             // Suivant
             AppButton(
-              onTap: ()=> Navigator.pushNamed(context, AppRoutes.TALENTPROFILESTEP6),
+              onTap: _onSubmitted,
               width: context.screenWidth * 0.4,
               child: AppText(text: "Suivant"),
             ),

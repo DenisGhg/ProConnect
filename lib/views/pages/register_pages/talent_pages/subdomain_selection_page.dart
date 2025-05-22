@@ -10,14 +10,14 @@ import 'package:provider/provider.dart';
 
 import '../../../../providers/register_providers/talent_providers/subdomain_selection_provider.dart';
 
-class TalentProfileStep2Page extends StatefulWidget {
-  const TalentProfileStep2Page({super.key});
+class SubdomainSelectionPage extends StatefulWidget {
+  const SubdomainSelectionPage({super.key});
 
   @override
-  State<TalentProfileStep2Page> createState() => _TalentProfileStep2PageState();
+  State<SubdomainSelectionPage> createState() => _SubdomainSelectionPageState();
 }
 
-class _TalentProfileStep2PageState extends State<TalentProfileStep2Page> {
+class _SubdomainSelectionPageState extends State<SubdomainSelectionPage> {
   // Données principales : domaines et leurs sous-domaines
   final Map<String, List<String>> domainData = {
     'Développement Web et Mobile': [
@@ -120,6 +120,17 @@ class _TalentProfileStep2PageState extends State<TalentProfileStep2Page> {
   // Vérifie si un sous-domaine est sélectionné
   bool _isSelected(String domain, String subDomain) {
     return selectedSubDomains[domain]?.contains(subDomain) ?? false;
+  }
+
+  void onSubmitted(){
+    if(selectedSubDomains.keys.isEmpty){
+      AppSnackBar.show(context, "Aucun domaine sélectionné");
+    }
+    else{
+      final provider = Provider.of<SubDomainSelectionProvider>(context, listen: false);
+      provider.saveSelections(selectedSubDomains);
+      Navigator.pushNamed(context, AppRoutes.TALENTTITLEPROPAGE);
+    }
   }
 
   @override
@@ -260,11 +271,7 @@ class _TalentProfileStep2PageState extends State<TalentProfileStep2Page> {
 
             //Suivant
             AppButton(
-              onTap: (){
-                final provider = Provider.of<SubDomainSelectionProvider>(context, listen: false);
-                provider.saveSelections(selectedSubDomains);
-                Navigator.pushNamed(context, AppRoutes.TALENTPROFILESTEP3);
-              },
+              onTap: onSubmitted,
               width: context.screenWidth * 0.4,
               child: AppText(text: "Suivant"),
             )

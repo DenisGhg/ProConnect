@@ -7,16 +7,18 @@ import 'package:pro_connect_projet/views/sizes/text_sizes.dart';
 import 'package:pro_connect_projet/widgets/app_button.dart';
 import 'package:pro_connect_projet/widgets/app_text.dart';
 import 'package:pro_connect_projet/widgets/app_textField.dart';
+import 'package:provider/provider.dart';
+import '../../../../providers/register_providers/talent_providers/talent_personal_info_provider.dart';
 import '../../../colors/app_colors.dart';
 
-class TalentProfileStep1 extends StatefulWidget {
-  const TalentProfileStep1({super.key});
+class TalentPersonalInfoPage extends StatefulWidget {
+  const TalentPersonalInfoPage({super.key});
 
   @override
-  State<TalentProfileStep1> createState() => _TalentProfileStep1State();
+  State<TalentPersonalInfoPage> createState() => _TalentPersonalInfoPageState();
 }
 
-class _TalentProfileStep1State extends State<TalentProfileStep1> {
+class _TalentPersonalInfoPageState extends State<TalentPersonalInfoPage> {
   final TextEditingController _countryController = TextEditingController();
   final TextEditingController _cityController = TextEditingController();
   final TextEditingController _phoneNumberController = TextEditingController();
@@ -28,22 +30,29 @@ class _TalentProfileStep1State extends State<TalentProfileStep1> {
   String? phoneNumberError;
   String? dateOfBirthError;
 
-  void verifierInfo() {
+  void onSubmitted() {
     setState(() {
       countryError = _countryController.text.isEmpty ? "Le pays est obligatoire" : null;
       cityError = _cityController.text.isEmpty ? "La ville est obligatoire" : null;
       phoneNumberError = _phoneNumberController.text.isEmpty ? "Le numéro de téléphone est obligatoire" : null;
       dateOfBirthError = _dateBirthController.text.isEmpty ? "La date de naissance est obligatoire" : null;
-
     });
 
     if (countryError == null &&
         cityError == null &&
         phoneNumberError == null &&
         dateOfBirthError == null) {
-      Navigator.pushNamed(context, AppRoutes.TALENTPROFILESTEP2);
+
+      final provider = Provider.of<TalentPersonalInfoProvider>(context, listen: false);
+      provider.setCountry(_countryController.text.trim());
+      provider.setCity(_cityController.text.trim());
+      provider.setPhoneNumber(_phoneNumberController.text.trim());
+      provider.setDateOfBirth(_dateBirthController.text.trim());
+
+      Navigator.pushNamed(context, AppRoutes.SUBDOMAINSELECTIONPAGE);
     }
   }
+
 
   void _selectDate() async {
     DateTime? pickedDate = await showDatePicker(
@@ -78,7 +87,7 @@ class _TalentProfileStep1State extends State<TalentProfileStep1> {
 
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: EdgeInsets.all(context.defaultPagePadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -129,7 +138,7 @@ class _TalentProfileStep1State extends State<TalentProfileStep1> {
                 },
               ),
               countryError != null
-                  ? AppText(text: countryError!, color: Colors.red, fontSize: 12)
+                  ? AppText(text: countryError!, color: AppColors.redColor, fontSize: 12)
                   : const SizedBox.shrink(),
               const SizedBox(height: 12),
 
@@ -143,7 +152,7 @@ class _TalentProfileStep1State extends State<TalentProfileStep1> {
                 onChanged: (_) => setState(() => cityError = null),
               ),
               cityError != null
-                  ? AppText(text: cityError!, color: Colors.red, fontSize: 12)
+                  ? AppText(text: cityError!, color: AppColors.redColor, fontSize: 12)
                   : const SizedBox.shrink(),
               const SizedBox(height: 12),
 
@@ -158,7 +167,7 @@ class _TalentProfileStep1State extends State<TalentProfileStep1> {
                 onChanged: (_) => setState(() => phoneNumberError = null),
               ),
               phoneNumberError != null
-                  ? AppText(text: phoneNumberError!, color: Colors.red, fontSize: 12)
+                  ? AppText(text: phoneNumberError!, color: AppColors.redColor, fontSize: 12)
                   : const SizedBox.shrink(),
               const SizedBox(height: 12),
 
@@ -175,20 +184,20 @@ class _TalentProfileStep1State extends State<TalentProfileStep1> {
               ),
 
               dateOfBirthError != null
-                  ? AppText(text: dateOfBirthError!, color: Colors.red, fontSize: 12)
+                  ? AppText(text: dateOfBirthError!, color: AppColors.redColor, fontSize: 12)
                   : const SizedBox.shrink(),
 
               SizedBox(height: context.defaultSpacing * 15,),
 
               AppButton(
-                onTap: verifierInfo,
+                onTap: onSubmitted,
                 height: 50,
                 width: double.infinity,
                 backgroundColor: AppColors.blueColor,
                 alignment: Alignment.center,
                 child: AppText(
                   text: "Continuer",
-                  color: Colors.white,
+                  color: AppColors.whiteColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),
