@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pro_connect_projet/providers/register_providers/talent_providers/talent_recap_page.dart';
 import 'package:pro_connect_projet/views/pages/auth_pages/log_in_page.dart';
 import 'package:pro_connect_projet/views/pages/auth_pages/sign_up_page.dart';
 import 'package:pro_connect_projet/views/pages/logo_page.dart';
@@ -37,6 +38,7 @@ Map<String, Widget Function(BuildContext)> routes = {
   '/educationsSelectionPage' :(context) => EducationsSelectionPage(),
   '/languagesSelectionPage' :(context) => LanguagesSelectionPage(),
   '/talentBioPage' :(context) => TalentBioPage(),
+  '/talentRecapPage' : (context) => TalentRecapPage(),
 };
 
 class AppRoutes{
@@ -57,4 +59,6 @@ class AppRoutes{
   static const String EDUCATIONSSELECTIONPAGE = '/educationsSelectionPage';
   static const String LANGUAGESSELECTIONPAGE = '/languagesSelectionPage';
   static const String TALENTBIOPAGE = '/talentBioPage';
+  static const String TALENTRECAPPAGE = '/talentRecapPage';
+
 }

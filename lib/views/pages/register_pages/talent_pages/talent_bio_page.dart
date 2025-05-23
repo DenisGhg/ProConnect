@@ -25,13 +25,12 @@ class _TalentBioPageState extends State<TalentBioPage> {
 
   //Fonction de contrôle
   void _onSubmitted(){
-    print(_bioController.text.length);
-    if(_bioController.text.length > 100){
+    if(_bioController.text.length < 100){
       AppSnackBar.show(context, "La bio doit contenir au moins 100 caractères");
     }else{
       final provider = Provider.of<TalentBioProvider>(context, listen : false);
       provider.setbio(_bioController.text);
-      Navigator.pushNamed(context, AppRoutes.LANGUAGESSELECTIONPAGE);
+      Navigator.pushNamed(context, AppRoutes.TALENTRECAPPAGE);
     }
   }
 

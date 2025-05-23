@@ -30,7 +30,7 @@ class _MyAppState extends State<MyApp> {
       darkTheme: AppTheme.darkTheme,
       themeMode: context.watch<ThemeProvider>().themeMode,
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.TALENTPERSONALINFOPAGE,
+      initialRoute: AppRoutes.TALENTRECAPPAGE,
       routes: routes,
     );
   }

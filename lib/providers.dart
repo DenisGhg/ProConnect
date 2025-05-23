@@ -1,6 +1,7 @@
 import 'package:pro_connect_projet/providers/auth_providers/sign_up_provider.dart';
 import 'package:pro_connect_projet/providers/profil_type_provider.dart';
 import 'package:pro_connect_projet/providers/register_providers/talent_providers/subdomain_selection_provider.dart';
+import 'package:pro_connect_projet/providers/register_providers/talent_providers/talent_bio_provider.dart';
 import 'package:pro_connect_projet/providers/register_providers/talent_providers/talent_education_provider.dart';
 import 'package:pro_connect_projet/providers/register_providers/talent_providers/talent_experience_provider.dart';
 import 'package:pro_connect_projet/providers/register_providers/talent_providers/talent_language_provider.dart';
@@ -42,4 +43,7 @@ List<SingleChildWidget> providers = [
 
   //Langues du Talent
   ChangeNotifierProvider(create: (context) => TalentLanguageProvider()),
+
+  //Bio du Talent
+  ChangeNotifierProvider(create: (context) => TalentBioProvider()),
 ];
