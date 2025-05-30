@@ -15,4 +15,16 @@ class Experience {
     this.endDate,
     this.isCurrent = false,
   });
+
+  factory Experience.fromJson(Map<String, dynamic> json) {
+    return Experience(
+      title: json['title'],
+      company: json['company'],
+      description: json['description'],
+      startDate: DateTime.parse(json['startDate']),
+      endDate: json['endDate'] != null ? DateTime.parse(json['endDate']) : null,
+      isCurrent: json['isCurrent'] ?? false,
+    );
+  }
+
 }
