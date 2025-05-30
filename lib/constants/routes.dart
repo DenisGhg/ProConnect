@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pro_connect_projet/providers/register_providers/talent_providers/talent_recap_page.dart';
 import 'package:pro_connect_projet/views/pages/auth_pages/log_in_page.dart';
 import 'package:pro_connect_projet/views/pages/auth_pages/sign_up_page.dart';
 import 'package:pro_connect_projet/views/pages/logo_page.dart';
@@ -10,11 +9,14 @@ import 'package:pro_connect_projet/views/pages/register_pages/talent_pages/exper
 import 'package:pro_connect_projet/views/pages/register_pages/talent_pages/languages_selection_page.dart';
 import 'package:pro_connect_projet/views/pages/register_pages/talent_pages/subdomain_selection_page.dart';
 import 'package:pro_connect_projet/views/pages/register_pages/talent_pages/talent_bio_page.dart';
+import 'package:pro_connect_projet/views/pages/register_pages/talent_pages/talent_recap_page.dart';
 import 'package:pro_connect_projet/views/pages/register_pages/talent_pages/talent_title_pro_page.dart';
 import 'package:pro_connect_projet/views/pages/reset_password_pages/reset_password_page.dart';
 import 'package:pro_connect_projet/views/pages/reset_password_pages/verify_code_page.dart';
 import 'package:pro_connect_projet/views/pages/reset_password_pages/verify_mail_page.dart';
 import 'package:pro_connect_projet/views/pages/success_log_in.dart';
+import 'package:pro_connect_projet/views/pages/talent_pages/profil_page.dart';
+import 'package:pro_connect_projet/views/pages/talent_pages/talent_home_page.dart';
 
 import '../views/pages/register_pages/talent_pages/talent_personal_info_page.dart';
 import '../views/pages/register_pages/talent_pages/talent_profile_presentation_page.dart';
@@ -39,6 +41,10 @@ Map<String, Widget Function(BuildContext)> routes = {
   '/languagesSelectionPage' :(context) => LanguagesSelectionPage(),
   '/talentBioPage' :(context) => TalentBioPage(),
   '/talentRecapPage' : (context) => TalentRecapPage(),
+
+  //TALENT PAGES
+  '/talentHomePage' : (context) => TalentHomePage(),
+  '/profilPage' : (context) => ProfilPage(),
 };
 
 class AppRoutes{
@@ -60,5 +66,9 @@ class AppRoutes{
   static const String LANGUAGESSELECTIONPAGE = '/languagesSelectionPage';
   static const String TALENTBIOPAGE = '/talentBioPage';
   static const String TALENTRECAPPAGE = '/talentRecapPage';
+
+  //TALENT PAGES
+  static const String TALENTHOMEPAGE = '/talentHomePage';
+  static const String PROFILPAGE = '/profilPage';
 
 }

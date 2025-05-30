@@ -24,8 +24,8 @@ class _EducationsSelectionPageState extends State<EducationsSelectionPage> {
   int? editingIndex;
 
   final _formKey = GlobalKey<FormState>();
-  final _diplomaController = TextEditingController();
-  final _schoolController = TextEditingController();
+  final _titleController = TextEditingController();
+  final _companyController = TextEditingController();
   final _descriptionController = TextEditingController();
 
   DateTime? _startDate;
@@ -35,16 +35,16 @@ class _EducationsSelectionPageState extends State<EducationsSelectionPage> {
   void _showExperienceForm([int? indexToEdit]) {
     if (indexToEdit != null) {
       final edu = educations[indexToEdit];
-      _diplomaController.text = edu.diploma;
-      _schoolController.text = edu.school;
+      _titleController.text = edu.title;
+      _companyController.text = edu.company;
       _descriptionController.text = edu.description;
       _startDate = edu.startDate;
       _endDate = edu.endDate;
       _isCurrent = edu.isCurrent;
       editingIndex = indexToEdit;
     } else {
-      _diplomaController.clear();
-      _schoolController.clear();
+      _titleController.clear();
+      _companyController.clear();
       _descriptionController.clear();
       _startDate = null;
       _endDate = null;
@@ -75,14 +75,14 @@ class _EducationsSelectionPageState extends State<EducationsSelectionPage> {
 
                     // Champ : Intitulé du diplôme
                     TextFormField(
-                      controller: _diplomaController,
+                      controller: _titleController,
                       decoration: InputDecoration(labelText: 'Diplôme ou formation'),
                       validator: (value) => value!.isEmpty ? 'Champ requis' : null,
                     ),
 
                     // Champ : École
                     TextFormField(
-                      controller: _schoolController,
+                      controller: _companyController,
                       decoration: InputDecoration(labelText: 'Établissement'),
                       validator: (value) => value!.isEmpty ? 'Champ requis' : null,
                     ),
@@ -198,8 +198,8 @@ class _EducationsSelectionPageState extends State<EducationsSelectionPage> {
   void _submitEducation() {
     if (_formKey.currentState!.validate() && _startDate != null) {
       final newEdu = Education(
-        diploma: _diplomaController.text,
-        school: _schoolController.text,
+        title: _titleController.text,
+        company: _companyController.text,
         description: _descriptionController.text,
         startDate: _startDate!,
         endDate: _isCurrent ? null : _endDate,
@@ -249,7 +249,7 @@ class _EducationsSelectionPageState extends State<EducationsSelectionPage> {
               borderRadius: BorderRadius.circular(context.screenHeight * 0.03),
             ),
             child: Icon(
-              Icons.school,
+              Icons.person,
               size: context.screenHeight * 0.038,
               color: AppColors.blackColor,
             ),
@@ -307,9 +307,9 @@ class _EducationsSelectionPageState extends State<EducationsSelectionPage> {
                   return Card(
                     margin: EdgeInsets.only(bottom: context.defaultPagePadding * 0.9),
                     child: ListTile(
-                      title: AppText(text: edu.diploma),
+                      title: AppText(text: edu.title),
                       subtitle: AppText(
-                        text: "${edu.school}\n"
+                        text: "${edu.company}\n"
                             "${edu.description}\n"
                             "${edu.startDate.toLocal().toString().split(' ')[0]}"
                             "${edu.isCurrent ? ' - Présent' : ' - ${edu.endDate?.toLocal().toString().split(' ')[0] ?? ''}'}",

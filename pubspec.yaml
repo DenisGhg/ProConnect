@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   provider: ^6.1.2
   country_picker: ^2.0.27
+  convex_bottom_bar: ^3.2.0
 
 dev_dependencies:
   flutter_test:
@@ -65,6 +66,7 @@ flutter:
     - asserts/logos/
     - asserts/lotties/
     - asserts/icons/
+    - asserts/jsons/profiles.json
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

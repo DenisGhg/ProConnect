@@ -11,9 +11,10 @@ import 'package:pro_connect_projet/views/sizes/text_sizes.dart';
 import 'package:pro_connect_projet/widgets/app_text.dart';
 import 'package:provider/provider.dart';
 
-import '../../../views/colors/app_colors.dart';
-import '../../../widgets/app_button.dart';
-import '../../auth_providers/sign_up_provider.dart';
+import '../../../../providers/auth_providers/sign_up_provider.dart';
+import '../../../../widgets/app_button.dart';
+import '../../../colors/app_colors.dart';
+
 
 class TalentRecapPage extends StatelessWidget {
   const TalentRecapPage({super.key});
@@ -95,7 +96,7 @@ class TalentRecapPage extends StatelessWidget {
             children: educations.educations.isEmpty
                 ? [AppText(text: "Aucune education ajoutée")]
                 : educations.educations.map((edu) {
-              return _infoRow(edu.diploma, '${edu.school} • ${edu.startDate}', context);
+              return _infoRow(edu.title, '${edu.company} • ${edu.startDate}', context);
             }).toList(),
           ),
 
@@ -128,7 +129,7 @@ class TalentRecapPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppText(text: title, fontWeight: FontWeight.bold, fontSize: context.mediumText * 1.5,),
+                AppText(text: title, fontWeight: FontWeight.bold, fontSize: context.mediumText * 1.2,),
                 if (onEdit != null)
                   IconButton(
                     onPressed: onEdit,
