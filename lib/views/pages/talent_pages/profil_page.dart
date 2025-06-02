@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:pro_connect_projet/views/sizes/app_sizes.dart';
+import 'package:pro_connect_projet/views/sizes/text_sizes.dart';
 import 'package:pro_connect_projet/widgets/app_text.dart';
 
 import '../../../models/register/talent/profile.dart';
@@ -15,14 +17,16 @@ class ProfilPage extends StatefulWidget {
 class _ProfilPageState extends State<ProfilPage> {
   TalentProfile? profil;
 
+  //Fonction de changement des utilisateurs
   Future<void> loadProfile() async {
     final String response = await rootBundle.loadString('asserts/jsons/profiles.json');
     final List<dynamic> data = json.decode(response);
     setState(() {
-      profil = TalentProfile.fromJson(data[26]); // Simule profil connecté
+      profil = TalentProfile.fromJson(data[35]); // Simule profil connecté
     });
   }
 
+  //Pour le lancement auto de loadProfile()
   @override
   void initState() {
     super.initState();
@@ -36,9 +40,9 @@ class _ProfilPageState extends State<ProfilPage> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Profil Talent")),
+      appBar: AppBar(title: AppText(text: "Profil", fontSize: context.largeText,), centerTitle: true,),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(context.defaultPagePadding),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -46,11 +50,36 @@ class _ProfilPageState extends State<ProfilPage> {
             Center(
               child: Column(
                 children: [
-                  CircleAvatar(radius: 50, backgroundImage: NetworkImage(profil!.avatar)),
+                  //Avatar
+                  GestureDetector(
+                    //Agrandissement de l'image au clic
+                    onTap: (){
+                      showDialog(
+                        context: context,
+                        builder: (alertContext) => AlertDialog(
+                          insetPadding: EdgeInsets.zero,
+                          content: Container(
+                            width: context.screenWidth,
+                            height: context.screenHeight * 0.7,
+
+                            child: CircleAvatar(radius: 50, backgroundImage: NetworkImage(profil!.avatar)),
+                          )
+                        ),
+                      );
+                    },
+                    child: CircleAvatar(radius: 50, backgroundImage: NetworkImage(profil!.avatar)),
+
+                  ),
                   const SizedBox(height: 10),
+
+                  // Nom Prénoms
                   AppText(text: "${profil!.firstName} ${profil!.lastName}", fontSize: 20, fontWeight: FontWeight.bold),
+
+                  //Titre pro
                   AppText(text: profil!.title),
                   const SizedBox(height: 10),
+
+                  //Bio
                   Text(profil!.bio, textAlign: TextAlign.center),
                 ],
               ),
@@ -73,6 +102,7 @@ class _ProfilPageState extends State<ProfilPage> {
             const Divider(height: 30),
 
             // Formations
+            AppText(text: "Formations", fontWeight: FontWeight.bold, fontSize: 18),
             ...profil!.educations.map((e) => ListTile(
               title: Text(e.title),
               subtitle: Column(
@@ -103,6 +133,6 @@ extension DateHelpers on DateTime {
   String toShortDateString() {
     return "${day.toString().padLeft(2, '0')}/"
         "${month.toString().padLeft(2, '0')}/"
-        "${year}";
+        "$year";
   }
 }
