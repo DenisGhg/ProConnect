@@ -12,7 +12,7 @@ import '../../../../widgets/app_button.dart';
 import '../../../../widgets/app_snackbar.dart';
 import '../../../../widgets/app_textField.dart';
 
-// =========================== PAGE DE SÉLECTION DES SKILLS ===========================
+
 class SkillSelectionPage extends StatefulWidget {
   const SkillSelectionPage({super.key});
 
@@ -314,13 +314,11 @@ class _SkillSelectionPageState extends State<SkillSelectionPage> {
     return suggestions.toList();
   }
 
-
   //Fonction de validation
-  void onSubmitted(){
-    if(_tempSelectedSkills.isEmpty){
+  void onSubmitted() {
+    if (_tempSelectedSkills.isEmpty) {
       AppSnackBar.show(context, "Aucune compétence sélectionnée");
-    }
-    else{
+    } else {
       context.read<SkillSelectionProvider>().setSkills(_tempSelectedSkills);
       Navigator.pushNamed(context, AppRoutes.SKILLSSELECTIONPAGE);
     }
@@ -329,7 +327,8 @@ class _SkillSelectionPageState extends State<SkillSelectionPage> {
   @override
   Widget build(BuildContext context) {
     // Map des domaines et sous domaines déjà selectionnés par le talent
-    final subDomainSelections = context.watch<SubDomainSelectionProvider>().selectedSubDomains;
+    final subDomainSelections =
+        context.watch<SubDomainSelectionProvider>().selectedSubDomains;
 
     final searchText = _searchController.text.trim().toLowerCase();
 
@@ -386,7 +385,7 @@ class _SkillSelectionPageState extends State<SkillSelectionPage> {
               textAlign: TextAlign.center,
               color: AppColors.blueColor,
             ),
-            SizedBox(height: context.defaultSpacing,),
+            SizedBox(height: context.defaultSpacing),
 
             // Champ de recherche : déclenche le setState pour rafraîchir la liste au fur et à mesure
             AppTextField(
@@ -397,19 +396,49 @@ class _SkillSelectionPageState extends State<SkillSelectionPage> {
             ),
             SizedBox(height: context.defaultSpacing),
 
-            AppText(
-              text: "Suggestions",
-              fontWeight: FontWeight.bold,
-              color: AppColors.blueColor,
-            ),
+            //Si pas de résultat pour la recherche alors :
+            if (displayedSkills.isEmpty && searchText.isNotEmpty)
+              Padding(
+                padding: EdgeInsets.all(context.defaultPagePadding),
+                child: Center(
+                  child: Column(
+                    children: [
+                      Icon(
+                        Icons.search_off,
+                        color: AppColors.greyColor,
+                        size: context.referenceSize * 4,
+                      ),
+                      SizedBox(height: context.referenceSize),
+
+                      AppText(
+                        text: 'Aucune compétence trouvée pour « $searchText »',
+                        color: AppColors.greyColor,
+                      ),
+                      SizedBox(height: context.referenceSize),
+                      AppText(
+                        text:
+                            'Essaie un autre mot-clé ou vérifie l’orthographe',
+                        color: AppColors.greyColor,
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            //Si des skills sont trouvés alors affichage
+            else
+              AppText(
+                text: "Suggestions",
+                fontWeight: FontWeight.bold,
+                color: AppColors.blueColor,
+              ),
             SizedBox(height: context.defaultSpacing),
 
             // Liste des compétences affichées (suggestions ou résultats recherche)
             Expanded(
               child: SingleChildScrollView(
                 child: Wrap(
-                  spacing: context.tenPixel * 0.8,
-                  runSpacing: context.tenPixel * 0.8,
+                  spacing: context.referenceSize * 0.8,
+                  runSpacing: context.referenceSize * 0.8,
                   children:
                       displayedSkills.map((skill) {
                         return Hero(
@@ -418,8 +447,18 @@ class _SkillSelectionPageState extends State<SkillSelectionPage> {
                           child: GestureDetector(
                             onTap: () {
                               setState(() {
-                                _tempSelectedSkills.add(skill);
-                                AppSnackBar.show(context, "Compétence $skill ajouter avec succès");
+                                if (_tempSelectedSkills.length < 10) {
+                                  _tempSelectedSkills.add(skill);
+                                  AppSnackBar.show(
+                                    context,
+                                    "Compétence « $skill » ajouter avec succès",
+                                  );
+                                } else {
+                                  AppSnackBar.show(
+                                    context,
+                                    "Vous ne pouvez pas choisir plus de 10 compétences",
+                                  );
+                                }
                               });
                             },
                             child: Card(
@@ -427,13 +466,13 @@ class _SkillSelectionPageState extends State<SkillSelectionPage> {
                               color: AppColors.whiteColor,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(
-                                  context.tenPixel * 1.2,
+                                  context.referenceSize * 1.2,
                                 ),
                               ),
                               child: Padding(
                                 padding: EdgeInsets.symmetric(
-                                  vertical: context.tenPixel * 0.8,
-                                  horizontal: context.tenPixel * 1.6,
+                                  vertical: context.referenceSize * 0.8,
+                                  horizontal: context.referenceSize * 1.6,
                                 ),
                                 child: AppText(
                                   text: skill,
@@ -451,21 +490,22 @@ class _SkillSelectionPageState extends State<SkillSelectionPage> {
             ),
             SizedBox(height: context.defaultSpacing),
 
-            if(_tempSelectedSkills.isNotEmpty)
-              AppText(
-                text: "Compétences choisie(s)",
-                fontWeight: FontWeight.bold,
-                color: AppColors.blueColor,
-              ),
-              SizedBox(height: context.defaultSpacing,),
+            //Nombre de compétences choisies
+            AppText(
+              text: "Compétences choisie(s) : ${_tempSelectedSkills.length} / 10",
+              fontWeight: FontWeight.bold,
+              color: AppColors.blueColor,
+            ),
+
+            SizedBox(height: context.defaultSpacing),
 
             // Affichage des skills sélectionnés sous forme de chips
             SizedBox(
               height: context.screenHeight * 0.2,
               child: SingleChildScrollView(
                 child: Wrap(
-                  spacing: context.tenPixel,
-                  runSpacing: context.tenPixel * 0.8,
+                  spacing: context.referenceSize,
+                  runSpacing: context.referenceSize * 0.8,
                   children:
                       _tempSelectedSkills
                           .map(
@@ -476,11 +516,11 @@ class _SkillSelectionPageState extends State<SkillSelectionPage> {
                                 backgroundColor: AppColors.blueColor,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(
-                                    context.tenPixel * 1.2,
+                                    context.referenceSize * 1.2,
                                   ),
                                   side: BorderSide(
                                     color: AppColors.blueColor,
-                                    width: context.tenPixel * 0.2,
+                                    width: context.referenceSize * 0.2,
                                   ),
                                 ),
                                 deleteButtonTooltipMessage: "Supprimer",
@@ -493,7 +533,10 @@ class _SkillSelectionPageState extends State<SkillSelectionPage> {
                                 onDeleted: () {
                                   setState(() {
                                     _tempSelectedSkills.remove(skill);
-                                    AppSnackBar.show(context, "Compétence $skill supprimer avec succès");
+                                    AppSnackBar.show(
+                                      context,
+                                      "Compétence « $skill » supprimer avec succès",
+                                    );
                                   });
                                 },
                               ),
@@ -504,21 +547,12 @@ class _SkillSelectionPageState extends State<SkillSelectionPage> {
               ),
             ),
             SizedBox(height: context.defaultSpacing),
-
-            // Bouton pour valider et enregistrer les skills dans le provider
-            /*ElevatedButton(
-              onPressed: () {
-                skillProvider.setSkills(_tempSelectedSkills);
-                Navigator.pop(context);
-              },
-              child: const Text("Enregistrer les compétences"),
-            ),*/
           ],
         ),
       ),
 
-      //Boutons Confirmer et Retour
-      bottomNavigationBar:  Container(
+      // Bouton pour valider et enregistrer les skills dans le provider
+      bottomNavigationBar: Container(
         color: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
         padding: EdgeInsets.all(context.defaultPagePadding),
         child: Row(
@@ -526,15 +560,18 @@ class _SkillSelectionPageState extends State<SkillSelectionPage> {
           children: [
             Container(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(context.screenHeight * 0.038),
-                  border: Border.all(
-                    color: AppColors.greyColor,
-                    width: 2,
-                  )
+                borderRadius: BorderRadius.circular(
+                  context.screenHeight * 0.038,
+                ),
+                border: Border.all(color: AppColors.greyColor, width: 2),
               ),
               child: IconButton(
                 onPressed: () => Navigator.pop(context),
-                icon: Icon(Icons.arrow_back_ios_new, size: context.screenHeight * 0.03, color: AppColors.blueColor,),
+                icon: Icon(
+                  Icons.arrow_back_ios_new,
+                  size: context.screenHeight * 0.03,
+                  color: AppColors.blueColor,
+                ),
               ),
             ),
 
@@ -543,7 +580,7 @@ class _SkillSelectionPageState extends State<SkillSelectionPage> {
               onTap: onSubmitted,
               width: context.screenWidth * 0.4,
               child: AppText(text: "Suivant"),
-            )
+            ),
           ],
         ),
       ),
