@@ -13,7 +13,7 @@ extension ScreenSize on BuildContext {
 
   double get defaultPagePadding => MediaQuery.of(this).size.width  * 0.055;
 
-  double get tenPixel => MediaQuery.of(this).size.width * 0.0278;
+  double get referenceSize => MediaQuery.of(this).size.width * 0.0278; // 10 pixel sur mon écran
 
   double get safeHeight => screenHeight - statusBarHeight - bottomBarHeight;
 
