@@ -129,7 +129,7 @@ class _SubdomainSelectionPageState extends State<SubdomainSelectionPage> {
     else{
       final provider = Provider.of<SubDomainSelectionProvider>(context, listen: false);
       provider.saveSelections(selectedSubDomains);
-      Navigator.pushNamed(context, AppRoutes.TALENTTITLEPROPAGE);
+      Navigator.pushNamed(context, AppRoutes.SKILLSSELECTIONPAGE);
     }
   }
 

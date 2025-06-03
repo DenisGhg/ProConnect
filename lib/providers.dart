@@ -1,5 +1,6 @@
 import 'package:pro_connect_projet/providers/auth_providers/sign_up_provider.dart';
 import 'package:pro_connect_projet/providers/profil_type_provider.dart';
+import 'package:pro_connect_projet/providers/register_providers/talent_providers/skill_selection_provider.dart';
 import 'package:pro_connect_projet/providers/register_providers/talent_providers/subdomain_selection_provider.dart';
 import 'package:pro_connect_projet/providers/register_providers/talent_providers/talent_bio_provider.dart';
 import 'package:pro_connect_projet/providers/register_providers/talent_providers/talent_education_provider.dart';
@@ -31,6 +32,9 @@ List<SingleChildWidget> providers = [
 
   //Choix des domaines et sous domaines
   ChangeNotifierProvider(create: (context) => SubDomainSelectionProvider()),
+  
+  //Choix des compétences
+  ChangeNotifierProvider(create: (context) => SkillSelectionProvider()),
 
   //Titre Pro Talent
   ChangeNotifierProvider(create: (context) => TalentTitleProProvider()),
@@ -46,4 +50,5 @@ List<SingleChildWidget> providers = [
 
   //Bio du Talent
   ChangeNotifierProvider(create: (context) => TalentBioProvider()),
+  
 ];

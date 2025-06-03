@@ -103,9 +103,7 @@ class TalentRecapPage extends StatelessWidget {
           SizedBox(height: context.defaultSpacing,),
 
           AppButton(
-            onTap: () {
-              // SUBMIT FINAL
-            },
+            onTap: () => Navigator.pushNamed(context, AppRoutes.TALENTHOMEPAGE),
             child: AppText(text: 'Soumettre le profil'),
           )
         ],

@@ -321,7 +321,6 @@ class _SkillSelectionPageState extends State<SkillSelectionPage> {
       AppSnackBar.show(context, "Aucune compétence sélectionnée");
     }
     else{
-      final provider = Provider.of<SubDomainSelectionProvider>(context, listen: false);
       context.read<SkillSelectionProvider>().setSkills(_tempSelectedSkills);
       Navigator.pushNamed(context, AppRoutes.SKILLSSELECTIONPAGE);
     }

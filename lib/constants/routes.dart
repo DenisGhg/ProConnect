@@ -7,6 +7,7 @@ import 'package:pro_connect_projet/views/pages/auth_pages/profil_choice_page.dar
 import 'package:pro_connect_projet/views/pages/register_pages/talent_pages/educations_selection_page.dart';
 import 'package:pro_connect_projet/views/pages/register_pages/talent_pages/experiences_selection_page.dart';
 import 'package:pro_connect_projet/views/pages/register_pages/talent_pages/languages_selection_page.dart';
+import 'package:pro_connect_projet/views/pages/register_pages/talent_pages/skills_selection_page.dart';
 import 'package:pro_connect_projet/views/pages/register_pages/talent_pages/subdomain_selection_page.dart';
 import 'package:pro_connect_projet/views/pages/register_pages/talent_pages/talent_bio_page.dart';
 import 'package:pro_connect_projet/views/pages/register_pages/talent_pages/talent_recap_page.dart';
@@ -35,6 +36,7 @@ Map<String, Widget Function(BuildContext)> routes = {
   '/talentProfilPresentation': (context) => const TalentProfilPresentation(),
   '/talentPersonalInfoPage' :(context) => const TalentPersonalInfoPage(),
   '/subdomainSelectionPage' :(context) => const SubdomainSelectionPage(),
+  '/skillsSelectionPage' : (context) => const SkillSelectionPage(),
   '/talentTitleProPage' :(context) => TalentTitleProPage(),
   '/experiencesSelectionPage' :(context) => ExperiencesSelectionPage(),
   '/educationsSelectionPage' :(context) => EducationsSelectionPage(),
@@ -60,6 +62,7 @@ class AppRoutes{
   static const String TALENTPROFILPRESENTATION = '/talentProfilPresentation';
   static const String TALENTPERSONALINFOPAGE = '/talentPersonalInfoPage';
   static const String SUBDOMAINSELECTIONPAGE = '/subdomainSelectionPage';
+  static const String SKILLSSELECTIONPAGE = '/skillsSelectionPage';
   static const String TALENTTITLEPROPAGE = '/talentTitleProPage';
   static const String EXPERIENCESSELECTIONPAGE = '/experiencesSelectionPage';
   static const String EDUCATIONSSELECTIONPAGE = '/educationsSelectionPage';
