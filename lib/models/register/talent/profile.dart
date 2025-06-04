@@ -12,6 +12,7 @@ class TalentProfile {
   final String city;
   final String birthDate;
   final Map<String, List<String>> domains;
+  final List<String> skills;
   final List<Experience> experiences;
   final List<Education> educations;
   final List<Map<String, String>> languages;
@@ -28,6 +29,7 @@ class TalentProfile {
     required this.city,
     required this.birthDate,
     required this.domains,
+    required this.skills,
     required this.experiences,
     required this.educations,
     required this.languages,
@@ -46,6 +48,7 @@ class TalentProfile {
       city: json['city'],
       birthDate: json['birthDate'],
       domains: Map<String, List<String>>.from(json['domains'].map((key, val) => MapEntry(key, List<String>.from(val)))),
+      skills: List<String>.from(json['skills']),
       experiences: List<Experience>.from(json['experiences'].map((e) => Experience.fromJson(e))),
       educations: List<Education>.from(json['educations'].map((e) => Education.fromJson(e))),
       languages: List<Map<String, String>>.from(json['languages'].map((lang) => Map<String, String>.from(lang))),

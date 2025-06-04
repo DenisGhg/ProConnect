@@ -12,6 +12,7 @@
     "domains": {
       "Développement Web et Mobile": ["Frontend", "Backend"]
     },
+    "skills": ["React", "Vue.js", "Angular", "Node.js", "Express", "Laravel", "Tailwind CSS"],
     "experiences": [
       {
         "title": "Développeuse Fullstack",
@@ -51,6 +52,7 @@
     "domains": {
       "Développement Web et Mobile": ["Backend", "Architecture logicielle"]
     },
+    "skills": ["Node.js", "Express", "Laravel", "Django", "Spring Boot", "Ruby", "Go", "PHP"],
     "experiences": [
       {
         "title": "Ingénieur Backend",
@@ -88,8 +90,10 @@
     "city": "Bamako",
     "birthDate": "1995-06-22",
     "domains": {
-      "Design et UI/UX": ["Design UI", "Prototypage"]
+      "Design et UI/UX": ["Design UI", "Prototypage"],
+      "Développement Web et Mobile": ["Frontend", "Backend"]
     },
+    "skills": ["Adobe Photoshop", "Figma", "InVision", "React", "Vue.js", "Node.js", "Express", "Laravel", "Django", "Angular"],
     "experiences": [
       {
         "title": "Designer UI/UX",
@@ -127,8 +131,9 @@
     "city": "Tunis",
     "birthDate": "1998-02-18",
     "domains": {
-      "Développement Web et Mobile": ["Flutter", "Dart"]
+      "Développement Web et Mobile": ["Développement mobile", "Design web et mobile"]
     },
+    "skills": ["Flutter", "Dart", "Kotlin", "Swift", "Adobe XD", "Figma", "Sketch", "InVision", "Principle", "Zeplin"],
     "experiences": [
       {
         "title": "Développeur Mobile",
@@ -168,6 +173,7 @@
     "domains": {
       "Data et Intelligence Artificielle": ["Analyse de données", "DataViz"]
     },
+    "skills": ["Excel", "Tableau", "Power BI", "Google Analytics", "Data Visualization", "Python", "SQL", "Pandas", "NumPy", "Jupyter"],
     "experiences": [
       {
         "title": "Analyste Data",
@@ -206,8 +212,9 @@
     "city": "Conakry",
     "birthDate": "1997-09-09",
     "domains": {
-      "Développement Web et Mobile": ["Frontend", "React"]
+      "Développement Web et Mobile": ["Dev WebFrontend", "Design"]
     },
+    "skills": ["HTML", "CSS", "JavaScript", "React", "Vue.js", "Angular", "Bootstrap", "Tailwind CSS", "Figma", "Adobe XD"],
     "experiences": [
       {
         "title": "Développeur React",
@@ -245,8 +252,9 @@
     "city": "Khartoum",
     "birthDate": "1996-05-20",
     "domains": {
-      "Développement Web et Mobile": ["Flutter", "Firebase"]
+      "Développement Web et Mobile": ["Développement mobile", "Backend"]
     },
+    "skills": ["Flutter", "Dart", "Kotlin", "Swift", "Node.js", "Express", "Laravel", "Django", "MongoDB", "Firebase", "PHP"],
     "experiences": [
       {
         "title": "Flutter Developer",
@@ -284,8 +292,9 @@
     "city": "Abidjan",
     "birthDate": "1991-01-10",
     "domains": {
-      "Infrastructure et DevOps": ["CI/CD", "Docker", "Kubernetes"]
+      "Infrastructure et DevOps": ["CI/CD", "Conteneurisation", "Orchestration"]
     },
+    "skills": ["Jenkins", "GitLab CI", "Docker", "Docker Compose", "Kubernetes", "Helm", "Terraform", "Ansible"],
     "experiences": [
       {
         "title": "Ingénieur DevOps",
@@ -325,6 +334,7 @@
     "domains": {
       "Data et Intelligence Artificielle": ["Data Science", "Machine Learning"]
     },
+    "skills": ["Python", "R", "Pandas", "NumPy", "Jupyter", "SQL", "TensorFlow", "Scikit-learn", "Keras", "PyTorch", "XGBoost"],
     "experiences": [
       {
         "title": "Data Scientist",
@@ -362,8 +372,9 @@
     "city": "Nouakchott",
     "birthDate": "1990-07-07",
     "domains": {
-      "Développement Web et Mobile": ["Backend", "APIs REST"]
+      "Développement Web et Mobile": ["Backend", "Architecture logicielle"]
     },
+    "skills": ["Node.js", "Express", "Laravel", "Django", "Spring Boot", "APIs REST"],
     "experiences": [
       {
         "title": "Développeur Backend",
@@ -401,8 +412,9 @@
     "city": "Bamako",
     "birthDate": "1998-03-21",
     "domains": {
-      "Design": ["UI/UX", "Design Mobile"]
+      "Design et UI/UX": ["Design UI", "Design UX"]
     },
+    "skills": ["Adobe Photoshop", "Adobe Illustrator", "Figma", "Sketch", "Canva", "Wireframing", "User Research", "Usability Testing", "Information Architecture", "Persona Creation"],
     "experiences": [
       {
         "title": "UI/UX Designer",
@@ -440,8 +452,9 @@
     "city": "Oran",
     "birthDate": "1992-11-30",
     "domains": {
-      "Data et Intelligence Artificielle": ["Deep Learning", "Computer Vision"]
+      "Data et Intelligence Artificielle": ["Deep Learning", "Machine Learning"]
     },
+    "skills": ["CNN", "RNN", "LSTM", "GANs", "Autoencoders", "TensorFlow", "Keras", "PyTorch", "OpenCV", "Scikit-learn"],
     "experiences": [
       {
         "title": "Ingénieur Machine Learning",
@@ -480,8 +493,9 @@
     "city": "Douala",
     "birthDate": "1990-08-12",
     "domains": {
-      "Gestion de Projet": ["Scrum", "Agilité"]
+      "Gestion de Projet et Agilité": ["Scrum", "Gestion de projet agile"]
     },
+    "skills": ["Sprint Planning", "Daily Standup", "Sprint Review", "Retrospective", "Product Backlog", "Kanban", "Lean", "Agile Metrics", "Burndown Chart"],
     "experiences": [
       {
         "title": "Scrum Master",
@@ -519,8 +533,9 @@
     "city": "Ouagadougou",
     "birthDate": "1995-02-14",
     "domains": {
-      "Développement Web et Mobile": ["Fullstack", "Node.js", "React"]
+      "Développement Web et Mobile": ["Fullstack mobile"]
     },
+    "skills": ["Flutter", "Dart", "Kotlin", "Swift", "Firebase", "REST APIs", "GraphQL", "Git", "CI/CD", "UX Design"],
     "experiences": [
       {
         "title": "Fullstack Developer",
@@ -557,8 +572,9 @@
     "city": "Niamey",
     "birthDate": "1993-06-10",
     "domains": {
-      "Sécurité Informatique": ["Pentesting", "Réseaux", "SIEM"]
+      "Cybersécurité": ["Pentesting", "Sécurité réseau", "Supervision et monitoring"]
     },
+    "skills": ["Metasploit", "Nmap", "Burp Suite", "Wireshark", "Kali Linux", "Firewall", "VPN", "IDS/IPS", "Nagios", "Zabbix", "Splunk", "ELK Stack"],
     "experiences": [
       {
         "title": "Analyste Cybersécurité",
@@ -595,8 +611,9 @@
     "city": "Lagos",
     "birthDate": "1990-10-05",
     "domains": {
-      "Infrastructure et Cloud": ["DevOps", "CI/CD", "AWS"]
+      "Infrastructure et Cloud": ["DevOps", "CI/CD", "Cloud AWS"]
     },
+    "skills": ["Docker", "Kubernetes", "Terraform", "Jenkins", "GitLab CI", "Ansible", "AWS EC2", "AWS S3", "AWS Lambda", "Prometheus", "Grafana", "Helm", "CloudFormation"],
     "experiences": [
       {
         "title": "DevOps Engineer",
@@ -634,8 +651,9 @@
     "city": "Tunis",
     "birthDate": "1997-05-17",
     "domains": {
-      "Développement Web et Mobile": ["Frontend", "React", "Vue.js"]
+      "Développement Web et Mobile": ["Frontend Web"]
     },
+    "skills": ["HTML", "CSS", "JavaScript", "TypeScript", "React", "Vue.js", "Redux", "Vuex", "Webpack", "Babel", "Tailwind CSS", "Sass", "ES6"],
     "experiences": [
       {
         "title": "Frontend Developer",
@@ -674,8 +692,9 @@
     "city": "Kinshasa",
     "birthDate": "1987-12-01",
     "domains": {
-      "Infrastructure et Cloud": ["Réseaux", "Sécurité", "Infrastructure"]
+      "Infrastructure et Cloud": ["Réseaux", "Sécurité Réseau", "Infrastructure Cloud"]
     },
+    "skills": ["TCP/IP", "DNS", "Firewall", "VPN", "Wi-Fi", "Linux Server", "AWS", "Azure", "GCP", "Firewall Management", "IDS/IPS", "Cloud Security", "Infrastructure as Code", "Ansible", "Terraform"],
     "experiences": [
       {
         "title": "Network Administrator",
@@ -713,8 +732,9 @@
     "city": "Abidjan",
     "birthDate": "1996-09-08",
     "domains": {
-      "Data et Intelligence Artificielle": ["Data Analysis", "SQL", "Power BI"]
+      "Data et Intelligence Artificielle": ["Analyse de données", "Business Intelligence"]
     },
+    "skills": ["SQL", "Power BI", "Python", "Pandas", "NumPy", "Data Cleaning", "Data Visualization", "Tableau", "Excel avancé", "Statistiques descriptives", "Reporting", "ETL", "Data Wrangling", "Google Data Studio", "Storytelling avec les données"],
     "experiences": [
       {
         "title": "Data Analyst",
@@ -751,8 +771,9 @@
     "city": "Rabat",
     "birthDate": "1994-04-02",
     "domains": {
-      "Développement Web et Mobile": ["Backend", "Node.js", "PostgreSQL"]
+      "Développement Web et Mobile": ["Backend Web"]
     },
+    "skills": ["Node.js", "Express.js", "PostgreSQL", "API REST", "MongoDB", "TypeScript", "NestJS", "Prisma", "Docker", "Git"],
     "experiences": [
       {
         "title": "Développeur Backend",
@@ -791,8 +812,9 @@
     "city": "Dakar",
     "birthDate": "1995-06-18",
     "domains": {
-      "UI/UX Design": ["Figma", "Design Thinking", "Prototypage"]
+      "Design et UI/UX": ["Design UI", "Prototypage"]
     },
+    "skills": ["Figma", "Design Thinking", "Adobe XD", "Wireframing", "User Research", "Design System", "Prototypage interactif", "Responsive Design", "UX Writing"],
     "experiences": [
       {
         "title": "UI/UX Designer",
@@ -830,8 +852,9 @@
     "city": "Fès",
     "birthDate": "1993-08-22",
     "domains": {
-      "Data et Intelligence Artificielle": ["Machine Learning", "Deep Learning", "NLP"]
+      "Data et Intelligence Artificielle": ["Machine Learning", "Deep Learning", "Traitement du langage naturel (NLP)"]
     },
+    "skills": ["Python", "Pandas", "Scikit-learn", "TensorFlow", "Keras", "PyTorch", "NLTK", "SpaCy", "Data Preprocessing", "Modélisation", "Réseaux de neurones", "Classification", "Word Embeddings"],
     "experiences": [
       {
         "title": "ML Engineer",
@@ -870,8 +893,9 @@
     "city": "Brazzaville",
     "birthDate": "1998-02-27",
     "domains": {
-      "Développement Web et Mobile": ["Flutter", "Dart", "Firebase"]
+      "Développement Web et Mobile": ["Développement mobile fullstack"]
     },
+    "skills": ["Flutter", "Dart", "Firebase", "REST API", "State Management", "Clean Architecture", "Responsive Design", "SQLite"],
     "experiences": [
       {
         "title": "Flutter Dev",
@@ -909,8 +933,9 @@
     "city": "Conakry",
     "birthDate": "1991-07-30",
     "domains": {
-      "Infrastructure et Cloud": ["Cybersecurity", "Pentesting", "SOC"]
+      "Sécurité Informatique": ["Pentesting", "SOC", "Cybersecurity"]
     },
+    "skills": ["Sécurité réseau", "Analyse des vulnérabilités", "SIEM", "Firewall", "Ethical Hacking", "Incident Response", "Cryptographie", "Audit de sécurité"],
     "experiences": [
       {
         "title": "Analyste Cybersécurité",
@@ -950,6 +975,7 @@
     "domains": {
       "Gestion de Projet": ["Scrum", "Agile", "JIRA"]
     },
+    "skills": ["Gestion de projet", "Méthodologies agiles", "Planification", "Communication d'équipe", "Gestion des risques", "Product Owner", "Kanban", "Leadership"],
     "experiences": [
       {
         "title": "Scrum Master",
@@ -987,8 +1013,9 @@
     "city": "Lomé",
     "birthDate": "1994-03-14",
     "domains": {
-      "Développement Web et Mobile": ["JavaScript", "Node.js", "React", "MongoDB"]
+      "Développement Web et Mobile": ["Fullstack web"]
     },
+    "skills": ["JavaScript", "Node.js", "React", "MongoDB", "Express.js", "REST API", "Git", "HTML", "CSS", "TypeScript"],
     "experiences": [
       {
         "title": "Fullstack Dev",
@@ -1042,8 +1069,9 @@
     "city": "Alger",
     "birthDate": "1992-11-08",
     "domains": {
-      "Infrastructure et Cloud": ["Docker", "Kubernetes", "CI/CD", "AWS"]
+      "Infrastructure et Cloud": ["Infrastructure", "Cloud", "DevOps"]
     },
+    "skills": ["Docker", "Kubernetes", "CI/CD", "AWS", "Terraform", "Ansible", "Linux", "Azure", "GCP", "Monitoring", "Git"],
     "experiences": [
       {
         "title": "DevOps Engineer",
@@ -1090,8 +1118,9 @@
     "city": "Bamako",
     "birthDate": "1990-09-20",
     "domains": {
-      "Data et Intelligence Artificielle": ["Apache Spark", "ETL", "BigQuery"]
+      "Data et Intelligence Artificielle": ["Data Engineering", "Data Analysis", "Big Data"]
     },
+    "skills": ["Apache Spark", "ETL", "BigQuery", "SQL", "Python", "Hadoop", "Kafka", "Pandas", "Airflow", "Tableau", "Power BI"],
     "experiences": [
       {
         "title": "Data Engineer",
@@ -1137,8 +1166,9 @@
     "city": "Mogadiscio",
     "birthDate": "1997-04-03",
     "domains": {
-      "Développement Web et Mobile": ["Android", "Kotlin", "Swift", "Flutter"]
+      "Développement Web et Mobile": ["Fullstack mobile"]
     },
+    "skills": ["Flutter", "Dart", "Kotlin", "Swift", "Firebase", "REST APIs", "SQLite", "MVVM", "Provider", "Bloc"],
     "experiences": [
       {
         "title": "Mobile Dev",
@@ -1184,8 +1214,9 @@
     "city": "Lagos",
     "birthDate": "1988-06-25",
     "domains": {
-      "Architecture Logicielle": ["Microservices", "REST", "Design Patterns", "Clean Architecture"]
+      "Architecture Logicielle": ["Architecture Logicielle"]
     },
+    "skills": ["Microservices", "REST APIs", "Design Patterns", "Clean Architecture", "CQRS", "Event-Driven Architecture", "Domain-Driven Design", "API Gateway", "Docker", "Kubernetes", "TDD", "CI/CD"],
     "experiences": [
       {
         "title": "Software Architect",
@@ -1231,8 +1262,9 @@
     "city": "Brazzaville",
     "birthDate": "1996-10-12",
     "domains": {
-      "Design UI/UX": ["Figma", "Adobe XD", "Design Thinking", "User Research"]
+      "Design UI/UX": ["Design UI/UX"]
     },
+    "skills": ["Figma", "Adobe XD", "Design Thinking", "User Research", "Prototypage", "Wireframing", "User Testing", "Interaction Design", "Responsive Design", "Accessibility", "Color Theory", "Typography"],
     "experiences": [
       {
         "title": "UI/UX Designer",
@@ -1278,8 +1310,9 @@
     "city": "Conakry",
     "birthDate": "1993-01-04",
     "domains": {
-      "Développement Web et Mobile": ["Python", "Django", "PostgreSQL", "REST APIs"]
+      "Développement Web et Mobile": ["Backend Web"]
     },
+    "skills": ["Python", "Django", "PostgreSQL", "REST", "API Design", "ORM", "SQL", "Backend Development", "Security Best Practices", "Performance Optimization", "Testing", "Docker"],
     "experiences": [
       {
         "title": "Backend Developer",
@@ -1325,8 +1358,9 @@
     "city": "Tunis",
     "birthDate": "1989-05-30",
     "domains": {
-      "Product Management": ["Agile", "Scrum", "Product Strategy", "JIRA"]
+      "Gestion de Produit": ["Agile", "Scrum", "Product Strategy"]
     },
+    "skills": ["Product Management", "Roadmapping", "User Stories", "Backlog Prioritization", "Stakeholder Communication", "JIRA", "Kanban", "MVP Definition", "Market Analysis", "Team Leadership"],
     "experiences": [
       {
         "title": "Product Manager",
@@ -1373,8 +1407,9 @@
     "city": "Kinshasa",
     "birthDate": "1991-02-18",
     "domains": {
-      "Qualité et Tests": ["Selenium", "Jest", "Cypress", "TDD"]
+      "Qualité et Tests": ["Tests automatisés", "Tests fonctionnels", "TDD", "Tests de performance"]
     },
+    "skills": ["Selenium", "Jest", "Cypress", "Mocha", "JUnit", "BDD", "Test Planning", "Test Automation", "CI/CD Testing", "Bug Tracking"],
     "experiences": [
       {
         "title": "QA Engineer",
@@ -1420,8 +1455,10 @@
     "city": "Sikasso",
     "birthDate": "1995-07-14",
     "domains": {
-      "Développement Web et Mobile": ["React", "Tailwind CSS", "TypeScript", "Next.js"]
+      "Développement Web et Mobile": ["Frontend React", "Frontend CSS"],
+      "Architecture Logicielle": ["API Design", "Performance Optimization"]
     },
+    "skills": ["React", "Tailwind CSS", "TypeScript", "Next.js", "Responsive Design", "REST APIs", "GraphQL", "Webpack", "Git", "Performance Tuning", "Code Review", "UI/UX Basics"],
     "experiences": [
       {
         "title": "Frontend Developer",
@@ -1454,12 +1491,12 @@
       {"language": "Français", "level": "Courant"},
       {"language": "Bambara", "level": "Langue maternelle"}
     ],
-    "avatar": "https://randomuser.me/api/portraits/women/45.jpg"
+    "avatar": "https://randomuser.me/api/portraits/med/women/45.jpg"
   },
   {
     "id": 36,
-    "firstName": "Firmin",
-    "lastName": "Agboka",
+    "firstName": "Denis",
+    "lastName": "Gohoungo",
     "title": "Mobile Developer Flutter",
     "bio": "Code Flutter dans les veines. J’build des apps solides comme les racines du baobab.",
     "phone": "+22997011223",
@@ -1467,8 +1504,9 @@
     "city": "Cotonou",
     "birthDate": "1996-11-22",
     "domains": {
-      "Développement Web et Mobile": ["Flutter", "Dart", "Firebase", "Bloc"]
+      "Développement Mobile": ["Frontend", "Backend"]
     },
+    "skills": ["Flutter", "Dart", "Firebase", "Bloc", "State Management", "REST APIs", "Clean Architecture", "Animations", "UI Design", "Testing", "Responsive Design"],
     "experiences": [
       {
         "title": "Flutter Developer",
@@ -1502,7 +1540,7 @@
       {"language": "Fon", "level": "Langue maternelle"},
       {"language": "Anglais", "level": "Professionnel"}
     ],
-    "avatar": "https://randomuser.me/api/portraits/men/46.jpg"
+    "avatar": "https://randomuser.me/api/portraits/med/men/45.jpg"
   },
   {
     "id": 37,
@@ -1515,8 +1553,9 @@
     "city": "Douala",
     "birthDate": "1992-08-03",
     "domains": {
-      "Data et IA": ["Power BI", "SQL", "Python", "Pandas", "Data Cleaning"]
+      "Data et Intelligence Artificielle": ["Data Analysis", "Data Visualization", "Machine Learning"]
     },
+    "skills": ["Power BI", "SQL", "Python", "Pandas", "Data Cleaning", "Data Mining", "ETL", "Jupyter Notebook", "Scikit-learn", "Data Modeling", "Statistics", "Big Data"],
     "experiences": [
       {
         "title": "Data Analyst",
@@ -1562,8 +1601,9 @@
     "city": "Porto-Novo",
     "birthDate": "1990-09-15",
     "domains": {
-      "Infrastructure / DevOps": ["Docker", "Kubernetes", "CI/CD", "Linux", "AWS"]
+      "Infrastructure et Cloud": ["Containerisation", "Orchestration", "Intégration Continue", "Administration Linux", "Cloud AWS"]
     },
+    "skills": ["Docker", "Kubernetes", "CI/CD", "Linux", "AWS", "Terraform", "Ansible", "Monitoring", "Cloud Security", "Jenkins", "Prometheus", "Grafana"],
     "experiences": [
       {
         "title": "DevOps Engineer",
@@ -1610,8 +1650,9 @@
     "city": "Bamako",
     "birthDate": "1994-06-11",
     "domains": {
-      "Cyber Sécurité": ["Pentest", "SIEM", "Firewalls", "ISO 27001"]
+      "Sécurité Informatique": ["Pentesting", "Gestion des incidents", "Firewalls", "Conformité ISO 27001"]
     },
+    "skills": ["Pentesting", "SIEM", "Firewall Management", "ISO 27001", "Analyse de vulnérabilités", "Cryptographie", "Gestion des risques", "Incident Response", "SOC", "Audit de sécurité", "Tests d'intrusion", "Sécurité réseau"],
     "experiences": [
       {
         "title": "Analyste Sécurité",
@@ -1657,8 +1698,9 @@
     "city": "Lubumbashi",
     "birthDate": "1992-04-10",
     "domains": {
-      "Développement Web et Mobile": ["React", "Node.js", "MongoDB", "Express.js"]
+      "Développement Web et Mobile": ["Fullstack Web", "Frontend React", "Backend Node.js"]
     },
+    "skills": ["React", "Node.js", "Express.js", "MongoDB", "JavaScript", "TypeScript", "REST APIs", "GraphQL", "Webpack", "Git", "Jest", "Docker", "CI/CD"],
     "experiences": [
       {
         "title": "Fullstack Developer",
@@ -1704,8 +1746,9 @@
     "city": "Conakry",
     "birthDate": "1996-01-30",
     "domains": {
-      "Développement Web et Mobile": ["HTML", "CSS", "JavaScript", "React"]
+      "Développement Web et Mobile": ["Frontend Web"]
     },
+    "skills": ["HTML", "CSS", "JavaScript", "React", "TypeScript", "Sass", "Redux", "Webpack", "Jest", "Git", "Responsive Design", "Accessibility", "REST APIs"],
     "experiences": [
       {
         "title": "Développeuse Front-End",
@@ -1743,8 +1786,9 @@
     "city": "Dakar",
     "birthDate": "1993-04-17",
     "domains": {
-      "Design et Créativité": ["Figma", "Adobe XD", "Design Thinking", "Prototypage"]
+      "Design et Créativité": ["Design UI/UX"]
     },
+    "skills": ["Figma", "Adobe XD", "Sketch", "InVision", "Design Thinking", "Prototypage", "Wireframing", "User Research", "Animation UI", "Principles of Design", "Typography", "Color Theory", "Usability Testing"],
     "experiences": [
       {
         "title": "UI/UX Designer",
@@ -1790,8 +1834,9 @@
     "city": "Abidjan",
     "birthDate": "1990-12-05",
     "domains": {
-      "Gestion de Projet": ["Scrum", "JIRA", "Kanban", "Agile"]
+      "Gestion de Projet": ["Gestion de Projet Agile"]
     },
+    "skills": ["Scrum", "Kanban", "JIRA", "Trello", "Gestion des risques", "Planification", "Communication", "Leadership", "Gestion des ressources", "Gestion du temps", "Analyse des parties prenantes", "Reporting", "Méthodologies Agile"],
     "experiences": [
       {
         "title": "Scrum Master",
@@ -1828,8 +1873,9 @@
     "city": "Sikasso",
     "birthDate": "1989-06-20",
     "domains": {
-      "Tests et Qualité": ["Test automatisé", "Selenium", "Postman", "Jest"]
+      "Tests et Qualité": ["Tests et Qualité Logicielle"]
     },
+    "skills": ["Tests automatisés", "Selenium", "Jest", "Postman", "Cypress", "TDD", "BDD", "Tests unitaires", "Tests d'intégration", "Tests fonctionnels", "Tests de performance", "Tests de sécurité", "Analyse des bugs"],
     "experiences": [
       {
         "title": "QA Engineer",
@@ -1867,8 +1913,9 @@
     "city": "Saint-Louis",
     "birthDate": "1995-08-29",
     "domains": {
-      "Communication et Marketing": ["Content creation", "Growth", "Community Building"]
+      "Communication et Marketing": ["Marketing Digital", "Communication"]
     },
+    "skills": ["Content Marketing", "SEO", "Growth Hacking", "Community Management", "Réseaux sociaux", "Email Marketing", "Copywriting", "Google Analytics", "Publicité en ligne", "Stratégie de contenu", "Branding", "CRM", "Influence Marketing"],
     "experiences": [
       {
         "title": "Community Manager",
@@ -1906,8 +1953,9 @@
     "city": "Ouagadougou",
     "birthDate": "1988-03-08",
     "domains": {
-      "Gestion de Produit": ["Product Roadmap", "User Research", "Agile", "Figma"]
+      "Gestion de Produit": ["Product Management", "User Research", "Agile", "Design"]
     },
+    "skills": ["Product Strategy", "Roadmapping", "User Testing", "Agile Methodologies", "Scrum", "Kanban", "Wireframing", "Prototypage", "Figma", "JIRA", "Priorisation", "Analyse de données"],
     "experiences": [
       {
         "title": "Product Manager",
@@ -1945,8 +1993,9 @@
     "city": "Yamoussoukro",
     "birthDate": "1997-02-17",
     "domains": {
-      "Développement Web et Mobile": ["Node.js", "NestJS", "MongoDB", "TypeScript"]
+      "Développement Web et Mobile": ["Backend Web", "API Development", "TypeScript"]
     },
+    "skills": ["Node.js", "NestJS", "MongoDB", "TypeScript", "REST APIs", "GraphQL", "Express.js", "SQL", "NoSQL", "Docker", "JWT", "Microservices"],
     "experiences": [
       {
         "title": "Dév Backend",
@@ -1983,8 +2032,9 @@
     "city": "Yaoundé",
     "birthDate": "1994-10-11",
     "domains": {
-      "Data et IA": ["Python", "TensorFlow", "scikit-learn", "Computer Vision"]
+      "Data et Intelligence Artificielle": ["Machine Learning", "Deep Learning", "Computer Vision"]
     },
+    "skills": ["Python", "TensorFlow", "scikit-learn", "Keras", "Pandas", "NumPy", "OpenCV", "PyTorch", "Data Analysis", "Jupyter", "Matplotlib", "Seaborn"],
     "experiences": [
       {
         "title": "AI Engineer",
@@ -2022,8 +2072,9 @@
     "city": "Kayes",
     "birthDate": "1993-05-03",
     "domains": {
-      "Data et IA": ["ETL", "SQL", "Python", "BigQuery", "Airflow"]
+      "Data Engineering": ["ETL", "Data Warehousing", "Pipeline Automation"]
     },
+    "skills": ["Python", "SQL", "BigQuery", "Airflow", "Apache Spark", "Data Cleaning", "Data Modeling", "Cloud Data Services", "Kafka", "DBT"],
     "experiences": [
       {
         "title": "Data Engineer",
@@ -2060,8 +2111,9 @@
     "city": "Abomey",
     "birthDate": "1998-09-25",
     "domains": {
-      "Développement Jeux Vidéos": ["Unity", "C#", "Level Design", "3D Animation"]
+      "Développement Jeux Vidéos": ["Game Development", "Game Design", "3D Animation", "Level Design"]
     },
+    "skills": ["Unity", "C#", "Blender", "Unreal Engine", "Physics Simulation", "Shader Programming", "VR/AR Development", "Gameplay Programming", "AI for Games", "Asset Optimization"],
     "experiences": [
       {
         "title": "Développeur Unity",
