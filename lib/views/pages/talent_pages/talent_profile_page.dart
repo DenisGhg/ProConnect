@@ -3,9 +3,11 @@ import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:pro_connect_projet/views/sizes/app_sizes.dart';
 import 'package:pro_connect_projet/views/sizes/text_sizes.dart';
+import 'package:pro_connect_projet/widgets/app_snackbar.dart';
 import 'package:pro_connect_projet/widgets/app_text.dart';
 
 import '../../../models/register/talent/profile.dart';
+import '../../colors/app_colors.dart';
 
 
 class TalentProfilePage extends StatefulWidget {
@@ -41,6 +43,13 @@ class _TalentProfilePageState extends State<TalentProfilePage> {
     ];
     return months[month - 1];
   }
+
+  //Variable pour gérer "Voir plus" ou "voir moins" de la bio
+  bool isExpanded = false;
+  bool isEditingBio = false;
+
+  // Pour similer l'affichage de la modification de la bio
+  String? editedBio;
 
   //Fonction pour agrandir l'image de profil au clic
   void _showFullScreenAvatar(String imageUrl) {
@@ -87,6 +96,76 @@ class _TalentProfilePageState extends State<TalentProfilePage> {
     );
   }
 
+  //Fonction pour modifier la bio
+  void _showEditBioBottomSheet(BuildContext context) {
+    final TextEditingController controller = TextEditingController(text: profil!.bio);
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) => Padding(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+          top: 20,
+          left: 20,
+          right: 20,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              "Modifier la bio",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 12),
+            TextFormField(
+              controller: controller,
+              maxLines: 5,
+              minLines: 3,
+              decoration: const InputDecoration(
+                hintText: "Entrez votre nouvelle bio...",
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 12),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextButton(
+                  child: const Text("Annuler"),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+                const SizedBox(width: 12),
+                ElevatedButton(
+                  child: const Text("Modifier"),
+                  onPressed: () {
+                    final newBio = controller.text.trim();
+
+                    if (newBio.length < 100) {
+                      AppSnackBar.show(context, "La bio doit contenir au moins 100 caractères");
+                    } else {
+                      setState(() {
+                        editedBio = newBio;  // 🔥 maintenant dans setState
+                        isExpanded = false;
+                      });
+
+                      Navigator.of(context).pop();
+                      AppSnackBar.show(context, "Bio modifiée avec succès");
+                    }
+                  },
+
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+          ],
+        ),
+      ),
+    );
+  }
 
   @override
   void initState() {
@@ -96,11 +175,13 @@ class _TalentProfilePageState extends State<TalentProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    // Pour similer l'affichage de la modification de la bio
+    final String bioToDisplay = editedBio ?? profil!.bio;
+
     if (profil == null) {
       // Affichage d'un indicateur de chargement si le profil n'est pas encore dispo
       return const Center(child: CircularProgressIndicator());
     }
-
     return Scaffold(
       appBar: AppBar(title: const Text("Profil du Talent")),
       body: SingleChildScrollView(
@@ -116,10 +197,26 @@ class _TalentProfilePageState extends State<TalentProfilePage> {
             ProfileSectionCard(
               icon: Icons.info_outline,
               title: "Bio",
-              actionIcon: profil!.bio.isNotEmpty ? Icons.edit : Icons.add,
-              child: Text(
-                profil!.bio.isNotEmpty ? profil!.bio : "Aucune bio renseignée",
-                style: const TextStyle(fontSize: 16),
+              actionIcon: bioToDisplay.isNotEmpty ? Icons.edit : Icons.add,
+              onPressed: ()=> _showEditBioBottomSheet(context),
+              child: Column(
+                children: [
+                  AppText(
+                    text: bioToDisplay.isEmpty
+                        ? 'Aucune bio entrée.'
+                        : isExpanded || bioToDisplay.length <= 100
+                        ? bioToDisplay
+                        : '${bioToDisplay.substring(0, 100)}...',
+                    fontSize: context.mediumText * 0.8,
+                  ),
+
+                  //Bouton voir  plus voir moins
+                  if (bioToDisplay.length > 100 && bioToDisplay.isNotEmpty)
+                    TextButton(
+                      onPressed: () => setState(() => isExpanded = !isExpanded),
+                      child: AppText(text: isExpanded ? "Voir moins" : "Voir plus", fontSize: context.smallText * 1.2,),
+                    ),
+                ],
               ),
             ),
             SizedBox(height: context.defaultSpacing),
@@ -128,15 +225,23 @@ class _TalentProfilePageState extends State<TalentProfilePage> {
             ProfileSectionCard(
               icon: Icons.dashboard_customize_outlined,
               title: "Domaines",
-              actionIcon: profil!.domains.isEmpty ? Icons.add : null,
+              actionIcon: Icons.add,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: profil!.domains.entries.map((entry) {
                   return ListTile(
                     contentPadding: EdgeInsets.zero,
-                    title: Text(entry.key),
-                    subtitle: Text(entry.value.join(", ")),
-                    leading: const Icon(Icons.category_outlined),
+                    title: AppText(text: entry.key, fontSize: context.mediumText * 0.9, fontWeight: FontWeight.bold,),
+                    subtitle: AppText(text: entry.value.join(", "), fontSize: context.mediumText * 0.75,),
+                    leading: Icon(Icons.category_outlined, color: AppColors.blueColor,),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.edit, size: context.referenceSize * 1.5, color: AppColors.blueColor,),
+                        SizedBox(width: context.referenceSize * 0.8),
+                        Icon(Icons.delete_outline,  size: context.referenceSize * 1.5, color: AppColors.redColor,),
+                      ],
+                    ),
                   );
                 }).toList(),
               ),
@@ -149,10 +254,27 @@ class _TalentProfilePageState extends State<TalentProfilePage> {
               title: "Compétences",
               actionIcon: Icons.add,
               child: Wrap(
-                spacing: 8,
+                spacing: context.referenceSize,
+                runSpacing: context.referenceSize * 0.8,
                 children: profil!.skills.map((skill) {
                   return Chip(
-                    label: Text(skill),
+
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                        context.referenceSize * 1.2,
+                      ),
+                      side: BorderSide(
+                        color: AppColors.blueColor,
+                        width: context.referenceSize * 0.2,
+                      ),
+                    ),
+                    deleteButtonTooltipMessage: "Supprimer",
+                    label: AppText(
+                      text: skill,
+                      fontSize: context.smallText * 1.1,
+                      fontWeight: FontWeight.w600,
+
+                    ),
                     deleteIcon: const Icon(Icons.close),
                     onDeleted: () {}, // Suppression à gérer plus tard
                   );
@@ -175,15 +297,15 @@ class _TalentProfilePageState extends State<TalentProfilePage> {
 
                   return ListTile(
                     contentPadding: EdgeInsets.zero,
-                    title: Text(exp.company),
+                    title: AppText(text: exp.company, fontSize: context.mediumText * 0.9,),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(dateRange, style: const TextStyle(fontWeight: FontWeight.w600)),
-                        if (exp.title.isNotEmpty) Text(exp.title),
+                        AppText(text: dateRange, fontWeight: FontWeight.bold, fontSize: context.mediumText * 0.8,),
+                        if (exp.title.isNotEmpty) AppText(text: exp.title, fontSize: context.mediumText * 0.75,),
                       ],
                     ),
-                    leading: const Icon(Icons.business_center_outlined),
+                    leading: Icon(Icons.school, color: AppColors.blueColor,),
                   );
                 }).toList(),
               ),
@@ -204,15 +326,15 @@ class _TalentProfilePageState extends State<TalentProfilePage> {
 
                   return ListTile(
                     contentPadding: EdgeInsets.zero,
-                    title: Text(edu.company),
+                    title: AppText(text: edu.company, fontSize: context.mediumText * 0.9,),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(dateRange, style: const TextStyle(fontWeight: FontWeight.w600)),
-                        if (edu.title.isNotEmpty) Text(edu.title),
+                        AppText(text: dateRange, fontWeight: FontWeight.bold, fontSize: context.mediumText * 0.8,),
+                        if (edu.title.isNotEmpty) AppText(text: edu.title, fontSize: context.mediumText * 0.75,),
                       ],
                     ),
-                    leading: const Icon(Icons.school),
+                    leading: Icon(Icons.school, color: AppColors.blueColor,),
                   );
                 }).toList(),
               ),
@@ -245,31 +367,39 @@ class _TalentProfilePageState extends State<TalentProfilePage> {
     return Row(
       children: [
         GestureDetector(
+
           onTap: () => _showFullScreenAvatar(profil!.avatar),
           child: Stack(
             children: [
               CircleAvatar(
-                radius: 40,
+                radius: context.referenceSize * 4,
                 backgroundImage: NetworkImage(profil!.avatar),
               ),
               Positioned(
                 bottom: 0,
-                left: 0,
-                child: CircleAvatar(
-                  radius: 12,
-                  backgroundColor: Colors.white,
-                  child: const Icon(Icons.edit, size: 16),
+                right: 0,
+                child: Container(
+                  height: context.referenceSize * 3.5,
+                  width: context.referenceSize * 3.5,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: AppColors.blueColor,
+                      width: context.referenceSize * 0.2
+                    ),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(Icons.camera_alt, size: context.referenceSize * 1.5, color: AppColors.blueColor,),
                 ),
               ),
             ],
           ),
         ),
-        const SizedBox(width: 16),
+        SizedBox(width: context.defaultSpacing),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("${profil!.firstName} ${profil!.lastName}", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            Text(profil!.title, style: const TextStyle(color: Colors.grey)),
+            AppText(text: "${profil!.firstName} ${profil!.lastName}", fontWeight: FontWeight.bold,),
+            AppText(text: profil!.title, color: AppColors.greyColor, fontSize: context.mediumText * 0.9,),
           ],
         )
       ],
@@ -279,16 +409,16 @@ class _TalentProfilePageState extends State<TalentProfilePage> {
   // Ligne pour une langue : nom + niveau + actions
   Widget _buildLanguageRow(String language, String level) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
+      padding: EdgeInsets.symmetric(vertical: context.referenceSize * 0.4),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text("$language - $level"),
           Row(
-            children: const [
-              Icon(Icons.edit, size: 18),
-              SizedBox(width: 8),
-              Icon(Icons.delete_outline, size: 18),
+            children: [
+              Icon(Icons.edit, size: context.referenceSize * 1.5, color: AppColors.blueColor,),
+              SizedBox(width: context.referenceSize * 0.8),
+              Icon(Icons.delete_outline,  size: context.referenceSize * 1.5, color: AppColors.redColor,),
             ],
           )
         ],
@@ -303,6 +433,7 @@ class ProfileSectionCard extends StatelessWidget {
   final String title;
   final Widget child;
   final IconData? actionIcon;
+  final Function()? onPressed;
 
   const ProfileSectionCard({
     super.key,
@@ -310,6 +441,7 @@ class ProfileSectionCard extends StatelessWidget {
     required this.title,
     required this.child,
     this.actionIcon,
+    this.onPressed
   });
 
   @override
@@ -318,7 +450,7 @@ class ProfileSectionCard extends StatelessWidget {
       elevation: 2,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(context.defaultPagePadding * 0.8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -327,15 +459,30 @@ class ProfileSectionCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Icon(icon),
-                    const SizedBox(width: 8),
-                    Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+                    Icon(icon, color: AppColors.blueColor,),
+                    SizedBox(width: context.referenceSize * 0.8),
+                    AppText(text: title, fontWeight: FontWeight.bold, color: AppColors.blueColor,),
                   ],
                 ),
-                if (actionIcon != null) Icon(actionIcon!),
+                if (actionIcon != null)
+                  Container(
+                    height: context.referenceSize * 3.5,
+                    width: context.referenceSize * 3.5,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: AppColors.blueColor,
+                        width: context.referenceSize * 0.2,
+                      ),
+                      shape: BoxShape.circle,
+                    ),
+                    child: IconButton(
+                      icon: Icon(actionIcon!, size: context.referenceSize * 1.5, color: AppColors.blueColor,),
+                      onPressed: onPressed,
+                    ),
+                  ),
               ],
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: context.defaultSpacing * 0.5),
             child,
           ],
         ),
