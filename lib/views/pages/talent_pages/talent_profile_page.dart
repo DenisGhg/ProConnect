@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:pro_connect_projet/providers/themes/theme_provider.dart';
 import 'package:pro_connect_projet/views/sizes/app_sizes.dart';
 import 'package:pro_connect_projet/views/sizes/text_sizes.dart';
 import 'package:pro_connect_projet/widgets/app_snackbar.dart';
 import 'package:pro_connect_projet/widgets/app_text.dart';
+import 'package:provider/provider.dart';
 
 import '../../../models/register/talent/profile.dart';
 import '../../colors/app_colors.dart';
@@ -175,15 +177,32 @@ class _TalentProfilePageState extends State<TalentProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    // Pour similer l'affichage de la modification de la bio
-    final String bioToDisplay = editedBio ?? profil!.bio;
 
     if (profil == null) {
       // Affichage d'un indicateur de chargement si le profil n'est pas encore dispo
       return const Center(child: CircularProgressIndicator());
     }
+
+    // Pour similer l'affichage de la modification de la bio
+    final String bioToDisplay = editedBio ?? profil!.bio;
+
+    //Appel de la variable qui gère  thème dans le provider
+    final isDarkMode = context.watch<ThemeProvider>().isDarkMode;
+
     return Scaffold(
-      appBar: AppBar(title: const Text("Profil du Talent")),
+      appBar: AppBar(
+        title: AppText(text: "${profil!.firstName} ${profil!.lastName}", fontWeight: FontWeight.bold, fontSize: context.largeText,),
+        centerTitle: true,
+        actions: [
+          //Changement de thème
+          IconButton(
+            onPressed: (){
+              context.read<ThemeProvider>().toggleTheme();
+            },
+            icon: Icon(isDarkMode ? Icons.light_mode : Icons.dark_mode),
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(context.defaultPagePadding),
         child: Column(
@@ -305,7 +324,7 @@ class _TalentProfilePageState extends State<TalentProfilePage> {
                         if (exp.title.isNotEmpty) AppText(text: exp.title, fontSize: context.mediumText * 0.75,),
                       ],
                     ),
-                    leading: Icon(Icons.school, color: AppColors.blueColor,),
+                    leading: Icon(Icons.work, color: AppColors.blueColor,),
                   );
                 }).toList(),
               ),
@@ -348,9 +367,9 @@ class _TalentProfilePageState extends State<TalentProfilePage> {
               title: "Langues",
               actionIcon: Icons.add,
               child: Column(
-                children: (profil!.languages ?? []).map((lang) => _buildLanguageRow(
-                  lang['language'] ?? 'Langue inconnue',
-                  lang['level'] ?? 'Niveau inconnu',
+                children: (profil!.languages).map((lang) => _buildLanguageRow(
+                  lang['language']! ,
+                  lang['level']!,
                 )).toList(),
 
               ),
@@ -367,7 +386,6 @@ class _TalentProfilePageState extends State<TalentProfilePage> {
     return Row(
       children: [
         GestureDetector(
-
           onTap: () => _showFullScreenAvatar(profil!.avatar),
           child: Stack(
             children: [
@@ -382,6 +400,7 @@ class _TalentProfilePageState extends State<TalentProfilePage> {
                   height: context.referenceSize * 3.5,
                   width: context.referenceSize * 3.5,
                   decoration: BoxDecoration(
+                    color: AppColors.themeColor(context),
                     border: Border.all(
                       color: AppColors.blueColor,
                       width: context.referenceSize * 0.2
