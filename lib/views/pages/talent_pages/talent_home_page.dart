@@ -13,6 +13,7 @@ import 'package:pro_connect_projet/widgets/app_text.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/register/talent/profile.dart';
+import '../../../providers/talent_providers/notification_talent_provider.dart';
 import '../../../providers/themes/theme_provider.dart';
 import '../../../widgets/app_button.dart';
 import 'landing_screens/chart_page.dart';
@@ -86,13 +87,13 @@ class _TalentHomePageState extends State<TalentHomePage> {
             ListTile(
               onTap:
                   () =>
-                      Navigator.pushNamed(context, AppRoutes.TALENTPROFILEPAGE),
+                  Navigator.pushNamed(context, AppRoutes.TALENTPROFILEPAGE),
               leading: CircleAvatar(
                 radius: context.referenceSize * 2,
                 backgroundImage:
-                    profil != null
-                        ? NetworkImage(profil!.avatar)
-                        : AssetImage(ImagesPaths.DEFAULTAVATAR),
+                profil != null
+                    ? NetworkImage(profil!.avatar)
+                    : AssetImage(ImagesPaths.DEFAULTAVATAR),
               ),
 
               title: AppText(
@@ -105,7 +106,7 @@ class _TalentHomePageState extends State<TalentHomePage> {
                 fontSize: context.mediumText * 0.9,
               ),
             ),
-            
+
             //Options du ListTile
             AppListTile(
               leading: Icon(Icons.settings),
@@ -157,24 +158,24 @@ class _TalentHomePageState extends State<TalentHomePage> {
               child: GestureDetector(
                 onTap: () => _scaffoldKey.currentState?.openDrawer(),
                 child:
-                    profil != null
-                        ? CircleAvatar(
-                          radius: context.referenceSize * 2,
-                          backgroundImage: NetworkImage(profil!.avatar),
-                        )
-                        : Container(
-                          decoration: BoxDecoration(
-                            color: AppColors.greyColor,
-                            borderRadius: BorderRadius.circular(
-                              context.screenHeight * 0.03,
-                            ),
-                          ),
-                          child: Icon(
-                            Icons.person,
-                            size: context.screenHeight * 0.038,
-                            color: AppColors.blackColor,
-                          ),
-                        ),
+                profil != null
+                    ? CircleAvatar(
+                  radius: context.referenceSize * 2,
+                  backgroundImage: NetworkImage(profil!.avatar),
+                )
+                    : Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.greyColor,
+                    borderRadius: BorderRadius.circular(
+                      context.screenHeight * 0.03,
+                    ),
+                  ),
+                  child: Icon(
+                    Icons.person,
+                    size: context.screenHeight * 0.038,
+                    color: AppColors.blackColor,
+                  ),
+                ),
               ),
             ),
             SizedBox(width: context.referenceSize),
@@ -200,19 +201,25 @@ class _TalentHomePageState extends State<TalentHomePage> {
       ),
 
       //Bar de navigation
-      bottomNavigationBar: ConvexAppBar(
+      bottomNavigationBar: ConvexAppBar.badge(
+        {
+          // 👇 Index du tab "Notifications"
+          3: context.watch<NotificationTalentProvider>().unreadCount > 0
+              ? '${context.watch<NotificationTalentProvider>().unreadCount}' // Le nombre à afficher
+              : null, // Pas de badge si 0
+        },
         style: TabStyle.react,
         backgroundColor: AppColors.blueColor,
         activeColor: AppColors.whiteColor,
         items: [
           TabItem(icon: Icons.home, title: "Accueil"),
           TabItem(icon: Icons.message, title: "Discussions"),
-          TabItem(icon: Icons.developer_board, title: "Dashbord"),
+          TabItem(icon: Icons.developer_board, title: "Dashboard"),
           TabItem(icon: Icons.notifications, title: "Notifications"),
         ],
         initialActiveIndex: _selectedIndex,
         onTap: _onItemTapped,
-      ),
+      )
     );
   }
 }

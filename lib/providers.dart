@@ -9,6 +9,7 @@ import 'package:pro_connect_projet/providers/register_providers/talent_providers
 import 'package:pro_connect_projet/providers/register_providers/talent_providers/talent_personal_info_provider.dart';
 import 'package:pro_connect_projet/providers/register_providers/talent_providers/talent_title_pro_provider.dart';
 import 'package:pro_connect_projet/providers/reset_password_providers/mail_provider.dart';
+import 'package:pro_connect_projet/providers/talent_providers/notification_talent_provider.dart';
 import 'package:pro_connect_projet/providers/themes/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
@@ -50,5 +51,10 @@ List<SingleChildWidget> providers = [
 
   //Bio du Talent
   ChangeNotifierProvider(create: (context) => TalentBioProvider()),
+
+  //AFTER LOGIN
+
+  //Notification Talent
+  ChangeNotifierProvider(create: (context) => NotificationTalentProvider()),
   
 ];
