@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pro_connect_projet/views/sizes/app_sizes.dart';
+import 'package:pro_connect_projet/views/sizes/text_sizes.dart';
 import 'dart:async';
 import 'package:provider/provider.dart';
 import '../../../../providers/talent_providers/notification_talent_provider.dart';
+import '../../../../widgets/app_text.dart';
 import '../../../modelsUI/talent/notification_card.dart';
 
 
@@ -38,15 +41,19 @@ class _NotificationsPageState extends State<NotificationsPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Notifications (${provider.unreadCount})"),
+        title: AppText(
+          text: "Notifications (${provider.unreadCount})",
+          fontSize: context.largeText,
+          fontWeight: FontWeight.bold,
+        ),
       ),
       body: ListView.builder(
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.all(context.defaultPagePadding),
         itemCount: notifications.length,
         itemBuilder: (context, index) {
           final notif = notifications[index];
           return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 6),
+            padding: EdgeInsets.symmetric(vertical: context.referenceSize * 0.6),
             child: NotificationCard(notification: notif),
           );
         },

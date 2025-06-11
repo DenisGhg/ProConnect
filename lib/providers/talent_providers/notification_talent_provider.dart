@@ -8,7 +8,7 @@ class NotificationTalentProvider with ChangeNotifier {
       type: "profile_view",
       title: "Profil consulté",
       body: "Un recruteur a visité votre profil.",
-      timestamp: DateTime.now().subtract(Duration(minutes: 15)),
+      timestamp: DateTime.now().subtract(Duration(seconds: 15)),
       isRead: false,
       relatedRoute: "/profil",
     ),
